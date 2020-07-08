@@ -118,6 +118,11 @@ class User implements UserInterface
      */
     private $cityLikes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=UserLike::class, mappedBy="userSource", orphanRemoval=true)
+     */
+    private $userLikes;
+
     public function __construct()
     {
         $this->languages = new ArrayCollection();
@@ -126,6 +131,7 @@ class User implements UserInterface
         $this->reviews = new ArrayCollection();
         $this->reviewLikes = new ArrayCollection();
         $this->cityLikes = new ArrayCollection();
+        $this->userLikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -486,6 +492,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($cityLike->getUser() === $this) {
                 $cityLike->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserLike[]
+     */
+    public function getUserLikes(): Collection
+    {
+        return $this->userLikes;
+    }
+
+    public function addUserLike(UserLike $userLike): self
+    {
+        if (!$this->userLikes->contains($userLike)) {
+            $this->userLikes[] = $userLike;
+            $userLike->setUserSource($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserLike(UserLike $userLike): self
+    {
+        if ($this->userLikes->contains($userLike)) {
+            $this->userLikes->removeElement($userLike);
+            // set the owning side to null (unless already changed)
+            if ($userLike->getUserSource() === $this) {
+                $userLike->setUserSource(null);
             }
         }
 

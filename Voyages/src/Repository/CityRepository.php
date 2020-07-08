@@ -19,6 +19,18 @@ class CityRepository extends ServiceEntityRepository
         parent::__construct($registry, City::class);
     }
 
+    public function findByGeonameId($geonameId){
+        $builder = $this->createQueryBuilder('city');
+        $builder->where('city.geonameId = :geonameId');
+        $builder->setParameter('geonameId', $geonameId);
+        $query = $builder->getQuery();
+       
+        $result = $query->getOneOrNullResult();
+
+        return $result;
+    }
+
+
     // /**
     //  * @return City[] Returns an array of City objects
     //  */
