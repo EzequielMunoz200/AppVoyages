@@ -6,7 +6,9 @@ use App\Entity\City;
 use App\Entity\Picture;
 use App\Entity\Review;
 use App\Form\CityType;
+use App\Form\ReviewType;
 use App\Service\QueryApi;
+use App\Service\ImageUploader;
 use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -103,6 +105,7 @@ class CityController extends AbstractController
             'imagesData' => $queryApi->citiesDataImages($queryApi->citiesData($geonameId)['cityNameUnsplash']),
             'details' => $queryApi->cityDataDetails($geonameId),
             'reviews' => $city->getReviews(), //array à initialiser dans le template
+            'formReview' => $formReview->createView(),
         ]);
     }
 

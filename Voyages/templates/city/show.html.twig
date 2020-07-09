@@ -97,6 +97,21 @@
 </section>
 
 <section id="comments">
+    <div class="card card-form form-review-container">
+        <h4 class="h2-form-title">Avez-vous déjà visité {{ cityData.cityName }} ? </h4>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {{ form_start(formReview, {'attr': {'id': 'form_review', 'autocomplete': 'off'}}) }}
+        {{ form_widget(formReview) }}
+        <button class="btn form-submit">{{ button_label|default('Envoyer mon avis') }}</button>
+        {{ form_end(formReview) }}
+
+        {% else %}
+        <div class="alert alert-info">Veuillez vous
+            <a href="{{ path('app_login') }}" class="alert-link">connecter </a> pour rédiger un avis.
+        </div>
+        {% endif %}
+
+    </div>
     <h2 class="text-center">Avis des utilisateurs</h2>
 
     <div class="review-div">
