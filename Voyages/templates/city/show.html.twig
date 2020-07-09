@@ -97,7 +97,7 @@
 </section>
 
 <section id="comments">
-    <div class="card card-form form-review-container">
+    <div id="form-review-container">
         <h4 class="h2-form-title">Avez-vous déjà visité {{ cityData.cityName }} ? </h4>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         {{ form_start(formReview, {'attr': {'id': 'form_review', 'autocomplete': 'off'}}) }}

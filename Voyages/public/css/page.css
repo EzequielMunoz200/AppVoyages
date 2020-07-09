@@ -205,6 +205,20 @@ h1 {
     }
 }
 
+
+/* REVIEWS */
+
+#form-review-container {
+    width: 60%;
+    margin: auto;
+
+}
+
+ #review_rate{
+     display: flex;
+     justify-content: space-evenly;
+ }
+
 #comments{
     margin-bottom: 5%;
 }
