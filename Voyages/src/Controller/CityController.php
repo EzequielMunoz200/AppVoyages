@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\City;
 use App\Form\CityType;
+use App\Service\QueryApi;
 use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,7 +52,7 @@ class CityController extends AbstractController
     /**
      * @Route("/{geonameId}", name="city_show", requirements={"geonameId"="\d+"}, methods={"GET", "POST"})
      */
-    public function show(City $city, $geonameId): Response
+    public function show(City $city, QueryApi $queryApi, $geonameId): Response
     {
 
         $city = $this->getDoctrine()->getRepository(City::class)->findbyGeonameID($geonameId);
@@ -60,9 +61,12 @@ class CityController extends AbstractController
             throw $this->createNotFoundException('Cette page n\'existe pas');
         }
 
+        
+
 
         return $this->render('city/show.html.twig', [
-            'city' => $city,
+            'cityData' => $queryApi->citiesData($geonameId),
+            'imagesData' => $queryApi->citiesDataImages($queryApi->citiesData($geonameId)['cityNameUnsplash'])
         ]);
     }
 

@@ -32,4 +32,14 @@
 
     // Enable parameter hints
     "editor.parameterHints.enabled": true,
+    "workbench.editorAssociations": [
+    
+    ],
+    "html-css-class-completion.enableEmmetSupport": true,
+    "emmet.includeLanguages": {
+        "twig": "html"
+    
+    },
+    "files.associations": {"*.twig": "html"},
+    "editor.codeActionsOnSave": null,
 }

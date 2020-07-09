@@ -1,0 +1,42 @@
+#landing-sextion {
+    height: 100%;
+    background-size: 100% 110%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#data-section{
+    background-color: whitesmoke;
+    padding: 10%;
+}
+
+h1{
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+}
+
+#container-cards{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+#container-cards div {
+    margin-bottom: 10%;
+}
+
+.icon-card{
+    display: flex;
+    margin: auto;
+    align-items: center;
+    height: 20vh;
+}
+
+.fa-users:before{
+    font-size: 60px;
+}
+
+.card-text{
+    text-align: center;
+}

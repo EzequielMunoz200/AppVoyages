@@ -1,10 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}City{% endblock %}
+{% block stylesheets %}
+<link href="{{ asset('css/page.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
 
 {% block body %}
-{% dump(city) %}
+<section id="landing-section"
+    style="background-image:url('{{imagesData['urlImage'].full}}'); height:100%; background-size: 100% 110%; background-attachment: fixed;">
 
+</section>
+<section id="data-section">
+
+    {# {{ dump(cityData) }} #}
+    <h1>{{ cityData['fullname'] }}</h1>
+
+    <p>{{ cityData['description']|raw }}</p>
+
+    <div id="container-cards">
+        {% for key, score in cityData['scores'] %}
+        <div class="card shadow" style="width: 11rem;">
+            <div class="icon-card">
+                <i class="fa fa-users" aria-hidden="true"></i>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ score.name }}: {{ score.score_out_of_10|format_number({rounding_mode: 'floor'}) }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+
+</section>
+{% dump(cityData) %}
+{% dump(imagesData) %}
 
 
 
