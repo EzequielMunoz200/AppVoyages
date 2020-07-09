@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\City;
+use App\Entity\Picture;
+use App\Entity\Review;
 use App\Form\CityType;
 use App\Service\QueryApi;
 use App\Repository\CityRepository;
@@ -52,7 +54,7 @@ class CityController extends AbstractController
     /**
      * @Route("/{geonameId}", name="city_show", requirements={"geonameId"="\d+"}, methods={"GET", "POST"})
      */
-    public function show(City $city, QueryApi $queryApi, $geonameId): Response
+    public function show(City $city, QueryApi $queryApi, $geonameId, Request $request): Response
     {
 
         $city = $this->getDoctrine()->getRepository(City::class)->findbyGeonameID($geonameId);
@@ -61,13 +63,46 @@ class CityController extends AbstractController
             throw $this->createNotFoundException('Cette page n\'existe pas');
         }
 
-        
+        //form review
+        $review = new Review();
+        $formReview = $this->createForm(ReviewType::class, $review);
+        $formReview->handleRequest($request);
+
+        if ($formReview->isSubmitted() && $formReview->isValid()) {
+            $review->setCity($city);
+            // Active => true| Inactive => false
+            $review->setIsActive(true);
+            // is not reported => false | is reported => true
+            $review->setIsReported(false);
+            $review->setRate($formReview->get('rate')->getData());
+
+            $review->setCreatedAt(new \DateTime());
+
+            $filename = $imageUploader->moveFile($formReview->get('imageFile')->getData(), 'images/');
+            $picture = new Picture();
+            $title = $formReview->get('title')->getData();
+            $picture->setTitle($title);
+            $picture->setFilename($filename);
+            $picture->setCreatedAt(new \DateTime());
+            $picture->setReview($review);
+
+            $review->addPicture($picture);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($picture);
+            $entityManager->persist($review);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('city_show', ['geonameId' =>  $geonameId]);
+        }
+
 
 
         return $this->render('city/show.html.twig', [
             'cityData' => $queryApi->citiesData($geonameId),
             'imagesData' => $queryApi->citiesDataImages($queryApi->citiesData($geonameId)['cityNameUnsplash']),
             'details' => $queryApi->cityDataDetails($geonameId),
+            'reviews' => $city->getReviews(), //array à initialiser dans le template
         ]);
     }
 
@@ -96,7 +131,7 @@ class CityController extends AbstractController
      */
     public function delete(Request $request, City $city): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$city->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $city->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($city);
             $entityManager->flush();
