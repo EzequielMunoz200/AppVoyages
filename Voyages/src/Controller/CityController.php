@@ -66,7 +66,8 @@ class CityController extends AbstractController
 
         return $this->render('city/show.html.twig', [
             'cityData' => $queryApi->citiesData($geonameId),
-            'imagesData' => $queryApi->citiesDataImages($queryApi->citiesData($geonameId)['cityNameUnsplash'])
+            'imagesData' => $queryApi->citiesDataImages($queryApi->citiesData($geonameId)['cityNameUnsplash']),
+            'details' => $queryApi->cityDataDetails($geonameId),
         ]);
     }
 

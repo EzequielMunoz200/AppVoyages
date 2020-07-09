@@ -12,34 +12,65 @@
 </section>
 <section id="data-section">
 
-    {# {{ dump(cityData) }} #}
     <h1>{{ cityData['fullname'] }}</h1>
 
-    <p>{{ cityData['description']|raw }}</p>
+    <div id="description">{{ cityData['description']|raw }}</div>
 
-    <div id="container-cards">
-        {% for key, score in cityData['scores'] %}
-        <div class="card shadow" style="width: 11rem;">
-            <div class="icon-card">
-                <i class="fa fa-users" aria-hidden="true"></i>
+    <div id="city-scores">
+        <h3 class="subtitle-section">Scores de la ville</h3>
+        <div id="container-cards">
+            {% set iconScore = { 
+                0 : 'fas fa-building',
+                1 : 'fas fa-hand-holding-usd',
+                3 : 'fas fa-piggy-bank',
+                4 : 'fas fa-bus-alt', 
+                7 : 'fas fa-user-shield', 
+                8 : 'fas fa-hand-holding-medical', 
+                9 : 'fas fa-user-graduate', 
+                10 : 'fas fa-hand-holding-water', 
+                11 : 'far fa-money-bill-alt', 
+                13 : 'fas fa-wifi', 
+                14 : 'fas fa-theater-masks', 
+                15 : 'fas fa-genderless',
+                16 : 'fas fa-campground' 
+            } %}
+            {% set categoryScores = { 0 :'Logement'  , 1 : 'Coût de la vie' , 3 : 'Capital risque', 4 : 'Transports', 7 : 'Sécurité', 8 : 'Soins de santé', 9 : 'Éducation', 10 : 'Qualité de l\'environnement', 11 : 'Économie', 13 : 'Accès internet', 14 : 'Loisirs et Culture', 15 : 'Tolérance', 16 : 'En plein air' } %}
+
+            {% for key, score in categoryScores %}
+
+            <div class="card shadow" data-category="{{ score }}"
+                data-originalcategory="{{ cityData['scores'][key].name }}" style="width: 10rem;">
+                <i class="{{ iconScore[key] ~ ' fa-4x' }}" style="color: {{ cityData['scores'][key].color }};"></i>
+                <p class="card-text">{{ score }}</p>
+                <p id="p-score" class="card-text">
+                    {{ cityData['scores'][key].score_out_of_10|number_format(1, '.', ',') ~ ' / 10' }}</p>
             </div>
-            <div class="card-body">
-                <p class="card-text">{{ score.name }}: {{ score.score_out_of_10|format_number({rounding_mode: 'floor'}) }}</p>
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 
+</section>
 
+<section id="maps" >
+    <h3 class="subtitle-section">Plan de la ville</h3>
+      <div id="leaflet-maps" >
+        <div id="mapid" class="shadow" data-longitude="{{ cityData.location.longitude }}"
+          data-latitude="{{ cityData.location.latitude }}"></div>
+      </div>
+</section>
+
+<section id="gallery">
 
 </section>
+
+
+
 {% dump(cityData) %}
 {% dump(imagesData) %}
+{% dump(details) %}
 
-
-
-
-
+<!-- show maps script -->
+<script src="{{asset('js/city_show.js')}}"></script>
 
 
 {% endblock %}

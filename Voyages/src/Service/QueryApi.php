@@ -22,8 +22,6 @@ class QueryApi
         //dans la recherche pour geonameid https://api.teleport.org/api/cities/geonameid%3A3435910/
         //https://api.teleport.org/api/urban_areas/slug:new-york/scores/
         //https://api.teleport.org/api/cities/geonameid:2988507  paris
-        //http://localhost:8000/city/3489854 jamaica
-        //4717560 texas
 
         $jsonString = file_get_contents('https://api.teleport.org/api/cities/geonameid:' . $geonameId);
         $objectResponse = json_decode($jsonString);
@@ -38,8 +36,6 @@ class QueryApi
             $cityName = str_replace(' ', '-', $objectResponse->_links->$adminDivision->name);
         }
         $cityNameUnsplash = $cityName;
-        //dd($objectResponse->_links->$adminDivision->name);
-        //dd($objectResponse->_links);
         // this header is added to all requests made by this client
         $client = HttpClient::create(['headers' => [
             'User-Agent' => 'My App',
@@ -58,7 +54,7 @@ class QueryApi
 
         return [
             'fullname' => $objectResponse->full_name,
-            'geohash' => $objectResponse->location->geohash,
+            'location' => $objectResponse->location->latlon,
             'population' => $objectResponse->population,
             'description' => $objectResponseScores->summary,
             'scores' => $objectResponseScores->categories,
@@ -68,10 +64,9 @@ class QueryApi
     }
 
 
-    public function cityDataDescription($geonameId)
+    public function cityDataDetails($geonameId)
     {
         //https://api.teleport.org/api/cities/geonameid:2988507  paris
-        //http://localhost:8000/city/3489854 jamaica
 
         $jsonString = file_get_contents('https://api.teleport.org/api/cities/geonameid:' . $geonameId);
         $objectResponse = json_decode($jsonString);
@@ -90,13 +85,13 @@ class QueryApi
             'User-Agent' => 'My App',
         ]]);
 
-        $urlUrbanAreas = 'https://api.teleport.org/api/urban_areas/slug:' . strtolower($cityName) . '/scores/';
+        $urlUrbanAreas = 'https://api.teleport.org/api/urban_areas/slug:' . strtolower($cityName) . '/details';
         $responseUrlUrbanAreas = $client->request('GET', $urlUrbanAreas);
         // Responses are lazy: this code is executed as soon as headers are received
         if (200 == $responseUrlUrbanAreas->getStatusCode()) {
-            $jsonStringScores = file_get_contents('https://api.teleport.org/api/urban_areas/slug:' . strtolower($cityName) . '/scores/');
-            $objectResponseScores = json_decode($jsonStringScores)->summary;
-            if (!$objectResponseScores) {
+            $jsonStringScores = file_get_contents('https://api.teleport.org/api/urban_areas/slug:' . strtolower($cityName) . '/details');
+            $objectResponseDetails = json_decode($jsonStringScores)->categories;
+            if (!$objectResponseDetails) {
                 return null;
             }
         } else {
@@ -104,7 +99,7 @@ class QueryApi
         }
 
         return [
-            'description' => $objectResponseScores
+            'details' => $objectResponseDetails,
         ];
     }
 
