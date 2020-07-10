@@ -142,7 +142,7 @@
                                 <div class="collapse text-center text-danger report-message mx-0"
                                     id="signal-{{ review.id }}">
                                     <span class="span-review"><a
-                                            href="{{ path('api_v1_review_report', {'id': review.id } ) }}"
+                                            href="{# {{ path('api_v1_review_report', {'id': review.id } ) }} #}"
                                             class="report-review-button" data-reviewId="{{ review.id }}"> <i
                                                 class="em em-no_entry" aria-role="presentation"
                                                 aria-label="NO ENTRY"></i>Avis inapproprié, je signale!</a></span>
@@ -150,24 +150,24 @@
                                 <h3 class="card-title">
                                     {% if review is defined %}
                                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                    <a class="username" href="{{ path('user_show', { 'id': review.user.id}) }}"><img
-                                            src="{{ asset('images/avatars/' ~ review.user.avatar) }}"
+                                    <a class="username" href="{{ path('user_show', { 'id': review.author.id}) }}"><img
+                                            src="{{ asset('images/avatars/' ~ review.author.avatar) }}"
                                             alt="Photo de profil" class="user-profile-picture" style="width:13%;">
-                                        {{ review.user.username }}</a>
+                                        {{ review.author.username }}</a>
                                     {% else %}
-                                    <p class="m-0">{{ review.user.username }}</p>
+                                    <p class="m-0">{{ review.author.username }}</p>
                                     {% endif %}
 
                                     {# displays the highest level badge reached #}
                                     {% set badgeLevel = [] %}
-                                    {% for key, badge in review.user.badge %}
+                                    {% for key, badge in review.author.badges %}
                                     {% set badgeLevel = badgeLevel|merge([badge.badgeString]) %}
                                     {% endfor %}
-                                    {% for badge in review.user.badge %}
+                                    {% for badge in review.author.badges %}
                                     {% if badge.badgeString == max(badgeLevel) %}
                                     <p class="user-points">
 
-                                        {{ review.user.points|default(5)}} points
+                                        {{ review.author.points|default(5)}} points
                                         <img src="{{ asset('images/badges/' ~ badge.filename ~ '.svg' ) }}"
                                             alt="Badge {{ badge.label }}" class="user-badge" /></p>
                                     {% endif %}
@@ -184,7 +184,7 @@
                                         jour{% if leftDays > 1 %}s{% endif %}</em>
                                 </h4>
                                 <h4 class="h4-review"><strong>Visite effectuée</strong> le
-                                    {{review.travelDate.date|date("d/m/Y")}}
+                                    {{review.travelDate|date("d/m/Y")}}
                                 </h4>
                                 <h4>
                                     <strong class="mr-2">Appréciation</strong>
@@ -215,9 +215,9 @@
                                 <div class="card-body">
 
                                     <!-- Default dropleft button -->
-                                    <p class="card-text text-justify">{{ review.text|nl2br }}</p>
+                                    <p class="card-text text-justify">{{ review.text|raw }}</p>
 
-                                    <div class="review-votes d-flex justify-content-end">
+                                   {#  <div class="review-votes d-flex justify-content-end">
                                         <span class="review-vote like">
                                             {% if app.user and review.isLikedByUser(app.user) %}
                                             <i class="em em-heart" aria-role="presentation"
@@ -228,12 +228,12 @@
                                             {% endif %}
                                         </span>
                                         <span class="span-rate" data-likesCount="{{ review.likes|length }}"></span>
-                                    </div>
+                                    </div> #}
 
                                     <div class="city-pictures text-center">
-                                        {% for picture in review.picture %}
+                                        {% for picture in review.pictures %}
                                         <img src="{{ asset('images/uploads/' ~ picture.filename) }}"
-                                            alt="Image de {{city.cityName}} postée par un utilisateur."
+                                            alt="Image de {{cityData.cityName}} postée par un utilisateur."
                                             class="user-image">
                                         {% endfor %}
 

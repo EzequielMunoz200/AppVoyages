@@ -18,12 +18,12 @@ class Picture
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $filename;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $title;
 
@@ -53,7 +53,7 @@ class Picture
         return $this->filename;
     }
 
-    public function setFilename(string $filename): self
+    public function setFilename(?string $filename): self
     {
         $this->filename = $filename;
 
@@ -65,7 +65,7 @@ class Picture
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
