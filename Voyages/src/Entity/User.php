@@ -171,6 +171,7 @@ class User implements UserInterface
         $this->reviewLikes = new ArrayCollection();
         $this->cityLikes = new ArrayCollection();
         $this->userLikes = new ArrayCollection();
+        $this->createdAt = new \DateTime;
     }
 
     public function __toString()
@@ -202,7 +203,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->username;
     }
 
     /**

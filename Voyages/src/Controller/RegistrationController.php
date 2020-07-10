@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\BadgeRepository;
 use App\Security\AppVoyagesAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +18,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppVoyagesAuthenticator $authenticator): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppVoyagesAuthenticator $authenticator, BadgeRepository $badgeRepository): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -32,6 +33,19 @@ class RegistrationController extends AbstractController
                     //$form->get('plainPassword')->getData()
                 )
             );
+
+             //add default badge
+             $badge = $badgeRepository->find(1);
+             $user->addBadge($badge);
+             $user->setPoints(5);
+             //add default avatar
+             $user->setAvatar('default-avatar.svg');
+             //add default username $firstname(14 CHAR )+'#'.random_int
+             $firstname = $form->get('firstname')->getData();
+             $name = $form->get('name')->getData();
+             $newUsername = substr($firstname, 0, 14) . '#' . random_int(1, 100000);
+             $user->setUsername($newUsername);
+             $user->setIsActive(true);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

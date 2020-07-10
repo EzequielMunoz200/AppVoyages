@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Service\ImageUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -61,15 +62,32 @@ class UserController extends AbstractController
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user): Response
+    public function edit(ImageUploader $imageUploader, Request $request, User $user): Response
     {
+        //teste le droit (edit) sur l'objet($user)
+        //retourne un 403 si l'utilisateur ne rentre pas dans les conditions du voter
+        //$this->denyAccessUnlessGranted('edit', $question);
+        $this->denyAccessUnlessGranted('edit', $user);
+        /*  if (!$this->isGranted('edit', $user, 'User tried to access a page without having ROLE_ADMIN')) {
+            $this->addFlash('danger', 'Vous n\'avez pas le droits de editer cette question');
+            return $this->redirectToRoute('question_show', ['id' => $user->getId()]);
+        } */
+
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('avatar')->getData()) {
+                $fileName = $imageUploader->moveFile($form->get('avatar')->getData(), 'images/avatars');
+                /* dd($fileName); */
+                $user->setAvatar($fileName);
+            }
+
+
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_index');
+            return $this->redirectToRoute('user_show', ['id' => $user->getId()]);
         }
 
         return $this->render('user/edit.html.twig', [
@@ -83,7 +101,7 @@ class UserController extends AbstractController
      */
     public function delete(Request $request, User $user): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();

@@ -114,7 +114,7 @@
     </div>
     <h2 class="text-center">Avis des utilisateurs</h2>
 
-    <div class="review-div">
+    <div class="review-div col-xl-10">
         <!-- Beginning Caroussel -->
         <div id="carouselExampleIndicators-review" class="carousel slide">
             <div class="carousel-inner">
@@ -147,34 +147,34 @@
                                                 class="em em-no_entry" aria-role="presentation"
                                                 aria-label="NO ENTRY"></i>Avis inapproprié, je signale!</a></span>
                                 </div>
-                                <h3 class="card-title">
-                                    {% if review is defined %}
-                                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                    <a class="username" href="{{ path('user_show', { 'id': review.author.id}) }}"><img
-                                            src="{{ asset('images/avatars/' ~ review.author.avatar) }}"
-                                            alt="Photo de profil" class="user-profile-picture" style="width:13%;">
-                                        {{ review.author.username }}</a>
-                                    {% else %}
-                                    <p class="m-0">{{ review.author.username }}</p>
-                                    {% endif %}
 
-                                    {# displays the highest level badge reached #}
-                                    {% set badgeLevel = [] %}
-                                    {% for key, badge in review.author.badges %}
-                                    {% set badgeLevel = badgeLevel|merge([badge.badgeString]) %}
-                                    {% endfor %}
-                                    {% for badge in review.author.badges %}
-                                    {% if badge.badgeString == max(badgeLevel) %}
-                                    <p class="user-points">
+                                {% if review is defined %}
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <a class="username" href="{{ path('user_show', { 'id': review.author.id}) }}"><img
+                                        src="{{ asset('images/avatars/' ~ review.author.avatar) }}"
+                                        alt="Photo de profil" class="user-profile-picture" style="width:13%;">
+                                </a>
+                                <a class="username" href="{{ path('user_show', { 'id': review.author.id}) }}">
+                                    {{ review.author.username }}</a>
+                                {% else %}
+                                <p class="m-0">{{ review.author.username }}</p>
+                                {% endif %}
 
-                                        {{ review.author.points|default(5)}} points
-                                        <img src="{{ asset('images/badges/' ~ badge.filename ~ '.svg' ) }}"
-                                            alt="Badge {{ badge.label }}" class="user-badge" /></p>
-                                    {% endif %}
-                                    {% endfor %}
-                                    {% endif %}
-                                </h3>
-                                <h4 class="card-badge"> </h4>
+                                {# displays the highest level badge reached #}
+                                {% set badgeLevel = [] %}
+                                {% for key, badge in review.author.badges %}
+                                {% set badgeLevel = badgeLevel|merge([badge.level]) %}
+                                {% endfor %}
+                                {% for badge in review.author.badges %}
+                                {% if badge.level == max(badgeLevel) %}
+                                <h4 class="card-badge">
+                                    <img src="{{ asset('images/badges/' ~ badge.filename ~ '.svg' ) }}"
+                                        alt="Badge {{ badge.name }}" class="user-badge" style="width: 20px;" /></h4>
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+
+
 
                                 {% set difference = date(review.createdAt|date("Y/m/d")).diff(date('now'|date('Y/m/d'))) %}
                                 {% set leftDays = difference.days %}
@@ -217,7 +217,7 @@
                                     <!-- Default dropleft button -->
                                     <p class="card-text text-justify">{{ review.text|raw }}</p>
 
-                                   {#  <div class="review-votes d-flex justify-content-end">
+                                    {#  <div class="review-votes d-flex justify-content-end">
                                         <span class="review-vote like">
                                             {% if app.user and review.isLikedByUser(app.user) %}
                                             <i class="em em-heart" aria-role="presentation"
