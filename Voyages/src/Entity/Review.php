@@ -6,6 +6,7 @@ use App\Repository\ReviewRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ReviewRepository::class)
@@ -21,11 +22,25 @@ class Review
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(allowNull=false, message="Obligatoire")
+     * @Assert\Range(
+     *      min = "1960-01-01",
+     *      max = "now",
+     *      notInRangeMessage="Date invalide"
+     * )
      */
     private $travelDate;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(allowNull=false, message="Description obligatoire")
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 4096,
+     *      minMessage = "{{ limit }} caractères minimum",
+     *      maxMessage = "{{ limit }} caractères maximum",
+     *      allowEmptyString = false
+     * )
      */
     private $text;
 
@@ -39,8 +54,10 @@ class Review
      */
     private $isReported;
 
-    /**
-     * @ORM\Column(type="integer")
+     /**
+     * @ORM\Column(type="smallint", options={"default" : 5})
+     * @Assert\Choice({"1", "2", "3", "4", "5"})
+     * 
      */
     private $rate;
 
@@ -80,6 +97,14 @@ class Review
     {
         $this->pictures = new ArrayCollection();
         $this->reviewLikes = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        if (is_null($this->text)) {
+            return 'NULL';
+        }
+        return $this->text;
     }
 
     public function getId(): ?int
