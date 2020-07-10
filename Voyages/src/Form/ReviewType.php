@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Review;
-
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,7 +11,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\Image;
 
@@ -39,7 +38,10 @@ class ReviewType extends AbstractType
                 'label' => 'Date du voyage',
                 'required' => false,
             ])
-            ->add('text', TextareaType::class, [
+            ->add('text', CKEditorType::class, [
+                'config' => [
+                    'language' => 'fr',
+                ],
                 'label' => 'Donner votre avis sur la destination',
                 'required' => false,
                 'row_attr' => ['rows' => 4],
