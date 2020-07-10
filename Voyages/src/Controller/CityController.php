@@ -80,24 +80,26 @@ class CityController extends AbstractController
             $review->setCreatedAt(new \DateTime());
             $review->setAuthor($this->getUser());
 
-            $filename = $imageUploader->moveFile($formReview->get('imageFile')->getData(), 'images/');
+            $filename = $imageUploader->moveFile($formReview->get('imageFile')->getData(), 'images/uploads');
             $picture = new Picture();
-            $title = $formReview->get('title')->getData();
-            $picture->setTitle($title);
-            $picture->setFilename($filename);
-            $picture->setCreatedAt(new \DateTime());
-            $picture->setReview($review);
-
-            $review->addPicture($picture);
-
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($picture);
+            if ($formReview->get('imageFile')->getData()) {
+                if ($formReview->get('title')->getData() === null) {
+                    $picture->setTitle($city->getCityName());
+                } else {
+                    $picture->setTitle($formReview->get('title')->getData());
+                }
+                $picture->setFilename($filename);
+                $picture->setCreatedAt(new \DateTime());
+                $picture->setReview($review);
+                $review->addPicture($picture);
+                $entityManager->persist($picture);
+            }
             $entityManager->persist($review);
             $entityManager->flush();
 
             return $this->redirectToRoute('city_show', ['geonameId' =>  $geonameId]);
         }
-
 
 
         return $this->render('city/show.html.twig', [
@@ -141,5 +143,28 @@ class CityController extends AbstractController
         }
 
         return $this->redirectToRoute('city_index');
+    }
+
+
+     /**
+     * @Route("/random", name="city_random", methods={"GET"})
+     */
+    public function getRandomCity(): Response
+    {
+        $randomCities = [];
+        $randomCity = false;
+        while (true) {
+            $randomCity = $this->getDoctrine()->getRepository(City::class)->find(rand(1035, 2029));
+            if ($randomCity) {
+                $randomCities[] = $randomCity;
+                if (count($randomCities) == 6) {
+                    break;
+                }
+            }
+        }
+
+        return $this->render('city/random.html.twig', [
+            'randomCities' => $randomCities,
+        ]);
     }
 }
