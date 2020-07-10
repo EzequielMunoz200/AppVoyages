@@ -61,7 +61,7 @@ class Review
     private $author;
 
     /**
-     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="review", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="review", cascade="remove", orphanRemoval=true)
      */
     private $pictures;
 

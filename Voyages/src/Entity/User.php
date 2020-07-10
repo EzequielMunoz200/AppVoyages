@@ -8,10 +8,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Ce compte existe déjà")
  */
 class User implements UserInterface
 {
@@ -24,6 +25,9 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(allowNull=false, message="Obligatoire")
+     * @Assert\Email(
+     * message = "Email non valide.")
      */
     private $email;
 
@@ -35,36 +39,71 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(allowNull=false, message="Obligatoire")
+     * @Assert\Regex(
+     *  pattern = "#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W)#",
+     *  match=true,
+     *  message="Au moins 8 caractères, au moins une majuscule, au moins un caractère spécial et au moins un chiffre")
+     * @Assert\Length(
+     *  min = 8,
+     *  max = 4096,
+     *  minMessage="8 caractères minimum")
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(allowNull=false, message="Obligatoire")
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 30,
+     *      minMessage = "{{ limit }} caractères minimum",
+     *      maxMessage = "{{ limit }} caractères maximum",
+     *      allowEmptyString = false
+     * )
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(allowNull=false, message="Obligatoire")
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 30,
+     *      minMessage = "{{ limit }} caractères minimum",
+     *      maxMessage = "{{ limit }} caractères maximum",
+     *      allowEmptyString = false
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "{{ limit }} caractères minimum",
+     *      maxMessage = "{{ limit }} caractères maximum",
+     *      allowEmptyString = false
+     * )
      */
     private $username;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank(allowNull=false, message="Obligatoire")
+     * @Assert\LessThan("-18 years", message="Minimum 18 ans")
+     * 
      */
     private $birthdate;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
 
-    /**
-     * @ORM\Column(type="integer")
+   /**
+     * @ORM\Column(type="integer", nullable=true, options={"default" : 0})
      */
     private $points;
 
@@ -236,7 +275,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(?string $username): self
     {
         $this->username = $username;
 
@@ -260,7 +299,7 @@ class User implements UserInterface
         return $this->avatar;
     }
 
-    public function setAvatar(string $avatar): self
+    public function setAvatar(?string $avatar): self
     {
         $this->avatar = $avatar;
 

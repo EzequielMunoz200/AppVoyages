@@ -17,7 +17,9 @@
 
 {% endblock %}
 
-{% block container %}
+{% block body %}
+
+{% dump(randomCities) %}
 
     <h1>Destinations aléatoires</h1>
     <p class="intro">Pour les curieux, découvrez ici des destinations auxquelles vous n'auriez pas pensé.</p>
@@ -26,18 +28,15 @@
 
     {% for city in randomCities %}
     <a href="{{ path('city_show', { geonameId : city.geonameId }) }}">
-        <div class="city-card" data-name="{{ city.cityName }}" data-geonameid="{{ city.geonameId }}">
-            <img class="city-img" src="" alt="Image de "
-                onerror="this.src='{{ asset('images/loader.gif') }}'" />
-            <p class="city-name">{{ city.cityName }}</p>
+        <div class="city-card" data-name="{{ city.name }}" data-geonameid="{{ city.geonameId }}">
+            <img class="city-img" src="" alt="Image de " />
+                {# onerror="this.src='{{ asset('images/loader.gif') }}'" #}
+            <p class="city-name">{{ city.name }}</p>
         </div>
     </a>
     {% endfor %}
 
 </div>
-
-
-  
 
 
 
@@ -46,7 +45,6 @@
 
 {% block javascripts %}
 
-{{ parent() }}
 
 <script>
     let cities = document.querySelectorAll('.city-card');
@@ -59,7 +57,7 @@
             cityName = cityName.replace(/\s/g, '-');
             let cityId = city.dataset.geonameid;
             // Récupération des images de ville
-            fetch('/projet-dream-travel-project/travel-project/public/api/v1/image/' + cityName)
+            fetch('/api/v1/image/' + cityName)
                 .then(
                     (response) => {
                         return response.status == 200 ?
@@ -74,8 +72,9 @@
                     })
                 .then(
                     (data) => {
-                        let imageElement = city.querySelector('img');
-                        imageElement.setAttribute('src', data.thumb)
+                        console.log(data);
+                        //let imageElement = city.querySelector('img');
+                        //imageElement.setAttribute('src', data.thumb)
                     }
                 );
         }

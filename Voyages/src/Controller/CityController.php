@@ -146,7 +146,7 @@ class CityController extends AbstractController
     }
 
 
-     /**
+    /**
      * @Route("/random", name="city_random", methods={"GET"})
      */
     public function getRandomCity(): Response
