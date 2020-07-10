@@ -56,7 +56,7 @@ class CityController extends AbstractController
     /**
      * @Route("/{geonameId}", name="city_show", requirements={"geonameId"="\d+"}, methods={"GET", "POST"})
      */
-    public function show(City $city, QueryApi $queryApi, $geonameId, Request $request): Response
+    public function show(ImageUploader $imageUploader, City $city, QueryApi $queryApi, $geonameId, Request $request): Response
     {
 
         $city = $this->getDoctrine()->getRepository(City::class)->findbyGeonameID($geonameId);
@@ -77,8 +77,8 @@ class CityController extends AbstractController
             // is not reported => false | is reported => true
             $review->setIsReported(false);
             $review->setRate($formReview->get('rate')->getData());
-
             $review->setCreatedAt(new \DateTime());
+            $review->setAuthor($this->getUser());
 
             $filename = $imageUploader->moveFile($formReview->get('imageFile')->getData(), 'images/');
             $picture = new Picture();
