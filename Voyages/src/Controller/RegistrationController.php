@@ -39,7 +39,7 @@ class RegistrationController extends AbstractController
              $user->addBadge($badge);
              $user->setPoints(5);
              //add default avatar
-             $user->setAvatar('default-avatar.svg');
+             $user->setAvatar('default-avatar.png');
              //add default username $firstname(14 CHAR )+'#'.random_int
              $firstname = $form->get('firstname')->getData();
              $name = $form->get('name')->getData();

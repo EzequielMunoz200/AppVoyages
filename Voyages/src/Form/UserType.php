@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Language;
 use App\Entity\User;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -55,10 +56,10 @@ class UserType extends AbstractType
                     ]),
                 ]
             ])
-            ->add('language', EntityType::class, [
+            ->add('languages', EntityType::class, [
                 'label' => 'Langues Parlées',
                 'class' => Language::class,
-                'choice_label' => 'label',
+                'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,
             ]);

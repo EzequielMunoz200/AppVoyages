@@ -1,0 +1,34 @@
+<div id="carouselExampleIndicators" class="carousel">
+
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="city-pictures text-center img-gallery">
+                {% for image in imagesData['urlRandomImages']|slice(0, 8) %}
+                <img id="{{ 'image' ~ random(1,50000) }}" src="{{ image.small }}" alt="Image de Paris"
+                    class="img-carousel" />
+                {% endfor %}
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="city-pictures text-center">
+                <div class="city-pictures text-center img-gallery">
+                    {% for image in imagesData['urlRandomImages']|slice(8, 16) %}
+                    <img id="{{ 'image' ~ random(1,50000) }}" src="{{ image.thumb }}" alt="Image de Paris"
+                        class="img-carousel" />
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    </ol>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+    {#  <div id="caption"></div> #}
+</div>

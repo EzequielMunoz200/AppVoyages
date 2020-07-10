@@ -138,7 +138,7 @@ class QueryApi
             $objectResponseUrlImage = json_decode($jsonStringUrlImage);
             $urlImage = $objectResponseUrlImage->results[0]->urls;
  */
-            $urlRandomImageQuery = 'https://api.unsplash.com/photos/random?query=' . $cityNameUnsplash . '&count=18&client_id=' . $_ENV['API_KEY_UNSPLASH'];
+            $urlRandomImageQuery = 'https://api.unsplash.com/photos/random?query=' . $cityNameUnsplash . '&count=16&client_id=' . $_ENV['API_KEY_UNSPLASH'];
             $jsonStringUrlRandomImage = file_get_contents($urlRandomImageQuery);
             $objectResponseUrlRandomImage = json_decode($jsonStringUrlRandomImage);
             $randomImagesArray = [];
