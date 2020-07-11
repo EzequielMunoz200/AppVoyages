@@ -14,6 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class RegistrationFormType extends AbstractType
 {
@@ -42,12 +43,11 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-
                 'invalid_message' => 'Mots de passe non similaires',
                 'required' => true,
                 'first_options'  => [
                     'label' => 'Mot de passe',
-                    /*  'help' => 'The ZIP/Postal code for your credit card\'s billing address.' */
+                    'help' => 'Le mot de passe doit contenir au moins une majuscule, au moins un nombre et au moins un caractère spécial',
                 ],
                 'second_options' => ['label' => 'Répéter le mot de passe'],
             ]);
