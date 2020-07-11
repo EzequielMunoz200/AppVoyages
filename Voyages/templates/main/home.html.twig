@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() ~ ' - ' }} {{pageTitle}}{% endblock %}
+{% block stylesheets %}
+{# <link href="{{ asset('css/page.css') }}" type="text/css" rel="stylesheet" /> #}
+{% endblock %}
+
+{% block body %}
+<div class="wrapper-accueil">
+    <h1>Page d accueil</h1>
+</div>
+
+{% endblock %}

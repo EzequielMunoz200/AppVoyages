@@ -108,6 +108,7 @@ class CityController extends AbstractController
             'details' => $queryApi->cityDataDetails($geonameId),
             'reviews' => $city->getReviews(), //array à initialiser dans le template
             'formReview' => $formReview->createView(),
+            'objectCity' => $city,
         ]);
     }
 

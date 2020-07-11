@@ -29,5 +29,6 @@ services:
     # please note that last definitions always *replace* previous ones
     App\EventSubscriber\TokenSubscriber:
         autowire: true
+        autoconfigure: true
         arguments:
             $tokens: '%tokens%'

@@ -4,6 +4,7 @@
 
 #data-section {
     padding: 10%;
+    padding-bottom: 5%;
 }
 
 h1 {
@@ -55,6 +56,29 @@ h1 {
 .card-text {
     text-align: center;
 }
+
+/* Start Tags Section  */
+
+.tags-list {
+    display: flex;
+    list-style: none;
+    width: 75%;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+}
+
+.tags-list li {
+    margin: 0.2em;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.tags-list span {
+    height: 35px;
+    padding: 10px;
+}
+/* Ends Tags Section */
 
 
 /* LEAFLET CSS */
@@ -236,7 +260,7 @@ h1 {
     color: white;
     background-color: indianred;
     border-radius: 3px;
-} 
+}
 
 #review .form-group label {
     color: white;
