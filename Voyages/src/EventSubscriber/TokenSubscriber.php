@@ -10,6 +10,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class TokenSubscriber implements EventSubscriberInterface
 {
+
     private $tokens;
 
     public function __construct($tokens)
@@ -28,15 +29,14 @@ class TokenSubscriber implements EventSubscriberInterface
         }
         /* $host = $event->getRequest()->getHost();
         dd($host); */
+         //here the real server ip address => 127.0.0.1, for ex.
         if ($event->getRequest()->getClientIp() === '127.0.0.1') {
             // mark the request as having passed token authentication
             $event->getRequest()->attributes->set('token', '5cUu2iLaOpIWuoVgz49z');
         }
 
-        //dd($event->getRequest());
         if ($controller instanceof TokenAuthenticatedController) {
             $token = $event->getRequest()->attributes->get('token');
-            //dd($event->getRequest()->query->get('token'));
             if (!in_array($token, $this->tokens)) {
                 throw new AccessDeniedHttpException('This action needs a valid token!');
             }
