@@ -30,6 +30,16 @@ class CityRepository extends ServiceEntityRepository
         return $result;
     }
 
+    public function findByPartialName($partialName){
+        $builder = $this->createQueryBuilder('city');
+        $builder->where('city.name LIKE :partialName');
+        $builder->setParameter('partialName',$partialName.'%');
+        $builder->orderBy('city.name', 'ASC');
+        $query = $builder->getQuery();
+       
+        return $query->execute();
+    }
+
 
     // /**
     //  * @return City[] Returns an array of City objects
