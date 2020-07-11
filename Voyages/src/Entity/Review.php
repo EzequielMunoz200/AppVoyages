@@ -117,7 +117,7 @@ class Review
         return $this->travelDate;
     }
 
-    public function setTravelDate(\DateTimeInterface $travelDate): self
+    public function setTravelDate(?\DateTimeInterface $travelDate): self
     {
         $this->travelDate = $travelDate;
 

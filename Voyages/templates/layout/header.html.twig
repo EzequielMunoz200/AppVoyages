@@ -1,28 +1,51 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">App Voyages</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Faire une recherche
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Recherche Avancée</a>
+          <a class="dropdown-item" href="#">Recherche Simple</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="#">Villes aleatoirs</a>
         </div>
       </li>
+      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          {{ app.user.firstname }} <i class="fas fa-user-circle"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Mon profil</a>
+          {% if is_granted('ROLE_ADMIN') %}
+          <a class="dropdown-item" href="#">Administration</a>
+          {% endif %}
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Se deconnecter</a>
+        </div>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="#">Se connecter</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">S'enregistrer</a>
+      </li>
+      {% endif %}
+
     </ul>
   </div>
 </nav>

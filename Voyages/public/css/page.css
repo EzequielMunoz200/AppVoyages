@@ -1,3 +1,7 @@
+* {
+    --color-items: #55967E;
+}
+
 #data-section {
     padding: 10%;
 }
@@ -213,9 +217,37 @@ h1 {
 /* REVIEWS */
 
 #form-review-container {
-    width: 60%;
-    margin: auto;
+    width: 90%;
+    margin: auto auto 5% auto;
+    background-color: var(--color-items);
+    padding: 3%;
+}
 
+.col-form-label,
+.form-check-label {
+    color: white;
+}
+
+.accordion>.card {
+    margin-bottom: 8%;
+}
+
+#review .invalid-feedback {
+    color: white;
+    background-color: indianred;
+    border-radius: 3px;
+} 
+
+#review .form-group label {
+    color: white;
+}
+
+
+.form-review-title {
+    text-align: center;
+    margin-bottom: 5%;
+    font-size: x-large;
+    color: white;
 }
 
 #review_rate {
@@ -235,14 +267,26 @@ h1 {
 .header-review {
     display: flex;
     align-items: start;
+    margin-top: 5%;
+}
 
+.alert {
+    text-align: center;
 }
 
 .report-button,
-.report-button:hover {
+.report-button:hover,
+.btn-see-more {
     color: gray;
     font-size: small;
     text-decoration: none;
+    box-shadow: none;
+}
+
+.btn-see-more:hover {
+    text-decoration: none;
+    color: lightgray;
+    box-shadow: none;
 }
 
 .report-review-button {
@@ -275,4 +319,20 @@ h1 {
 
 .profile-info p {
     font-size: .8em;
+}
+
+.profile-info a {
+    display: contents;
+    color: var(--color-items);
+}
+
+.fa-circle,
+.fa-circle-thin,
+.form-check-input {
+    color: var(--color-items);
+}
+
+
+.user-image {
+    max-width: 90%;
 }

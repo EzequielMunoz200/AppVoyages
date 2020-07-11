@@ -1,9 +1,9 @@
 <div id="form-review-container">
-    <h4 class="h2-form-title">Avez-vous déjà visité {{ cityData.cityName }} ? </h4>
+    <h4 class="form-review-title">Avez-vous déjà visité {{ cityData.cityName }} ? </h4>
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     {{ form_start(formReview, {'attr': {'id': 'form_review', 'autocomplete': 'off'}}) }}
     {{ form_widget(formReview) }}
-    <button class="btn form-submit">{{ button_label|default('Envoyer mon avis') }}</button>
+    <button class="btn btn-sm btn-dark form-submit">{{ button_label|default('Envoyer mon avis') }}</button>
     {{ form_end(formReview) }}
 
     {% else %}
@@ -13,7 +13,7 @@
     {% endif %}
 
 </div>
-<h2 class="text-center">Avis des utilisateurs</h2>
+<h3 class="subtitle-section">Avis des utilisateurs</h3>
 
 <div class="review-div col-xl-10">
     <!-- Beginning Caroussel -->
@@ -36,7 +36,7 @@
                             <p class="report-button  m-0 text-right">
                                 <a class="report-button py-0 m-0" data-toggle="collapse" href="#signal-{{ review.id }}"
                                     role="button" aria-expanded="false" aria-controls="collapseExample">
-                                    signaler
+                                    signaler <i class="fas fa-exclamation-triangle"></i>
                                 </a>
                             </p>
                             <div class="collapse text-center text-danger report-message mx-0"
@@ -118,8 +118,7 @@
                             <h2 class="mb-0">
                                 <button class="btn btn-link btn-block text-center btn-see-more" type="button"
                                     data-toggle="collapse" data-target="#collapse-{{ review.id }}" aria-expanded="true"
-                                    aria-controls="collapseOne">
-                                    Voir plus...
+                                    aria-controls="collapseOne">Voir plus
                                 </button>
                             </h2>
                         </div>
