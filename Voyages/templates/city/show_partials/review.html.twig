@@ -56,8 +56,7 @@
                                         <img class="user-profile-picture"
                                             src="{{ asset('images/avatars/' ~ review.author.avatar) }}"
                                             alt="Photo de profil"></a>
-                                    <a href="{{ path('user_show', { 'id': review.author.id}) }}">
-                                        {{ review.author.username }}</a>
+                                    <a class="user-name" href="{{ path('user_show', { 'id': review.author.id}) }}">{{ review.author.username }}</a>
                                 </div>
 
                                 {% else %}
@@ -65,7 +64,7 @@
                                     <img class="user-profile-picture"
                                         src="{{ asset('images/avatars/' ~ review.author.avatar) }}"
                                         alt="Photo de profil">
-                                    <p class="m-0">{{ review.author.username }}</p>
+                                    <p class="m-0 user-name">{{ review.author.username }}</p>
                                 </div>
 
                                 {% endif %}

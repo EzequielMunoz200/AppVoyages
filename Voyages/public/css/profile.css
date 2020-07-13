@@ -29,7 +29,7 @@
 
 .user-like {
     position: absolute;
-    top: -1257px;
+    top: -1110px;
     right: 42px;
     font-size: 1.7em;
     color: indianred;
@@ -45,6 +45,8 @@
 .user-left {
     /* background-color: violet; */
     height: 500px;
+    min-height: 500px;
+    max-height: 500px;
     flex: 1;
     margin: 2%;
     /* margin-top: 20%; */
@@ -79,7 +81,7 @@
     width: 105%;
     margin: auto;
     overflow-y: scroll;
-    max-height: 192px;
+    max-height: 135px;
     padding-right: 14px;
 }
 
@@ -100,7 +102,7 @@
     /* margin-top: 20%; */
     position: relative;
     border: .01rem solid rgba(0, 0, 0, .1);
-    top: -643px;
+    top: -472px;
 }
 
 .user-center-info {
@@ -126,7 +128,7 @@
     overflow: hidden;
 }
 
-.text-role-badge{
+.text-role-badge {
     position: absolute;
     top: 21px;
     left: 7px;
@@ -198,6 +200,7 @@
     border: .01rem solid rgba(0, 0, 0, .1);
     top: 532px;
     margin-bottom: 20%;
+    min-height: 500px;
 }
 
 .img-carousel {

@@ -20,7 +20,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Recherche Avancée</a>
-          <a class="dropdown-item" href="#">Recherche Simple</a>
+          <a class="dropdown-item" href="{{path('search')}}">Recherche Simple</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Villes aleatoirs</a>
         </div>
@@ -32,7 +32,7 @@
           {{ app.user.firstname }} <i class="fas fa-user-circle"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Mon profil</a>
+          <a class="dropdown-item" href="{{path('user_show', {id : app.user.id })}}">Mon profil</a>
           {% if is_granted('ROLE_ADMIN') %}
           <a class="dropdown-item" href="#">Administration</a>
           {% endif %}
