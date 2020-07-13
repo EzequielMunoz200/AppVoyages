@@ -1,0 +1,441 @@
+.wrapper-user {
+    display: flex;
+    flex-direction: column;
+    padding-top: 13vh;
+}
+
+.paragraph-inline {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.text-thumb {
+    margin-left: 5%;
+    font-size: small;
+}
+
+.report-profile {
+    position: absolute;
+    top: -576px;
+    color: lightgray;
+    font-size: 0.9rem;
+}
+
+.report-profile:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.user-like {
+    position: absolute;
+    top: -1257px;
+    right: 42px;
+    font-size: 1.7em;
+    color: indianred;
+}
+
+.user-like:hover {
+    color: mediumvioletred;
+    text-decoration: none;
+}
+
+/* START LEFT */
+
+.user-left {
+    /* background-color: violet; */
+    height: 500px;
+    flex: 1;
+    margin: 2%;
+    /* margin-top: 20%; */
+    position: relative;
+    border: .01rem solid rgba(0, 0, 0, .1);
+    top: 532px;
+}
+
+.title-badges {
+    font-size: small;
+    position: relative;
+    top: 15px;
+    left: 32px;
+    background-color: whitesmoke;
+    width: auto;
+    display: inline-block;
+}
+
+.img-badge {
+    width: 2em;
+}
+
+.user-left p {
+    font-size: small;
+}
+
+.box-badges {
+    /* background-color: wheat; */
+    padding: 3%;
+    padding-top: 5%;
+    border-top: 1px solid black;
+    width: 105%;
+    margin: auto;
+    overflow-y: scroll;
+    max-height: 192px;
+    padding-right: 14px;
+}
+
+
+.hide-scroll {
+    width: 80%;
+    overflow: hidden;
+    margin: auto;
+}
+
+/* END LEFT */
+
+.user-center {
+    /* background-color: gray; */
+    height: 500px;
+    flex: 1;
+    margin: 2%;
+    /* margin-top: 20%; */
+    position: relative;
+    border: .01rem solid rgba(0, 0, 0, .1);
+    top: -643px;
+}
+
+.user-center-info {
+    padding: 0px 5%;
+    position: absolute;
+    top: 337px;
+}
+
+.link-listes {
+    position: absolute;
+    top: 420px;
+    left: 13px;
+}
+
+.text-role {
+    position: absolute;
+    top: 2px;
+    left: 7px;
+    font-weight: bold;
+    font-size: small;
+    font-style: italic;
+    max-width: 32%;
+    overflow: hidden;
+}
+
+.text-role-badge{
+    position: absolute;
+    top: 21px;
+    left: 7px;
+    font-weight: bold;
+    font-size: small;
+    font-style: italic;
+    max-width: 32%;
+    overflow: hidden;
+}
+
+.user-center-info p {
+    font-size: small;
+    line-height: 1px;
+}
+
+.avatar-profile {
+    width: 7em;
+    height: 7em;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0px 0px 2px black);
+    left: 50%;
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 50%;
+}
+
+.badge-profile {
+    width: 10%;
+    position: absolute;
+    top: 8px;
+    right: 38px;
+}
+
+.title-profile {
+    position: absolute;
+    left: 50%;
+    top: 90px;
+    transform: translate(-50%);
+    font-size: large;
+    margin-top: 2%;
+}
+
+.text-presentation {
+    /* background-color: cyan; */
+    /* position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%); */
+    width: 90%;
+    min-height: 185px;
+    max-height: 190px;
+    overflow: auto;
+    font-size: small;
+    text-align: justify;
+    position: absolute;
+    top: 128px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.user-right {
+    /* background-color: coral; */
+    /* height: 500px; */
+    flex: 1;
+    margin: 2%;
+    /* margin-top: 20%; */
+    position: relative;
+    border: .01rem solid rgba(0, 0, 0, .1);
+    top: 532px;
+    margin-bottom: 20%;
+}
+
+.img-carousel {
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 50%;
+}
+
+.carousel-item {
+    min-height: 360px;
+}
+
+.carousel-indicators {
+    bottom: -81px;
+}
+
+.box-right-profile {
+    height: auto;
+}
+
+.box-gallery-right {
+    min-height: 436px;
+}
+
+/*----------------------------------------------------MEDIA QUERIES-------------------------------------------------------------------*/
+@media (min-width: 992px) {
+
+    .wrapper-user {
+        display: flex;
+        flex-direction: row;
+        padding-top: 18vh;
+    }
+
+    .user-like {
+        position: absolute;
+        top: -45px;
+        left: -173px;
+        font-size: 1.5em;
+        color: indianred;
+    }
+
+    .user-like:hover {
+        text-decoration: none;
+        color: mediumvioletred;
+    }
+
+    .report-profile {
+        position: absolute;
+        top: -92px;
+        left: 3px;
+        font-size: .8em;
+        color: gray;
+    }
+
+    .report-profile:hover {
+        text-decoration: none;
+        color: black;
+    }
+
+    .paragraph-inline {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+
+    .text-thumb {
+        margin-left: 5%;
+        font-size: small;
+    }
+
+    /* START LEFT */
+
+    .user-left {
+        /* background-color: violet; */
+        height: 500px;
+        flex: 1;
+        margin: 2%;
+        /* margin-top: 20%; */
+        position: relative;
+        border: .01rem solid rgba(0, 0, 0, .1);
+        top: 0px;
+    }
+
+    .title-badges {
+        font-size: small;
+        position: relative;
+        top: 15px;
+        left: 32px;
+        background-color: whitesmoke;
+        width: auto;
+        display: inline-block;
+    }
+
+    .img-badge {
+        width: 2em;
+    }
+
+    .user-left p {
+        font-size: small;
+    }
+
+    .box-badges {
+        /* background-color: wheat; */
+        padding: 3%;
+        padding-top: 5%;
+        border-top: 1px solid black;
+        width: 105%;
+        margin: auto;
+        overflow-y: scroll;
+        max-height: 123px;
+        padding-right: 14px;
+    }
+
+
+    .hide-scroll {
+        width: 80%;
+        overflow: hidden;
+        margin: auto;
+    }
+
+    /* END LEFT */
+
+    .user-center {
+        /* background-color: gray; */
+        height: 500px;
+        flex: 1;
+        margin: 2%;
+        /* margin-top: 20%; */
+        position: relative;
+        border: .01rem solid rgba(0, 0, 0, .1);
+        top: 0px;
+    }
+
+    .user-center-info {
+        padding: 0px 5%;
+        position: absolute;
+        top: 337px;
+    }
+
+    .link-listes {
+        position: absolute;
+        top: -49px;
+        left: -231px;
+    }
+
+    .text-role {
+        position: absolute;
+        top: 2px;
+        left: 7px;
+        font-weight: bold;
+        font-size: small;
+        font-style: italic;
+        max-width: 32%;
+        overflow: hidden;
+    }
+
+    .user-center-info p {
+        font-size: small;
+        line-height: 1px;
+    }
+
+    .avatar-profile {
+        width: 6em;
+        height: 6em;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        filter: drop-shadow(0px 0px 2px black);
+        left: 50%;
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 50%;
+    }
+
+    .badge-profile {
+        width: 10%;
+        position: absolute;
+        top: 8px;
+        right: 38px;
+    }
+
+    .title-profile {
+        position: absolute;
+        left: 50%;
+        top: 90px;
+        transform: translate(-50%);
+        font-size: large;
+        margin-top: 2%;
+    }
+
+    .text-presentation {
+        /* background-color: cyan; */
+        /* position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%); */
+        width: 90%;
+        min-height: 185px;
+        max-height: 190px;
+        overflow: auto;
+        font-size: small;
+        text-align: justify;
+        position: absolute;
+        top: 128px;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    .user-right {
+        /* background-color: coral; */
+        /* height: 500px; */
+        flex: 1;
+        margin: 2%;
+        /* margin-top: 20%; */
+        position: relative;
+        border: .01rem solid rgba(0, 0, 0, .1);
+        top: 0px;
+    }
+
+    .img-carousel {
+        width: 3.5em;
+        height: 3.5em;
+        border-radius: 50%;
+    }
+
+    .carousel-item {
+        min-height: 360px;
+    }
+
+    .carousel-indicators {
+        bottom: -81px;
+    }
+
+    .box-right-profile {
+        height: auto;
+    }
+
+    .box-gallery-right {
+        min-height: 436px;
+    }
+
+}

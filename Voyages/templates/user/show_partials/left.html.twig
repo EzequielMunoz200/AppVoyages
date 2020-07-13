@@ -1,0 +1,38 @@
+<div>
+    <h3 class="title-badges">Mes badges &nbsp</h3>
+    <div class="hide-scroll">
+        <div class="box-badges">
+            {% for badge in user.badges %}
+            <p><img src="{{asset('images/badges/' ~ badge.filename ~ '.svg') }}" alt="Image de Paris"
+                    class="img-badge" />
+                <span class="text-thumb">{{ badge.name }}</span></p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div>
+    <h3 class="title-badges">Mes villes favorites &nbsp</h3>
+    <div class="hide-scroll">
+        <div class="box-badges">
+            {% for badge in user.badges %}
+            <p><img src="{{asset('images/badges/' ~ badge.filename ~ '.svg') }}" alt="Image de Paris"
+                    class="img-badge" />
+                <span class="text-thumb">{{ badge.name }}</span></p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div>
+    <h3 class="title-badges">Mes voyageurs favoris &nbsp</h3>
+    <div class="hide-scroll">
+        <div class="box-badges">
+            {% for badge in user.badges %}
+            <p><img src="{{asset('images/badges/' ~ badge.filename ~ '.svg') }}" alt="Image de Paris"
+                    class="img-badge" />
+                <span class="text-thumb">{{ badge.name }}</span></p>
+            {% endfor %}
+        </div>
+    </div>
+</div>

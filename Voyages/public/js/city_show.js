@@ -16,7 +16,6 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(mymap);
 let marker = L.marker([latitude, longitude]).addTo(mymap);
 
-
 //Script pour afficher le modal
 // Get the modal
 var modal = document.getElementById("myModal");
