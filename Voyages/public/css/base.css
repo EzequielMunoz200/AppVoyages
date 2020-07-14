@@ -22,6 +22,10 @@ body {
   z-index: 50;
 }
 
+.nav-link, .dropdown-item{
+  font-size: small;
+}
+
 .container-fluid {
   height: 100%;
   padding: 0;

@@ -34,7 +34,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{{path('user_show', {id : app.user.id })}}">Mon profil</a>
           {% if is_granted('ROLE_ADMIN') %}
-          <a class="dropdown-item" href="#">Administration</a>
+          <a class="dropdown-item" href="{{ url( 'easyadmin' )}}">Administration</a>
           {% endif %}
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{{path('app_logout')}}">Se déconnecter</a>
