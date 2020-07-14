@@ -1,0 +1,6 @@
+<ul class="tags-list p-0">
+    {% for tag in objectCity.tags %}
+    <li><span class="badge badge-pill badge-secondary badge-tag font-weight-bold shadow-sm"
+            style="background-color:#{{tag.color }};">{{ tag.name }}</span></li>
+    {% endfor %}
+</ul>

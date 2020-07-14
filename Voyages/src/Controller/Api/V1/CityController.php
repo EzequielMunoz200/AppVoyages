@@ -18,23 +18,18 @@ use Symfony\Component\Validator\Constraints\Date;
 /**
  * @Route("/api/v1", name="api_v1_")
  */
-class CityController extends AbstractController implements TokenAuthenticatedController
+class CityController extends AbstractController /* implements TokenAuthenticatedController */
 {
 
-     /**
+    /**
      * @Route("/city", name="city_list", methods={"GET"})
      */
     public function list(CityRepository $cityRepository, ObjectNormalizer $objetNormalizer, Request $request)
     {
-
-        //$cities = $cityRepository->findAll();
-        //$form->get('plainPassword')->getData()
         $search = $request->query->get('city_name');
 
         $cities = $this->getDoctrine()->getRepository(City::class)->findByPartialName($search);
-
         if (empty($cities)) {
-
             return new Response('Pas de resultats', Response::HTTP_NO_CONTENT);
         }
 
@@ -44,7 +39,9 @@ class CityController extends AbstractController implements TokenAuthenticatedCon
 
         return $this->json($json);
     }
-   
+
+
+
     /**
      * @Route("/city/{geonameId}", name="description_city", methods={"GET"})
      */
@@ -64,10 +61,4 @@ class CityController extends AbstractController implements TokenAuthenticatedCon
 
         return $this->json($cityDetails);
     }
-
-
-
-    
-
-   
 }

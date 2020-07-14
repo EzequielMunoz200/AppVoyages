@@ -1,6 +1,12 @@
 <h1>{{ cityData['fullname'] }}</h1>
 
+{% if cityData['description'] is not null %}
 <div id="description">{{ cityData['description']|raw }}</div>
+{% else %}
+<div class="alert alert-warning text-center p-2">Pas de description pour cette ville</div>
+{% endif %}
+
+{{ include('/city/show_partials/tags.html.twig') }}
 
 <div id="city-scores">
     <h3 class="subtitle-section">Scores de la ville</h3>
@@ -22,15 +28,19 @@
         } %}
         {% set categoryScores = { 0 :'Logement'  , 1 : 'Coût de la vie' , 3 : 'Capital risque', 4 : 'Transports', 7 : 'Sécurité', 8 : 'Soins de santé', 9 : 'Éducation', 10 : 'Qualité de l\'environnement', 11 : 'Économie', 13 : 'Accès internet', 14 : 'Loisirs et Culture', 15 : 'Tolérance', 16 : 'En plein air' } %}
 
+        {% if cityData['scores'] is not null %}
         {% for key, score in categoryScores %}
-
-        <div class="card shadow" data-category="{{ score }}" data-originalcategory="{{ cityData['scores'][key].name }}"
-            style="width: 10rem;">
-            <i class="{{ iconScore[key] ~ ' fa-4x' }}" style="color: {{ cityData['scores'][key].color }};"></i>
-            <p class="card-text">{{ score }}</p>
+        <div class="card shadow" data-category="{{ score }}"
+            data-originalcategory="{{ cityData['scores'][key].name|default('n/a') }}" style="width: 10rem;">
+            <i class="{{ iconScore[key]|default('fas fa-exclamation') ~ ' fa-4x' }}"
+                style="color: {{ cityData['scores'][key].color|default('n/a') }};"></i>
+            <p class="card-text">{{ score|default('n/a') }}</p>
             <p id="p-score" class="card-text">
                 {{ cityData['scores'][key].score_out_of_10|number_format(1, '.', ',') ~ ' / 10' }}</p>
         </div>
         {% endfor %}
+        {% else %}
+        <div class="alert alert-warning text-center p-2">On a pas encore des données pour cette ville</div>
+        {% endif %}
     </div>
 </div>

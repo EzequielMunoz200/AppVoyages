@@ -56,8 +56,8 @@ class QueryApi
             'fullname' => $objectResponse->full_name,
             'location' => $objectResponse->location->latlon,
             'population' => $objectResponse->population,
-            'description' => $objectResponseScores->summary,
-            'scores' => $objectResponseScores->categories,
+            'description' => (is_object($objectResponseScores)) ? $objectResponseScores->summary : null,
+            'scores' => (is_object($objectResponseScores)) ? $objectResponseScores->categories : null,
             'cityName' => $cityName,
             'cityNameUnsplash' => $cityNameUnsplash,
         ];

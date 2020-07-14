@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() ~ ' - ' }} Contact{% endblock %}
+{% block stylesheets %}
+{# <link href="{{ asset('css/page.css') }}" type="text/css" rel="stylesheet" /> #}
+{% endblock %}
+
+{% block body %}
+<div class="wrapper-accueil">
+    <h1>Contact</h1>
+
+    {{ include('/main/_form.html.twig') }}
+</div>
+
+{% endblock %}

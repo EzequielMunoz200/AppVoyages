@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#"><picture>
+  <a class="navbar-brand" href="{{ path('accueil') }}"><picture>
     <source media="(min-width: 465px)" srcset="{{ asset('images/logo/travel-globe-152-170988.png')}}">
     <img src="{{ asset('images/logo/travel-globe-120-170988.png')}}" style="width: 32px;">
   </picture>App Voyages</a>
@@ -11,7 +11,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{{ path('accueil') }}">Accueil <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -20,7 +20,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Recherche Avancée</a>
-          <a class="dropdown-item" href="#">Recherche Simple</a>
+          <a class="dropdown-item" href="{{path('search')}}">Recherche Simple</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Villes aleatoirs</a>
         </div>
@@ -32,12 +32,12 @@
           {{ app.user.firstname }} <i class="fas fa-user-circle"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Mon profil</a>
+          <a class="dropdown-item" href="{{path('user_show', {id : app.user.id })}}">Mon profil</a>
           {% if is_granted('ROLE_ADMIN') %}
-          <a class="dropdown-item" href="#">Administration</a>
+          <a class="dropdown-item" href="{{ url( 'easyadmin' )}}">Administration</a>
           {% endif %}
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Se deconnecter</a>
+          <a class="dropdown-item" href="{{path('app_logout')}}">Se déconnecter</a>
         </div>
       </li>
       {% else %}

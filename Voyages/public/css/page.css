@@ -4,6 +4,7 @@
 
 #data-section {
     padding: 10%;
+    padding-bottom: 5%;
 }
 
 h1 {
@@ -55,6 +56,29 @@ h1 {
 .card-text {
     text-align: center;
 }
+
+/* Start Tags Section  */
+
+.tags-list {
+    display: flex;
+    list-style: none;
+    width: 75%;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+}
+
+.tags-list li {
+    margin: 0.2em;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.tags-list span {
+    height: 35px;
+    padding: 10px;
+}
+/* Ends Tags Section */
 
 
 /* LEAFLET CSS */
@@ -236,7 +260,7 @@ h1 {
     color: white;
     background-color: indianred;
     border-radius: 3px;
-} 
+}
 
 #review .form-group label {
     color: white;
@@ -300,6 +324,11 @@ h1 {
     display: flex;
     align-items: center;
     flex: 1;
+    overflow-wrap: anywhere;
+    margin-bottom: 4%;
+    flex-direction: column;
+    position: relative;
+    left: -29px;
 }
 
 .right-block-review {
@@ -314,8 +343,12 @@ h1 {
 }
 
 .user-profile-picture {
-    width: 30%;
+    width: 4.5em;
+    height: 4.5em;
+    border-radius: 50%;
+    margin-bottom: 4%;
 }
+
 
 .profile-info p {
     font-size: .8em;
@@ -335,4 +368,15 @@ h1 {
 
 .user-image {
     max-width: 90%;
+}
+
+/*-------------------------------------------------MEDIA QUERIES--------------------------------------------*/
+
+@media only screen and (min-width: 768px) {
+    .user-profile-picture {
+        width: 7em;
+        height: 7em;
+        border-radius: 50%;
+        margin-right: 4%;
+    }
 }

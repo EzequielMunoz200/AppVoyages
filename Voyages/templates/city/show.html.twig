@@ -8,8 +8,8 @@
 {% block body %}
 <section id="landing-section"
     style="background-image:url('{{imagesData['urlImage'].full}}'); height:110%; background-size: 100% 110%; background-attachment: fixed;">
-
 </section>
+
 <section id="data-section">
     {{ include('/city/show_partials/data.html.twig') }}
 </section>
@@ -30,6 +30,7 @@
 {% dump(cityData) %}
 {% dump(imagesData['urlRandomImages']) %}
 {% dump(details) %}
+{% dump(objectCity) %}
 
 <!-- show maps script -->
 <script src="{{asset('js/city_show.js')}}"></script>
