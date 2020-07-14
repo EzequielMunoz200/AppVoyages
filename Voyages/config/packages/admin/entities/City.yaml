@@ -1,0 +1,18 @@
+easy_admin:
+  entities:
+        City:
+            class: App\Entity\City
+            list:
+                fields:
+                    - id
+                    - name
+                    - country
+                    - geonameId
+                    
+                actions:
+                    - { name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-secondary' }
+                    - { name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger' }
+
+            form: 
+                fields:
+                    - { property: 'tags', label: 'Tags de la ville' }
