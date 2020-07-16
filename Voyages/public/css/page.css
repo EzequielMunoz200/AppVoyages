@@ -52,6 +52,9 @@ h1 {
     margin-top: 0px;
 }
 
+#container-cards .alert-warning {
+    width: 100%;
+}
 
 .card-text {
     text-align: center;
@@ -368,6 +371,10 @@ h1 {
 
 .user-image {
     max-width: 90%;
+}
+
+.review-div {
+    margin: auto;
 }
 
 /*-------------------------------------------------MEDIA QUERIES--------------------------------------------*/

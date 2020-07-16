@@ -22,7 +22,7 @@
           <a class="dropdown-item" href="#">Recherche Avancée</a>
           <a class="dropdown-item" href="{{path('search')}}">Recherche Simple</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Villes aleatoirs</a>
+          <a class="dropdown-item" href="{{path('city_random')}}">Villes aleatoirs</a>
         </div>
       </li>
       {% if is_granted('IS_AUTHENTICATED_FULLY') %}

@@ -61,4 +61,24 @@ class CityController extends AbstractController /* implements TokenAuthenticated
 
         return $this->json($cityDetails);
     }
+
+     /**
+     * @Route("/image/{cityName}", name="image_city", methods={"GET"})
+     */
+    public function cityImage(CityRepository $cityRepository, ObjectNormalizer $objetNormalizer, Request $request, QueryApi $queryApi, $cityName)
+    {
+
+        $cityImage = $queryApi->cityDataImage($cityName);
+
+
+        if (empty($cityImage)) {
+
+            return new Response('Pas de resultats', Response::HTTP_NO_CONTENT);
+        }
+
+        /*  $serializer = new Serializer([new DateTimeNormalizer(), $objetNormalizer]);
+        $json = $serializer->normalize($cityImage, null, ['groups' => 'api_v1_city']); */
+
+        return $this->json($cityImage);
+    }
 }

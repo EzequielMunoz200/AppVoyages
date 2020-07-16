@@ -1,4 +1,4 @@
-<div id="form-review-container">
+<div id="form-review-container" class="col-xl-6 col-lg-6 col-md-8 col-sm-8">
     <h4 class="form-review-title">Avez-vous déjà visité {{ cityData.cityName }} ? </h4>
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     {{ form_start(formReview, {'attr': {'id': 'form_review', 'autocomplete': 'off'}}) }}
@@ -15,7 +15,7 @@
 </div>
 <h3 class="subtitle-section">Avis des utilisateurs</h3>
 
-<div class="review-div col-xl-10">
+<div class="review-div col-xl-6 col-lg-6 col-md-8 col-sm-8">
     <!-- Beginning Caroussel -->
     <div id="carouselExampleIndicators-review" class="carousel slide">
         <div class="carousel-inner">
