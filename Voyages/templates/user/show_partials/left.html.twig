@@ -15,10 +15,10 @@
     <h3 class="title-badges">Mes villes favorites &nbsp</h3>
     <div class="hide-scroll">
         <div class="box-badges">
-            {% for badge in user.badges %}
-            <p><img src="{{asset('images/badges/' ~ badge.filename ~ '.svg') }}" alt="Image de Paris"
+            {% for cityLiked in app.user.cityLikes %}
+            <p><img src="{{asset('images/accueil/picture_' ~ random(1,17) ~ '.jpg') }}" alt=""
                     class="img-badge" />
-                <span class="text-thumb">{{ badge.name }}</span></p>
+                <span class="text-thumb">{{ cityLiked.city.name }}, {{ cityLiked.city.country }}</span></p>
             {% endfor %}
         </div>
     </div>

@@ -7,6 +7,23 @@
     padding-bottom: 5%;
 }
 
+.city-like{
+    position: absolute;
+    right: 20px;
+    bottom: -49px;
+    font-size: x-large;
+    color: indianred;
+}
+
+.city-like:hover{
+    position: absolute;
+    right: 20px;
+    bottom: -49px;
+    font-size: x-large;
+    color: indianred;
+    text-decoration: none;
+}
+
 h1 {
     text-align: center;
     font-size: xx-large;

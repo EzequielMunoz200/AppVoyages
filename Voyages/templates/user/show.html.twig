@@ -80,15 +80,7 @@
         {{ include('/user/show_partials/right.html.twig') }}
     </aside>
 
-
-
-
 </div>
-
-
-<style>
-
-</style>
 
 {#    <a href="{{ path('user_index') }}">back to list</a>
 
@@ -99,9 +91,6 @@
 <!-- Script pour le like d'un user -->
 <script>
     let likeElt = document.querySelector('.user-like');
-    let connectedUserId = likeElt.dataset.connecteduser;
-    let targetedUserId = likeElt.dataset.targeteduser;
-    //let heart = likeElt.querySelectorAll('i');
     likeElt.addEventListener('click', changeHeart);
     function changeHeart(evt) {
         evt.preventDefault();
@@ -128,15 +117,12 @@
                 })
             .then(
                 (data) => {
-                    //let icone = evt.target;
                     if (data.code == 200) {
                         likeElt.innerHTML = '';
                         likeElt.innerHTML = '<i class="far fa-heart"></i>';
-                        //icone.setAttribute("class", "far fas-heart");
                     } else if (data.code == 201) {
                         likeElt.innerHTML = '';
                         likeElt.innerHTML = '<i class="fas fa-heart"></i>';
-                        //icone.setAttribute("class", "fas fas-heart");
                     }
                 }
             );
