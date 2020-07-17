@@ -132,4 +132,14 @@ class Tag
 
         return $this;
     }
+
+    /**
+     * for EasyAdmin
+     *
+     * @return string
+     */
+    public function getColorTag()
+    {
+        return '<div style="background-color:#' . $this->getColor() . ';">&#8239;</div>';
+    }
 }

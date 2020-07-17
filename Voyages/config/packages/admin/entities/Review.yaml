@@ -1,0 +1,13 @@
+easy_admin:
+  entities:
+        Review:
+            label: Villes
+            class: App\Entity\Review
+            list:
+                fields:
+                    - id
+                    - { property: 'isActive', label: 'Status' }
+                    - { property: 'isReported', label: 'Signalé' }
+                    - { property: 'author', label: 'Auteur' }
+                    - { property: 'createdAt', label: 'Publiée' }
+                    

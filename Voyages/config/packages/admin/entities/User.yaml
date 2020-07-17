@@ -1,21 +1,23 @@
 easy_admin:
   entities:
         User:
+            label: Utilisateurs
             class: App\Entity\User
             list:
                 fields:
                     - id
-                    - isActive
-                    - firstname
-                    - name
-                    - username
-                    - birthdate
-                    - email 
+                    - { property: 'isActive', label: 'Status' }
+                    - { property: 'isReported', label: 'Signalé', type: 'toggle'}
+                    - { property: 'firstname', label: 'Prénom' }
+                    - { property: 'name', label: 'Nom' }
+                    - { property: 'username', label: 'Pseudo' }
+                    - { property: 'birthdate', label: 'Date de naissance' }
+                    - { property: 'email', label: 'Contact' }
                     - avatar
                     - points
                     - description
-                    - createdAt
-                    - roles
+                    - { property: 'createdAt', label: 'Inscrit' }
+                    - { property: 'roles', label: 'Rôles' }
 
 
                     

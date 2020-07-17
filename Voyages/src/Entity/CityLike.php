@@ -29,6 +29,11 @@ class CityLike
      */
     private $user;
 
+    public function __toString()
+    {
+        return strval($this->id);
+    }
+
     public function getId(): ?int
     {
         return $this->id;
