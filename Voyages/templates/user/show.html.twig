@@ -7,7 +7,9 @@
 {% block body %}
 <div class="wrapper-user">
     <aside class="user-left">
+        {% if user != app.user %}
         <a class="report-profile" href=""><i class="fas fa-exclamation-triangle"></i> Signaler cet profil</a>
+        {% endif %}
         {{ include('/user/show_partials/left.html.twig') }}
     </aside>
     <div class="user-center">
@@ -88,45 +90,7 @@
 
     {{ include('user/_delete_form.html.twig') }} #}
 
-<!-- Script pour le like d'un user -->
-<script>
-    let likeElt = document.querySelector('.user-like');
-    likeElt.addEventListener('click', changeHeart);
-    function changeHeart(evt) {
-        evt.preventDefault();
-        let url = '/api/v1/user/' + targetedUserId;
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        })
-            .then(
-                (response) => {
-                    return response.ok ?
-                        (
-                            console.log(response.status + ' - opération effectué'),
-                            response.json()
-                        )
+<!-- Script like user -->
+<script src="{{asset('js/user_like.js')}}"></script>
 
-                        :
-                        (response.status == 204) ? response.status + ' - pas de resultats'
-                            :
-                            console.log('L\'opération a échoué')
-                })
-            .then(
-                (data) => {
-                    if (data.code == 200) {
-                        likeElt.innerHTML = '';
-                        likeElt.innerHTML = '<i class="far fa-heart"></i>';
-                    } else if (data.code == 201) {
-                        likeElt.innerHTML = '';
-                        likeElt.innerHTML = '<i class="fas fa-heart"></i>';
-                    }
-                }
-            );
-    }
-
-</script>
 {% endblock %}
