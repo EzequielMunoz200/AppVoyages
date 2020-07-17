@@ -127,7 +127,8 @@ a.user-like {
 .user-center-info {
     padding: 0px 5%;
     position: absolute;
-    top: 337px;
+    top: 144px;
+    left: 0px;
 }
 
 .link-listes {
@@ -158,9 +159,12 @@ a.user-like {
     overflow: hidden;
 }
 
+
 .user-center-info p {
     font-size: small;
     line-height: 1px;
+    font-style: italic;
+    color: #55967E;
 }
 
 .avatar-profile {
@@ -204,7 +208,7 @@ a.user-like {
     font-size: small;
     text-align: justify;
     position: absolute;
-    top: 128px;
+    top: 179px;
     left: 50%;
     transform: translate(-50%);
 }
@@ -356,7 +360,8 @@ a.user-like {
     .user-center-info {
         padding: 0px 5%;
         position: absolute;
-        top: 337px;
+        top: -43px;
+        left: -535px;
     }
 
     .link-listes {
@@ -377,7 +382,8 @@ a.user-like {
     }
 
     .user-center-info p {
-        font-size: small;
+        font-size: x-small;
+        font-style: italic;
         line-height: 1px;
     }
 
@@ -460,4 +466,46 @@ a.user-like {
         min-height: 436px;
     }
 
+}
+
+
+/*----------------------------------------------------MEDIA QUERIES-------------------------------------------------------------------*/
+@media (min-width: 1000px) and (orientation: landscape) {
+
+
+    .user-center-info {
+        padding: 0px 5%;
+        position: absolute;
+        top: -30px;
+        left: -340px;
+    }
+
+    .link-listes {
+        position: absolute;
+        top: -38px;
+        left: -187px;
+
+    }
+
+    .report-profile {
+        position: absolute;
+        top: -64px;
+        left: 3px;
+        font-size: .8em;
+        color: gray;
+    }
+}
+/*-------------------------------------------MEDIA QUERIES-------------------------------------------------------*/
+@media (min-width: 1000px) and (orientation: landscape) {
+    .user-center-info {
+        padding: 0px 5%;
+        position: absolute;
+        top: -6%;
+        left: -119%;
+    }
+    .link-listes {
+        position: absolute;
+        top: -8%;
+        left: -58%;
+    }
 }
