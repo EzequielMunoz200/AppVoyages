@@ -41,7 +41,7 @@
         <p class="text-role">Utilisateur</p>
         {% endif %}
         {% endif %}
- 
+
         {# displays the highest level badge reached #}
         {% set badgeLevel = [] %}
         {% for key, badge in user.badges %}
@@ -60,11 +60,28 @@
 
 
     </div>
+    {% set isLiked = false %}
+    {% for userliked in app.user.favoriteUser %}
+    {% if userliked.id ==  user.id %}
+    {% set isLiked = true %}
+    {% endif %}
+    {% endfor %}
     <aside class="user-right">
-        <a class="user-like" href=""><i class="fas fa-heart"></i></a>
-        {# <a class="user-like" href=""><i class="far fa-heart"></i></a> #}
+        {% if user != app.user %}
+        {# FULL => fas | EMPTY => far#}
+        <a class="user-like" href="" data-like="" data-connecteduser="{{ app.user.id }}"
+            data-targeteduser="{{ user.id }}">
+            {% if isLiked == true %}
+            <i class="fas fa-heart"></i>
+            {% else %}
+            <i class="far fa-heart"></i>
+            {% endif %}
+        </a>
+        {% endif %}
         {{ include('/user/show_partials/right.html.twig') }}
     </aside>
+
+
 
 
 </div>
@@ -79,4 +96,52 @@
     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
 
     {{ include('user/_delete_form.html.twig') }} #}
+
+<!-- Script pour le like d'un user -->
+<script>
+    let likeElt = document.querySelector('.user-like');
+    let connectedUserId = likeElt.dataset.connecteduser;
+    let targetedUserId = likeElt.dataset.targeteduser;
+    //let heart = likeElt.querySelectorAll('i');
+    likeElt.addEventListener('click', changeHeart);
+    function changeHeart(evt) {
+        evt.preventDefault();
+        let url = '/api/v1/user/' + targetedUserId;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+            .then(
+                (response) => {
+                    return response.ok ?
+                        (
+                            console.log(response.status + ' - opération effectué'),
+                            response.json()
+                        )
+
+                        :
+                        (response.status == 204) ? response.status + ' - pas de resultats'
+                            :
+                            console.log('L\'opération a échoué')
+                })
+            .then(
+                (data) => {
+                    //let icone = evt.target;
+                    if (data.code == 200) {
+                        likeElt.innerHTML = '';
+                        likeElt.innerHTML = '<i class="far fa-heart"></i>';
+                        //icone.setAttribute("class", "far fas-heart");
+                    } else if (data.code == 201) {
+                        likeElt.innerHTML = '';
+                        likeElt.innerHTML = '<i class="fas fa-heart"></i>';
+                        //icone.setAttribute("class", "fas fas-heart");
+                    }
+                }
+            );
+    }
+
+</script>
 {% endblock %}

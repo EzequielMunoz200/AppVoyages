@@ -269,6 +269,10 @@ h1 {
     color: white;
 }
 
+#review .form-group .custom-file-label{
+    color: black;
+}
+
 
 .form-review-title {
     text-align: center;

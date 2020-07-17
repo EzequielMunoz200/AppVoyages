@@ -35,6 +35,10 @@
     color: indianred;
 }
 
+a.user-like {
+    width: fit-content;
+}
+
 .user-like:hover {
     color: mediumvioletred;
     text-decoration: none;
@@ -66,7 +70,8 @@
 }
 
 .img-badge {
-    width: 2em;
+    width: 3em;
+    border-radius: 50%;
 }
 
 .user-left p {
@@ -82,9 +87,23 @@
     margin: auto;
     overflow-y: scroll;
     max-height: 135px;
+    min-height: 135px;
     padding-right: 14px;
 }
 
+.link-item-profile-box {
+    text-decoration: none;
+    color: black;
+}
+
+.link-item-profile-box:hover {
+    text-decoration: none;
+    color: black;
+}
+
+/* .link-item-profile-box-img{
+    border-radius: 50%;
+} */
 
 .hide-scroll {
     width: 80%;
@@ -295,7 +314,7 @@
     }
 
     .img-badge {
-        width: 2em;
+        width: 2.5em;
     }
 
     .user-left p {
