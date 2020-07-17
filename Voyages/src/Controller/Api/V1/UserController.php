@@ -58,4 +58,31 @@ class UserController extends AbstractController
 
         ], 201);
     }
+
+
+    /**
+     * @Route("/user/{id}/report", name="user_report", requirements={"id"="\d+"}, methods={"POST"})
+     */
+    public function report($id)
+    {
+
+        $userRequest = $this->getUser();
+
+        if (!$userRequest) {
+
+            return $this->json(403);
+        }
+
+        $userToModerate = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $userToModerate->setIsReported(true);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($userToModerate);
+        $entityManager->flush();
+
+        if ($userToModerate->GetIsReported() === true) {
+            return new Response('Utilisateur signalé', Response::HTTP_ACCEPTED);
+        }
+    }
+
 }

@@ -8,7 +8,7 @@
 <div class="wrapper-user">
     <aside class="user-left">
         {% if user != app.user %}
-        <a class="report-profile" href=""><i class="fas fa-exclamation-triangle"></i> Signaler cet profil</a>
+            <a class="report-profile" href="{{ path('api_v1_user_report', {id : user.id } ) }}"><i class="fas fa-exclamation-triangle"></i> Signaler cet profil</a>
         {% endif %}
         {{ include('/user/show_partials/left.html.twig') }}
     </aside>
@@ -92,5 +92,9 @@
 
 <!-- Script like user -->
 <script src="{{asset('js/user_like.js')}}"></script>
+<!-- Script show modal user pictures -->
+<script src="{{asset('js/user_gallery_modal.js')}}"></script>
+<!-- Script to report a user -->
+<script src="{{asset('js/user_report.js')}}"></script>
 
 {% endblock %}

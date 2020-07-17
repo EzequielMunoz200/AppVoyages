@@ -167,6 +167,11 @@ class User implements UserInterface
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isReported;
+
 
     public function __construct()
     {
@@ -179,6 +184,7 @@ class User implements UserInterface
         $this->createdAt = new \DateTime;
         $this->favoriteUser = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->isReported = false;
     }
 
     public function __toString()
@@ -612,6 +618,18 @@ class User implements UserInterface
             }
         }
         return false;
+    }
+
+    public function getIsReported(): ?bool
+    {
+        return $this->isReported;
+    }
+
+    public function setIsReported(bool $isReported): self
+    {
+        $this->isReported = $isReported;
+
+        return $this;
     }
     
 
