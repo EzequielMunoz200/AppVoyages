@@ -40,6 +40,29 @@ class CityRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
+    public function findAllCountryName(){
+        $builder = $this->createQueryBuilder('city');
+        $builder->distinct(true);
+        //$builder->where('city.countryName LIKE :partialName');
+        //$builder->setParameter('partialName',$partialName.'%');
+        $builder->orderBy('city.country', 'ASC');
+        $builder->groupBy('city.country');
+        $query = $builder->getQuery();
+       
+        return $query->execute();
+    }
+
+    public function findByCountryName($country){
+        $builder = $this->createQueryBuilder('city');
+        $builder->where('city.country LIKE :country');
+        $builder->setParameter('country',$country);
+        $builder->orderBy('city.name', 'ASC');
+        $query = $builder->getQuery();
+       
+        return $query->execute();
+    }
+
+
 
     // /**
     //  * @return City[] Returns an array of City objects

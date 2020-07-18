@@ -20,46 +20,39 @@ class AdvancedSearchController extends AbstractController
      */
     public function index(Request $request, CityRepository $cityRepository, SearchMatchTag $searchMatchTag, SessionInterface $session)
     {
-
+        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(AdvancedSearchType::class);
         $form->handleRequest($request);
 
-        
-        //$formSearch = $this->createForm(SearchType::class);
         if ($form->isSubmitted() && $form->isValid()) {
+            //dd($form->get('countries')->getData()->getCountry());
+            //dd($form->get('tags')->getData());
+            //$labels = $form->getData();
+            //unset($labels[array_search($form->get('countries')->getData(), $labels)]);
 
-            //dd($request);
-            $em = $this->getDoctrine()->getManager();
-            $labels = $form->getData();
-
-            if ($form->get('search')->getData()) {
-                $queryCountry = $form->get('search')->getData();
+            //dd($labels);
+            if ($form->get('countries')->getData()->getCountry()) {
+                $queryCountry = $form->get('countries')->getData()->getCountry();
                 //create a query builder
-                $cities = $em->getRepository(City::class)->findByCountryName($queryCountry);
-                if (!$cities) {
+                $allCities = $em->getRepository(City::class)->findByCountryName($queryCountry);
+                if (!$allCities) {
                     return $this->redirectToRoute('advanced_search');
                 }
             } else {
                 //all cities of the db
-                $cities = $cityRepository->findAll();
+                $allCities = $cityRepository->findAll();
             }
 
-            unset($labels[array_search($form->get('search')->getData(), $labels)]);
-          /*   unset($labels[array_search($form->get('startDate')->getData(), $labels)]);
-            unset($labels[array_search($form->get('endDate')->getData(), $labels)]); */
-
-            $tagsId = $searchMatchTag->match($labels);
-
+            $chosenTags = $form->get('tags')->getData();
             $arrayResults = [];
             $matchCity = [];
-
-            foreach ($cities as $city) {
-                foreach ($tagsId as $tagId) {
-                    $tag = $em->getRepository(Tag::class)->find($tagId);
+            foreach ($allCities as $city) {
+                foreach ($chosenTags as $chosenTag) {
+                    //$tag = $em->getRepository(Tag::class)->find($tagId);
 
                     //matching of the tags
-                    if ($city->getTags()->contains($tag)) {
-                        $arrayResults[$tag->getName()][] = $city;
+                    if ($city->getTags()->contains($chosenTag)) {
+                        $arrayResults[$chosenTag->getName()][] = $city;
                         //all the cities that have a match
                         $matchCity[] = $city->getId(); //[1035, 1036, 1035, 1035 ]
                     }
@@ -73,7 +66,7 @@ class AdvancedSearchController extends AbstractController
             Calculation of the value (Nb of tags selected by the user/Total number of tags)  */
             $arrayMatching = [];
             foreach ($matchCity as $key => $value) {
-                $matchValue = $value / count($tagsId) * 100;
+                $matchValue = $value / count($chosenTags) * 100;
                 $objectCity = $em->getRepository(City::class)->find($key);
                 $arrayMatching[] = [
                     'city' => $objectCity,
@@ -81,14 +74,15 @@ class AdvancedSearchController extends AbstractController
                 ];
             }
 
-            $session->set('arrayMatching', $arrayMatching);
-           /*  $session->set('startDate', $form->get('startDate')->getData());
-            $session->set('endDate', $form->get('endDate')->getData());
- */
-            return $this->redirectToRoute('city_list_index',[
-                $form->getData()
-            ]);
+            //dd($arrayMatching);
+            //return $this->redirectToRoute('city_list');
+            // redirects to a route and maintains the original query string parameters
+            //https://symfony.com/doc/current/controller.html
+            return $this->redirectToRoute('city_list', $request->query->all());
         }
+
+
+
 
         return $this->render('search/advanced-search.html.twig', [
             'form' => $form->createView(),

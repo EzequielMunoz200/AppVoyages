@@ -2,21 +2,65 @@
 
 {% block title %}{{parent()}} - Recherche avancée {% endblock %}
 {% block stylesheets %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 {# <link href="{{ asset('css/search.css') }}" type="text/css" rel="stylesheet" /> #}
 {% endblock %}
 {% block body %}
-<div class="d-flex justify-content-center align-content-center">
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button class="btn btn-dark btn-sm pull-right">{{ button_label|default('Send') }}</button>
-    {{ form_end(form) }}
-</div>
 
-<style>
-    form {
-        margin-top: 100px;
+<div class="wrapper-advanced-search d-flex justify-content-center align-items-center">
+    <div class="inner-wrapper-advanced-search d-flex flex-column justify-content-center align-content-center p-2 col-8 mr-auto ml-auto">
+        <h1>Recherche avancée </h1>
+        <p> Faites une recherche avancée pour trouver votre destination, ou <a href="">faites une recherche simple</a></p>
+
+        <div class="d-flex flex-column col-12">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button class="btn btn-dark btn-sm pull-right">{{ button_label|default('Rechercher') }}</button>
+            {{ form_end(form) }}
+        </div>
+
+        <style>
+            .wrapper-advanced-search {
+                height: inherit;
+            }
+
+            .select2-container--default .select2-selection--multiple .select2-selection__choice{
+                overflow: hidden;
+                border-radius: 15px;
+            }
+
+            .select2-selection__choice__display{
+                font-size: small;
+                vertical-align: text-bottom;
+            }
+
+
+        </style>
+    </div>
+
+</div>
+{% block javascript2 %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script>
+
+    if (jQuery) {
+        console.log("jQuery est chargé");
     }
-</style>
+    else {
+        console.log("jQuery n'est pas chargé");
+    }
+
+    $('#countries').prepend('<option selected=""></option>').select2({
+        placeholder: 'Tous le pays'
+    });
+
+    $('#tags').select2({
+        placeholder: 'Selectionnez des critères'
+    });
+
+</script>
+{% endblock %}
 
 
 {% endblock %}
