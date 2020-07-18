@@ -32,6 +32,7 @@
           {{ app.user.firstname }} <i class="fas fa-user-circle"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{path('user_show', {id : app.user.id })}}">Mes listes de villes</a>
           <a class="dropdown-item" href="{{path('user_show', {id : app.user.id })}}">Mon profil</a>
           {% if is_granted('ROLE_ADMIN') %}
           <a class="dropdown-item" href="{{ url( 'easyadmin' )}}">Administration</a>

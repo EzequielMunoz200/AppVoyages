@@ -1,5 +1,5 @@
 <div class="box-right-profile">
-    <h3 class="title-badges">Mes photos postés &nbsp</h3>
+    <h3 class="title-badges">Photos postés &nbsp</h3>
     <div class="hide-scroll">
         <div class="box-badges box-gallery-right">
             <div class="city-pictures img-gallery">
@@ -9,6 +9,8 @@
                         src="{{asset('images/uploads/' ~ image.filename) }}" alt="Image de Paris"
                         class="img-carousel" /><span class="text-thumb">{{ image.title }}</span></p>
                 {% endfor %}
+                {% else %}
+                    <div class="alert alert-info small">Il n'y a pas de contenu posté.</div> 
                 {% endfor %}
             </div>
         </div>

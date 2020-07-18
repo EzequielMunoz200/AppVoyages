@@ -23,8 +23,8 @@ function handleUserReport(evt) {
         })
         .then(
             (data) => {
-                evt.target.textContent = 'L\'profil est signalé.';
-                evt.target.style.color = 'red';
+                evt.target.textContent = 'Le profil est signalé.';
+                evt.target.style.color = 'crimson';
             }
         );
 }

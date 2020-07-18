@@ -1,5 +1,5 @@
 <div>
-    <h3 class="title-badges">Mes badges &nbsp</h3>
+    <h3 class="title-badges">Badges obtenues &nbsp</h3>
     <div class="hide-scroll">
         <div class="box-badges">
             {% for badge in user.badges %}
@@ -12,7 +12,7 @@
 </div>
 
 <div>
-    <h3 class="title-badges">Mes villes favorites &nbsp</h3>
+    <h3 class="title-badges">Villes favorites &nbsp</h3>
     <div class="hide-scroll">
         <div class="box-badges">
             {% for cityLiked in app.user.cityLikes %}
@@ -26,7 +26,7 @@
 
 <div>
     {% if user != app.user %}
-    <h3 class="title-badges">Mes langues &nbsp</h3>
+    <h3 class="title-badges">Langues parlées&nbsp</h3>
     <div class="hide-scroll">
         <div class="box-badges">
             {% for languages in user.languages %}
@@ -34,7 +34,7 @@
                 class="img-badge" />
             <span class="text-thumb">{{ languages }}</span></a></p>
             {% else %}
-                pas de langues
+                <div class="alert alert-info small">Il n'y a pas de langues ajoutées.</div> 
             {% endfor %}
         </div>
     </div>
@@ -46,7 +46,9 @@
             <p><a class="link-item-profile-box" href="{{path('user_show', {id : userLiked.id })}}"><img src="{{asset('images/avatars/' ~ userLiked.avatar ) }}" alt="Image de profil de l'utilisateur {{ userLiked.username }}"
                 class="img-badge" />
             <span class="text-thumb">{{ userLiked.username }}</span></a></p>
-            {% endfor %}
+            {% else %}
+            <div class="alert alert-info small">Il n'y a pas de voyageurs favoris.</div> 
+        {% endfor %}
         </div>
     </div>
     {% endif %}

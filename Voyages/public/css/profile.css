@@ -15,14 +15,14 @@
     font-size: small;
 }
 
-.report-profile {
+.report-profile, .settings-profile {
     position: absolute;
-    top: -576px;
+    top: -556px;
     color: lightgray;
     font-size: 0.9rem;
 }
 
-.report-profile:hover {
+.report-profile:hover, .settings-profile:hover{
     color: black;
     text-decoration: none;
 }
@@ -71,6 +71,7 @@ a.user-like {
 
 .img-badge {
     width: 3em;
+    height: 3em;
     border-radius: 50%;
 }
 
@@ -132,11 +133,6 @@ a.user-like {
     left: 0px;
 }
 
-.link-listes {
-    position: absolute;
-    top: 420px;
-    left: 13px;
-}
 
 .text-role {
     position: absolute;
@@ -203,8 +199,8 @@ a.user-like {
     left: 50%;
     transform: translate(-50%); */
     width: 90%;
-    min-height: 185px;
-    max-height: 190px;
+    min-height: 155px;
+    max-height: 155px;
     overflow: auto;
     font-size: small;
     text-align: justify;
@@ -212,6 +208,20 @@ a.user-like {
     top: 179px;
     left: 50%;
     transform: translate(-50%);
+}
+
+.language-self-profile{
+    position: absolute;
+    top: 316px;
+    width: -webkit-fill-available;
+    height: 152px;
+    min-height: 152px;
+    padding: 9px 0px;
+}
+
+.language-self-profile .img-badge{
+    width: 2em;
+    height: 2em;
 }
 
 .user-right {
@@ -271,7 +281,7 @@ a.user-like {
         color: mediumvioletred;
     }
 
-    .report-profile {
+    .report-profile, .settings-profile {
         position: absolute;
         top: -92px;
         left: 3px;
@@ -279,7 +289,7 @@ a.user-like {
         color: gray;
     }
 
-    .report-profile:hover {
+    .report-profile:hover, .settings-profile:hover {
         text-decoration: none;
         color: black;
     }
@@ -365,12 +375,6 @@ a.user-like {
         position: absolute;
         top: -43px;
         left: -535px;
-    }
-
-    .link-listes {
-        position: absolute;
-        top: -49px;
-        left: -231px;
     }
 
     .text-role {
@@ -483,14 +487,8 @@ a.user-like {
         left: -340px;
     }
 
-    .link-listes {
-        position: absolute;
-        top: -38px;
-        left: -187px;
 
-    }
-
-    .report-profile {
+    .report-profile, .settings-profile {
         position: absolute;
         top: -64px;
         left: 3px;
@@ -498,6 +496,7 @@ a.user-like {
         color: gray;
     }
 }
+
 /*-------------------------------------------MEDIA QUERIES-------------------------------------------------------*/
 @media (min-width: 1000px) and (orientation: landscape) {
     .user-center-info {
@@ -505,10 +504,5 @@ a.user-like {
         position: absolute;
         top: -6%;
         left: -119%;
-    }
-    .link-listes {
-        position: absolute;
-        top: -8%;
-        left: -58%;
     }
 }
