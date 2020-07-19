@@ -19,7 +19,7 @@
           Faire une recherche
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Recherche Avancée</a>
+          <a class="dropdown-item" href="{{path('advanced_search')}}">Recherche Avancée</a>
           <a class="dropdown-item" href="{{path('search')}}">Recherche Simple</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{{path('city_random')}}">Villes aleatoirs</a>
@@ -53,3 +53,12 @@
     </ul>
   </div>
 </nav>
+
+
+{% for type, messages in app.flashes %}
+{% for message in messages %}
+<div class="alert alert-{{ type }}" role="alert">
+    {{ message }}
+</div>
+{% endfor %}
+{% endfor %}

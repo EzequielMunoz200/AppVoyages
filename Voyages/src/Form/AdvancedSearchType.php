@@ -35,8 +35,9 @@ class AdvancedSearchType extends AbstractType
     {
         $builder->setMethod('GET')
             ->add('countries', ChoiceType::class, [
-                'label' => 'Rechercher dans tous les pays ou un en particulier',
+                'label' => 'Un pays en particulier?',
                 'mapped' => false,
+                'required' => false,
                 'choices' => [
                     'Recherche par pays' => $this->em->getRepository(City::class)->findAllCountryName()
                 ],
@@ -45,18 +46,20 @@ class AdvancedSearchType extends AbstractType
             ])
 
             ->add('tags', ChoiceType::class, [
-                'label' => 'Ajoutez a votre recherche les critéres que vous cherchez dans une ville',
+                'label' => 'Ajoutez des critères pour trouver la destination idéale',
                 'mapped' => false,
                 'choices' => $this->em->getRepository(Tag::class)->findAll(),
                 'choice_label' => 'name',
                 'choice_value' => 'id',
                 'multiple' => true,
+                'required' => true,
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'data_class' => AdvancedSearchData::class,
             'method' => 'GET',
             'csrf_protection' => false,
             'attr' => ['novalidate' => 'novalidate'],

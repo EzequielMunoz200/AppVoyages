@@ -1,38 +1,117 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}CityList{% endblock %}
+{% block title %}
+	{{ parent() }}
+	Destinations aléatoires
+{% endblock %}
+
+{% block stylesheets %}
+
+	<link rel="stylesheet" href="{{ asset('css/random-city.css') }}" crossorigin=""/>
+
+{% endblock %}
 
 {% block body %}
-    <h1>CityList</h1>
+	<div class="wrapper-results-city-list">
+		<div class="row">
+			<aside class="details col-2 border">
+				<h3>Détails</h3>
+				<ul>
+					{% set i = 100 %}
+					{% set j = i - 1 %}
+					{% for k in 1..100 %}
+						{% if quantityPerRange[j]  is defined  %}
+							<li>
+								<p>
+									{{ j }} % ~
+									{{ i }} %  ~ ( {{ quantityPerRange[j] }} )</p>
+							</li>
+						{% endif %}
+						{% for key, match in arrayMatching %}
+							{% if arrayMatching[key]['value'] > j and arrayMatching[key]['value'] <= i %}
+								<p>
+									<a href="{{ path('city_show', {geonameId : match['city'].geonameId}) }}">{{ match['city'].name }}, <span class="details-country-link">{{ match['city'].country }}</span></a>
+								</p>
+							{% endif %}
+						{% endfor %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ city_list.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ city_list.name }}</td>
-            </tr>
-            <tr>
-                <th>Url</th>
-                <td>{{ city_list.url }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ city_list.createdAt ? city_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ city_list.updatedAt ? city_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+						{% set i = i - 5 %}
+						{% set j = i - 5 %}
+					{% endfor %}
+				</ul>
 
-    <a href="{{ path('city_list_index') }}">back to list</a>
+			</aside>
+			<div class="col-10">
+				<h1>Resultats de la recherche avancée</h1>
+				<p class="intro">Pour les curieux, découvrez ici des destinations auxquelles vous n'auriez pas pensé.</p>
 
-    <a href="{{ path('city_list_edit', {'id': city_list.id}) }}">edit</a>
+				<div class="city-list-result">
 
-    {{ include('city_list/_delete_form.html.twig') }}
+					{% for item in arrayMatching %}
+						<a href="{{ path('city_show', { geonameId : item.city.geonameId }) }}">
+							<picture class="city-card" data-name="{{ item.city.name }}" data-geonameid="{{ item.city.geonameId }}">
+								<source srcset="" media="(min-width: 400px)">
+								<img class="city-img shadow-sm" src="{{asset('images/accueil/picture_' ~ random(1,17) ~ '.jpg')}}" alt="Image de {{ item.city.name }}" onerror="this.src='{{ asset('images/loader.gif') }}'"/>
+								<p class="city-name">{{ item.city.name }}</p>
+							</picture>
+						</a>
+					{% endfor %}
+
+				</div>
+			</div>
+		</div>
+		<style>
+			.wrapper-results-city-list {
+				display: flex;
+				position: absolute;
+				top: 4%;
+				padding: 5%;
+			}
+
+			.wrapper-results-city-list h1 {
+				font-size: xx-large;
+				text-align: center;
+			}
+			.intro {
+				text-align: center;
+			}
+
+
+			.wrapper-results-city-list h3 {
+				font-size: medium;
+				text-align: center;
+			}
+
+			.wrapper-results-city-list p {
+				font-size: small;
+			}
+
+			.details {
+				color: white;
+				background-color: #55967E;
+				padding: 15px;
+            }
+            
+            .details-country-link{
+                font-weight: normal;
+            }
+
+			.details a {
+                color: white;
+                font-weight: bold;
+
+            }
+
+            .details ul {
+                list-style: none;
+            }
+            .details li{
+                font-style: italic;
+			}
+		</style>
+
+		{% dump(arrayMatching) %}
+		{% dump(urlResults) %}
+		{% dump(quantityPerRange) %}
+	</div>
 {% endblock %}

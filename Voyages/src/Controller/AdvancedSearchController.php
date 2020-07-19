@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Data\AdvancedSearchData;
 use App\Entity\City;
 use App\Entity\Tag;
 use App\Form\AdvancedSearchType;
 use App\Form\SearchType;
 use App\Repository\CityRepository;
 use App\Service\SearchMatchTag;
+use RecursiveArrayIterator;
+use RecursiveIteratorIterator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,20 +21,19 @@ class AdvancedSearchController extends AbstractController
     /**
      * @Route("/advanced-search", name="advanced_search", methods={"GET", "POST"})
      */
-    public function index(Request $request, CityRepository $cityRepository, SearchMatchTag $searchMatchTag, SessionInterface $session)
+    public function index(Request $request, CityRepository $cityRepository, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(AdvancedSearchType::class);
+
+        $data = new AdvancedSearchData();
+        $form = $this->createForm(AdvancedSearchType::class, $data);
+
+        /*  $form = $this->createForm(AdvancedSearchType::class);
+        $form->handleRequest($request); */
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //dd($form->get('countries')->getData()->getCountry());
-            //dd($form->get('tags')->getData());
-            //$labels = $form->getData();
-            //unset($labels[array_search($form->get('countries')->getData(), $labels)]);
-
-            //dd($labels);
-            if ($form->get('countries')->getData()->getCountry()) {
+            if ($form->get('countries')->getData()) {
                 $queryCountry = $form->get('countries')->getData()->getCountry();
                 //create a query builder
                 $allCities = $em->getRepository(City::class)->findByCountryName($queryCountry);
@@ -44,12 +46,11 @@ class AdvancedSearchController extends AbstractController
             }
 
             $chosenTags = $form->get('tags')->getData();
+            //dd($chosenTags);
             $arrayResults = [];
             $matchCity = [];
             foreach ($allCities as $city) {
                 foreach ($chosenTags as $chosenTag) {
-                    //$tag = $em->getRepository(Tag::class)->find($tagId);
-
                     //matching of the tags
                     if ($city->getTags()->contains($chosenTag)) {
                         $arrayResults[$chosenTag->getName()][] = $city;
@@ -73,12 +74,24 @@ class AdvancedSearchController extends AbstractController
                     'value' => $matchValue,
                 ];
             }
+            $arrayMatchingFlat = [];
+            //https://stackoverflow.com/questions/1319903/how-to-flatten-a-multidimensional-array
+            $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($arrayMatching));
+            foreach ($it as $v) {
+                $arrayMatchingFlat[] = (int) $v;
+            }
 
-            //dd($arrayMatching);
-            //return $this->redirectToRoute('city_list');
+            //get results for each range
+            //https://www.php.net/manual/en/function.array-count-values.php
+            $quantityPerRange = (array_count_values($arrayMatchingFlat));
+
             // redirects to a route and maintains the original query string parameters
             //https://symfony.com/doc/current/controller.html
-            return $this->redirectToRoute('city_list', $request->query->all());
+            //return $this->redirectToRoute('city_list_show_resultats', ['resultats' => $request->query->all()]);
+            $session->set('arrayMatching', $arrayMatching);
+            $session->set('urlResults',  $_SERVER['REQUEST_URI']);
+            $session->set('quantityPerRange', $quantityPerRange);
+            return $this->redirectToRoute('city_list_results');
         }
 
 

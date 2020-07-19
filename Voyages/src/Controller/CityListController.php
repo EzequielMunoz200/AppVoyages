@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\CityList;
+use App\Form\AdvancedSearchType;
 use App\Form\CityListType;
 use App\Repository\CityListRepository;
+use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -15,8 +18,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CityListController extends AbstractController
 {
+
+    private $session;
+
+    public function __construct(SessionInterface $session)
+    {
+        $this->session = $session;
+    }
+
     /**
-     * @Route("/", name="city_list_index", methods={"GET"})
+     * @Route("/xx", name="city_list_index", methods={"GET"})
      */
     public function index(CityListRepository $cityListRepository): Response
     {
@@ -49,12 +60,29 @@ class CityListController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="city_list_show", methods={"GET"})
+     * @Route("/results", name="city_list_results", methods={"GET"})
+     */
+    public function showResults(Request $request, CityRepository $cityRepository, SessionInterface $session): Response
+    {
+        $arrayMatching = $session->get('arrayMatching');
+        $urlResults = $session->get('urlResults');
+        $quantityPerRange = $session->get('quantityPerRange');
+
+        return $this->render('city_list/show.html.twig', [
+            'arrayMatching' => $arrayMatching,
+            'urlResults' => $urlResults,
+            'quantityPerRange' => $quantityPerRange,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="city_list_sho", methods={"GET"})
      */
     public function show(CityList $cityList): Response
     {
         return $this->render('city_list/show.html.twig', [
             'city_list' => $cityList,
+            //'resultat' => 
         ]);
     }
 
@@ -83,7 +111,7 @@ class CityListController extends AbstractController
      */
     public function delete(Request $request, CityList $cityList): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$cityList->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $cityList->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($cityList);
             $entityManager->flush();
