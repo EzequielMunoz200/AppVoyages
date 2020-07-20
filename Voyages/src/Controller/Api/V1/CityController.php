@@ -4,6 +4,8 @@ namespace App\Controller\Api\V1;
 
 use App\Controller\TokenAuthenticatedController;
 use App\Entity\City;
+use App\Entity\CityLike;
+use App\Repository\CityLikeRepository;
 use App\Repository\CityRepository;
 use App\Service\QueryApi;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,5 +62,72 @@ class CityController extends AbstractController /* implements TokenAuthenticated
         $json = $serializer->normalize($cityImage, null, ['groups' => 'api_v1_city']); */
 
         return $this->json($cityDetails);
+    }
+
+     /**
+     * @Route("/image/{cityName}", name="image_city", methods={"GET"})
+     */
+    public function cityImage(CityRepository $cityRepository, ObjectNormalizer $objetNormalizer, Request $request, QueryApi $queryApi, $cityName)
+    {
+
+        $cityImage = $queryApi->cityDataImage($cityName);
+
+
+        if (empty($cityImage)) {
+
+            return new Response('Pas de resultats', Response::HTTP_NO_CONTENT);
+        }
+
+        /*  $serializer = new Serializer([new DateTimeNormalizer(), $objetNormalizer]);
+        $json = $serializer->normalize($cityImage, null, ['groups' => 'api_v1_city']); */
+
+        return $this->json($cityImage);
+    }
+
+     /**
+     * @Route("/city/{id}/like", name="city_like", requirements={"id"="\d+"}, methods={"POST"})
+     */
+    public function like(City $city, CityLikeRepository $cityLikeRepository): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+
+            return $this->json(403);
+        }
+
+        if ($city->isLikedByUser($user)) {
+            $like = $cityLikeRepository->findOneBy([
+                'city' => $city,
+                'user' => $user,
+            ]);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($like);
+            $entityManager->flush();
+
+            return $this->json([
+                'code' => 200,
+                'message' => 'like removed',
+                'likes' => $cityLikeRepository->count(['city' => $city]),
+
+            ], 200);
+        }
+
+        $like = new CityLike();
+        $like->setCity($city);
+        $like->setUser($user);
+      
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($like);
+        $entityManager->flush();
+
+
+        return $this->json([
+            'code' => 201,
+            'message' => 'City liked',
+            'likes' => $cityLikeRepository->count(['city' => $city]),
+        ], 200);
     }
 }

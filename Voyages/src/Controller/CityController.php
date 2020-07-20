@@ -98,6 +98,11 @@ class CityController extends AbstractController
             $entityManager->persist($review);
             $entityManager->flush();
 
+            $this->addFlash(
+                'success',
+                'L\'avis a été publiée!'
+            );
+
             return $this->redirectToRoute('city_show', ['geonameId' =>  $geonameId]);
         }
 

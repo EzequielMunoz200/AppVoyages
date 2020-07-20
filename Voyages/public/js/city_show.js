@@ -1,3 +1,12 @@
+//affichage du filename dans le label inputfile
+
+if (document.getElementById("review_imageFile") !== null) {
+    const inputElt = document.getElementById("review_imageFile");
+    inputElt.addEventListener('change', function (evt) {
+        let filename = evt.currentTarget.value.split("\\").pop();
+        document.querySelector('.custom-file-label').textContent = filename;
+    });
+}
 
 let latitude = document.getElementById('mapid').dataset.latitude;
 let longitude = document.getElementById('mapid').dataset.longitude;
@@ -37,3 +46,5 @@ var span = document.getElementsByClassName("close")[0];
 modal.onclick = function () {
     modal.style.display = "none";
 }
+
+

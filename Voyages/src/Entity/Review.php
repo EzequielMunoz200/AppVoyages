@@ -281,4 +281,5 @@ class Review
 
         return $this;
     }
+
 }

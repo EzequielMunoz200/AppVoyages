@@ -7,7 +7,13 @@
 {% block body %}
 <div class="wrapper-user">
     <aside class="user-left">
-        <a class="report-profile" href=""><i class="fas fa-exclamation-triangle"></i> Signaler cet profil</a>
+        {% if user != app.user %}
+        <a class="report-profile" href="{{ path('api_v1_user_report', {id : user.id } ) }}"><i
+                class="fas fa-exclamation-triangle"></i> Signaler</a>
+        {% else %}
+        <a class="settings-profile" href="{{ path('user_edit', {id : app.user.id } ) }}">
+            <i class="fas fa-cog"></i> Paramètres</a>
+        {% endif %}
         {{ include('/user/show_partials/left.html.twig') }}
     </aside>
     <div class="user-center">
@@ -24,13 +30,37 @@
         {% endif %}
         {% endfor %}
         <h4 class="title-profile">{{ user.username }}</h4>
+        {% if user.description != null %}
         <div class="text-presentation">{{ user.description|raw }}</div>
-        <div class="user-center-info">
-            <p>Mes points: {{user.points}}</p>
-            <p>Inscrit depuis le: {{user.createdAt|date("d-m-Y")}}</p>
-            <p>Derniére conexion le: </p>
+        {% else %}
+        <div class="text-presentation">
+            <div class="alert alert-info">La presentation n\'a pas été redigé.</div>
         </div>
-        <a class="btn btn-info btn-sm link-listes" href="">Mes Listes de villes </a>
+        {% endif %}
+       
+
+        {% if user == app.user %}
+        <div class="language-self-profile">
+            <h3 class="title-badges">Mes langues &nbsp</h3>
+            <div class="hide-scroll">
+                <div class="box-badges">
+                    {% for languages in user.languages %}
+                    <p><img src="{{asset('images/flags/' ~ languages.flag ) }}" alt="Icône drapeau" class="img-badge" />
+                        <span class="text-thumb">{{ languages }}</span></a></p>
+                    {% else %}
+                    <div class="alert alert-info small">Il n'y a pas des langues ajoutées.</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+       
+
+        <div class="user-center-info">
+            <p class="points">Mes points: {{user.points}}</p>
+            <p class="registration-date">Inscrit depuis le: {{user.createdAt|date("d-m-Y")}}</p>
+        </div>
+
         {# displays the highest ROLE reached #}
         {% if 'ROLE_ADMIN' in user.roles %}
         <p class="text-role">Administrateur</p>
@@ -41,7 +71,7 @@
         <p class="text-role">Utilisateur</p>
         {% endif %}
         {% endif %}
- 
+
         {# displays the highest level badge reached #}
         {% set badgeLevel = [] %}
         {% for key, badge in user.badges %}
@@ -57,26 +87,41 @@
         {% endif %}
         {% endfor %}
 
-
-
     </div>
+    {% set isLiked = false %}
+    {% for userliked in app.user.favoriteUser %}
+    {% if userliked.id ==  user.id %}
+    {% set isLiked = true %}
+    {% endif %}
+    {% endfor %}
     <aside class="user-right">
-        <a class="user-like" href=""><i class="fas fa-heart"></i></a>
-        {# <a class="user-like" href=""><i class="far fa-heart"></i></a> #}
+        {% if user != app.user %}
+        {# FULL => fas | EMPTY => far#}
+        <a class="user-like" href="" data-like="" data-connecteduser="{{ app.user.id }}"
+            data-targeteduser="{{ user.id }}">
+            {% if isLiked == true %}
+            <i class="fas fa-heart"></i>
+            {% else %}
+            <i class="far fa-heart"></i>
+            {% endif %}
+        </a>
+        {% endif %}
         {{ include('/user/show_partials/right.html.twig') }}
     </aside>
 
-
 </div>
-
-
-<style>
-
-</style>
 
 {#    <a href="{{ path('user_index') }}">back to list</a>
 
     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
 
     {{ include('user/_delete_form.html.twig') }} #}
+
+<!-- Script like user -->
+<script src="{{asset('js/user_like.js')}}"></script>
+<!-- Script show modal user pictures -->
+<script src="{{asset('js/user_gallery_modal.js')}}"></script>
+<!-- Script to report a user -->
+{#<script src="{{asset('js/user_report.js')}}"></script> #}
+
 {% endblock %}

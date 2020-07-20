@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CityList index{% endblock %}
+
+{% block body %}
+    <h1>CityList index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Url</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for city_list in city_lists %}
+            <tr>
+                <td>{{ city_list.id }}</td>
+                <td>{{ city_list.name }}</td>
+                <td>{{ city_list.url }}</td>
+                <td>{{ city_list.createdAt ? city_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ city_list.updatedAt ? city_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

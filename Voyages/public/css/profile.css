@@ -15,14 +15,14 @@
     font-size: small;
 }
 
-.report-profile {
+.report-profile, .settings-profile {
     position: absolute;
-    top: -576px;
+    top: -556px;
     color: lightgray;
     font-size: 0.9rem;
 }
 
-.report-profile:hover {
+.report-profile:hover, .settings-profile:hover{
     color: black;
     text-decoration: none;
 }
@@ -33,6 +33,10 @@
     right: 42px;
     font-size: 1.7em;
     color: indianred;
+}
+
+a.user-like {
+    width: fit-content;
 }
 
 .user-like:hover {
@@ -52,7 +56,7 @@
     /* margin-top: 20%; */
     position: relative;
     border: .01rem solid rgba(0, 0, 0, .1);
-    top: 532px;
+    top: 575px;
 }
 
 .title-badges {
@@ -66,7 +70,9 @@
 }
 
 .img-badge {
-    width: 2em;
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
 }
 
 .user-left p {
@@ -82,9 +88,23 @@
     margin: auto;
     overflow-y: scroll;
     max-height: 135px;
+    min-height: 135px;
     padding-right: 14px;
 }
 
+.link-item-profile-box {
+    text-decoration: none;
+    color: black;
+}
+
+.link-item-profile-box:hover {
+    text-decoration: none;
+    color: black;
+}
+
+/* .link-item-profile-box-img{
+    border-radius: 50%;
+} */
 
 .hide-scroll {
     width: 80%;
@@ -97,6 +117,7 @@
 .user-center {
     /* background-color: gray; */
     height: 500px;
+    min-height: 500px;
     flex: 1;
     margin: 2%;
     /* margin-top: 20%; */
@@ -108,14 +129,10 @@
 .user-center-info {
     padding: 0px 5%;
     position: absolute;
-    top: 337px;
+    top: 144px;
+    left: 0px;
 }
 
-.link-listes {
-    position: absolute;
-    top: 420px;
-    left: 13px;
-}
 
 .text-role {
     position: absolute;
@@ -139,9 +156,12 @@
     overflow: hidden;
 }
 
+
 .user-center-info p {
     font-size: small;
     line-height: 1px;
+    font-style: italic;
+    color: #55967E;
 }
 
 .avatar-profile {
@@ -179,15 +199,29 @@
     left: 50%;
     transform: translate(-50%); */
     width: 90%;
-    min-height: 185px;
-    max-height: 190px;
+    min-height: 155px;
+    max-height: 155px;
     overflow: auto;
     font-size: small;
     text-align: justify;
     position: absolute;
-    top: 128px;
+    top: 179px;
     left: 50%;
     transform: translate(-50%);
+}
+
+.language-self-profile{
+    position: absolute;
+    top: 316px;
+    width: -webkit-fill-available;
+    height: 152px;
+    min-height: 152px;
+    padding: 9px 0px;
+}
+
+.language-self-profile .img-badge{
+    width: 2em;
+    height: 2em;
 }
 
 .user-right {
@@ -198,7 +232,7 @@
     /* margin-top: 20%; */
     position: relative;
     border: .01rem solid rgba(0, 0, 0, .1);
-    top: 532px;
+    top: 76px;
     margin-bottom: 20%;
     min-height: 500px;
 }
@@ -247,7 +281,7 @@
         color: mediumvioletred;
     }
 
-    .report-profile {
+    .report-profile, .settings-profile {
         position: absolute;
         top: -92px;
         left: 3px;
@@ -255,7 +289,7 @@
         color: gray;
     }
 
-    .report-profile:hover {
+    .report-profile:hover, .settings-profile:hover {
         text-decoration: none;
         color: black;
     }
@@ -295,7 +329,8 @@
     }
 
     .img-badge {
-        width: 2em;
+        width: 2.5em;
+        height: 2.5em;
     }
 
     .user-left p {
@@ -326,6 +361,7 @@
     .user-center {
         /* background-color: gray; */
         height: 500px;
+        min-height: 500px;
         flex: 1;
         margin: 2%;
         /* margin-top: 20%; */
@@ -337,13 +373,8 @@
     .user-center-info {
         padding: 0px 5%;
         position: absolute;
-        top: 337px;
-    }
-
-    .link-listes {
-        position: absolute;
-        top: -49px;
-        left: -231px;
+        top: -43px;
+        left: -535px;
     }
 
     .text-role {
@@ -358,7 +389,8 @@
     }
 
     .user-center-info p {
-        font-size: small;
+        font-size: x-small;
+        font-style: italic;
         line-height: 1px;
     }
 
@@ -441,4 +473,36 @@
         min-height: 436px;
     }
 
+}
+
+
+/*----------------------------------------------------MEDIA QUERIES-------------------------------------------------------------------*/
+@media (min-width: 1000px) and (orientation: landscape) {
+
+
+    .user-center-info {
+        padding: 0px 5%;
+        position: absolute;
+        top: -30px;
+        left: -340px;
+    }
+
+
+    .report-profile, .settings-profile {
+        position: absolute;
+        top: -64px;
+        left: 3px;
+        font-size: .8em;
+        color: gray;
+    }
+}
+
+/*-------------------------------------------MEDIA QUERIES-------------------------------------------------------*/
+@media (min-width: 1000px) and (orientation: landscape) {
+    .user-center-info {
+        padding: 0px 5%;
+        position: absolute;
+        top: -6%;
+        left: -119%;
+    }
 }

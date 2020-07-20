@@ -1,13 +1,14 @@
 easy_admin:
   entities:
         City:
+            label: Villes
             class: App\Entity\City
             list:
                 fields:
                     - id
-                    - name
-                    - country
-                    - geonameId
+                    - { property: 'name', label: 'Ville' }
+                    - { property: 'country', label: 'Pays' }
+                    - { property: 'geonameId', label: 'Geoname id' , type: 'integer'}
                     
                 actions:
                     - { name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-secondary' }

@@ -67,13 +67,11 @@ class UserController extends AbstractController
     {
         //teste le droit (edit) sur l'objet($user)
         //retourne un 403 si l'utilisateur ne rentre pas dans les conditions du voter
-        //$this->denyAccessUnlessGranted('edit', $question);
         $this->denyAccessUnlessGranted('edit', $user);
         /*  if (!$this->isGranted('edit', $user, 'User tried to access a page without having ROLE_ADMIN')) {
             $this->addFlash('danger', 'Vous n\'avez pas le droits de editer cette question');
             return $this->redirectToRoute('question_show', ['id' => $user->getId()]);
         } */
-
 
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -87,6 +85,11 @@ class UserController extends AbstractController
 
 
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash(
+                'success',
+                'Le profil a été mis à jour!'
+            );
 
             return $this->redirectToRoute('user_show', ['id' => $user->getId()]);
         }

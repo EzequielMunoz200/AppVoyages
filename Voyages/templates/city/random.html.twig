@@ -4,48 +4,38 @@
 
 {% block stylesheets %}
 
-<!-- Stylesheet GOOGLE FONT -->
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Yeseva+One&display=swap"
-    rel="stylesheet">
-
-<!-- Stylesheet BOOTSTRAP -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-<link rel="stylesheet" href="{{ asset('css/style-city-list.css') }}" crossorigin="" />
-<link rel="stylesheet" href="{{ asset('css/style-nav-header.css') }}" crossorigin=""/>
+<link rel="stylesheet" href="{{ asset('css/random-city.css') }}" crossorigin="" />
 
 {% endblock %}
 
 {% block body %}
 
-{% dump(randomCities) %}
+<div class="wrapper-cities-list">
+    {% dump(randomCities) %}
 
     <h1>Destinations aléatoires</h1>
     <p class="intro">Pour les curieux, découvrez ici des destinations auxquelles vous n'auriez pas pensé.</p>
 
-<div class="city-list-result">
+    <div class="city-list-result col-lg-8">
 
-    {% for city in randomCities %}
-    <a href="{{ path('city_show', { geonameId : city.geonameId }) }}">
-        <div class="city-card" data-name="{{ city.name }}" data-geonameid="{{ city.geonameId }}">
-            <img class="city-img" src="" alt="Image de " />
-                {# onerror="this.src='{{ asset('images/loader.gif') }}'" #}
-            <p class="city-name">{{ city.name }}</p>
-        </div>
-    </a>
-    {% endfor %}
+        {% for city in randomCities %}
+        <a href="{{ path('city_show', { geonameId : city.geonameId }) }}">
+            <picture class="city-card" data-name="{{ city.name }}" data-geonameid="{{ city.geonameId }}">
+                <source srcset="" media="(min-width: 400px)">
+                <img class="city-img shadow-sm" src="" alt="Image de {{ city.name }}" onerror="this.src='{{ asset('images/loader.gif') }}'" />
+                <p class="city-name">{{ city.name }}</p>
+            </picture>
+        </a>
+        {% endfor %}
+
+    </div>
 
 </div>
-
-
 
 {% endblock %}
 
 
 {% block javascripts %}
-
-
 <script>
     let cities = document.querySelectorAll('.city-card');
     let cityName = '';
@@ -73,8 +63,11 @@
                 .then(
                     (data) => {
                         console.log(data);
-                        //let imageElement = city.querySelector('img');
-                        //imageElement.setAttribute('src', data.thumb)
+                        let imageElement = city.querySelector('img');
+                        let imageElt = city.querySelector('source');
+                        imageElt.setAttribute('srcset', data.urlImage.regular);
+                        imageElement.setAttribute('src', data.urlImage.full);
+                        //console.log(data.thumb);
                     }
                 );
         }

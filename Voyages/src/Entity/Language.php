@@ -39,6 +39,11 @@ class Language
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $flag;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -114,6 +119,18 @@ class Language
             $this->users->removeElement($user);
             $user->removeLanguage($this);
         }
+
+        return $this;
+    }
+
+    public function getFlag(): ?string
+    {
+        return $this->flag;
+    }
+
+    public function setFlag(?string $flag): self
+    {
+        $this->flag = $flag;
 
         return $this;
     }

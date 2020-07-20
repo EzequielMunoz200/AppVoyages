@@ -158,9 +158,20 @@ class User implements UserInterface
     private $cityLikes;
 
     /**
-     * @ORM\OneToMany(targetEntity=UserLike::class, mappedBy="userSource", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="users")
      */
-    private $userLikes;
+    private $favoriteUser;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="favoriteUser")
+     */
+    private $users;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isReported;
+
 
     public function __construct()
     {
@@ -170,13 +181,15 @@ class User implements UserInterface
         $this->reviews = new ArrayCollection();
         $this->reviewLikes = new ArrayCollection();
         $this->cityLikes = new ArrayCollection();
-        $this->userLikes = new ArrayCollection();
         $this->createdAt = new \DateTime;
+        $this->favoriteUser = new ArrayCollection();
+        $this->users = new ArrayCollection();
+        $this->isReported = false;
     }
 
     public function __toString()
     {
-        return $this->name;
+        return $this->username;
     }
 
     public function getId(): ?int
@@ -257,12 +270,66 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+    /**
+     * @return Collection|self[]
+     */
+    public function getFavoriteUser(): Collection
+    {
+        return $this->favoriteUser;
+    }
+
+    public function addFavoriteUser(self $favoriteUser): self
+    {
+        if (!$this->favoriteUser->contains($favoriteUser)) {
+            $this->favoriteUser[] = $favoriteUser;
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteUser(self $favoriteUser): self
+    {
+        if ($this->favoriteUser->contains($favoriteUser)) {
+            $this->favoriteUser->removeElement($favoriteUser);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(self $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addFavoriteUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(self $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            $user->removeFavoriteUser($this);
+        }
+
+        return $this;
+    }
+
     public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
-    public function setFirstname(?string $firstname): self
+    public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -274,14 +341,14 @@ class User implements UserInterface
         return $this->name;
     }
 
-    public function setName(?string $name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function setUsername(?string $username): self
+    public function setUsername(string $username): self
     {
         $this->username = $username;
 
@@ -293,7 +360,7 @@ class User implements UserInterface
         return $this->birthdate;
     }
 
-    public function setBirthdate(?\DateTimeInterface $birthdate): self
+    public function setBirthdate(\DateTimeInterface $birthdate): self
     {
         $this->birthdate = $birthdate;
 
@@ -317,7 +384,7 @@ class User implements UserInterface
         return $this->points;
     }
 
-    public function setPoints(int $points): self
+    public function setPoints(?int $points): self
     {
         $this->points = $points;
 
@@ -543,34 +610,27 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|UserLike[]
-     */
-    public function getUserLikes(): Collection
+    public function isFavoriteUser(User $userTarget) :bool
     {
-        return $this->userLikes;
-    }
-
-    public function addUserLike(UserLike $userLike): self
-    {
-        if (!$this->userLikes->contains($userLike)) {
-            $this->userLikes[] = $userLike;
-            $userLike->setUserSource($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserLike(UserLike $userLike): self
-    {
-        if ($this->userLikes->contains($userLike)) {
-            $this->userLikes->removeElement($userLike);
-            // set the owning side to null (unless already changed)
-            if ($userLike->getUserSource() === $this) {
-                $userLike->setUserSource(null);
+        foreach ($this->users as $userLike) {
+            if ($userLike->getFavoriteUser() === $userTarget) {
+                return true;
             }
         }
+        return false;
+    }
+
+    public function getIsReported(): ?bool
+    {
+        return $this->isReported;
+    }
+
+    public function setIsReported(bool $isReported): self
+    {
+        $this->isReported = $isReported;
 
         return $this;
     }
+    
+
 }

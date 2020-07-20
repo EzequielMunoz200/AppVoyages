@@ -7,6 +7,23 @@
     padding-bottom: 5%;
 }
 
+.city-like{
+    position: absolute;
+    right: 20px;
+    bottom: -49px;
+    font-size: x-large;
+    color: indianred;
+}
+
+.city-like:hover{
+    position: absolute;
+    right: 20px;
+    bottom: -49px;
+    font-size: x-large;
+    color: indianred;
+    text-decoration: none;
+}
+
 h1 {
     text-align: center;
     font-size: xx-large;
@@ -52,6 +69,9 @@ h1 {
     margin-top: 0px;
 }
 
+#container-cards .alert-warning {
+    width: 100%;
+}
 
 .card-text {
     text-align: center;
@@ -266,6 +286,10 @@ h1 {
     color: white;
 }
 
+#review .form-group .custom-file-label{
+    color: black;
+}
+
 
 .form-review-title {
     text-align: center;
@@ -368,6 +392,10 @@ h1 {
 
 .user-image {
     max-width: 90%;
+}
+
+.review-div {
+    margin: auto;
 }
 
 /*-------------------------------------------------MEDIA QUERIES--------------------------------------------*/

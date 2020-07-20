@@ -1,5 +1,5 @@
 <div>
-    <h3 class="title-badges">Mes badges &nbsp</h3>
+    <h3 class="title-badges">Badges obtenues &nbsp</h3>
     <div class="hide-scroll">
         <div class="box-badges">
             {% for badge in user.badges %}
@@ -12,27 +12,44 @@
 </div>
 
 <div>
-    <h3 class="title-badges">Mes villes favorites &nbsp</h3>
+    <h3 class="title-badges">Villes favorites &nbsp</h3>
     <div class="hide-scroll">
         <div class="box-badges">
-            {% for badge in user.badges %}
-            <p><img src="{{asset('images/badges/' ~ badge.filename ~ '.svg') }}" alt="Image de Paris"
+            {% for cityLiked in app.user.cityLikes %}
+            <p><img src="{{asset('images/accueil/picture_' ~ random(1,17) ~ '.jpg') }}" alt=""
                     class="img-badge" />
-                <span class="text-thumb">{{ badge.name }}</span></p>
+                <span class="text-thumb">{{ cityLiked.city.name }}, {{ cityLiked.city.country }}</span></p>
             {% endfor %}
         </div>
     </div>
 </div>
 
 <div>
+    {% if user != app.user %}
+    <h3 class="title-badges">Langues parlées&nbsp</h3>
+    <div class="hide-scroll">
+        <div class="box-badges">
+            {% for languages in user.languages %}
+            <p><img src="{{asset('images/flags/' ~ languages.flag ) }}" alt="Icône drapeau"
+                class="img-badge" />
+            <span class="text-thumb">{{ languages }}</span></a></p>
+            {% else %}
+                <div class="alert alert-info small">Il n'y a pas de langues ajoutées.</div> 
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
     <h3 class="title-badges">Mes voyageurs favoris &nbsp</h3>
     <div class="hide-scroll">
         <div class="box-badges">
-            {% for badge in user.badges %}
-            <p><img src="{{asset('images/badges/' ~ badge.filename ~ '.svg') }}" alt="Image de Paris"
-                    class="img-badge" />
-                <span class="text-thumb">{{ badge.name }}</span></p>
-            {% endfor %}
+            {% for userLiked in app.user.favoriteUser %}
+            <p><a class="link-item-profile-box" href="{{path('user_show', {id : userLiked.id })}}"><img src="{{asset('images/avatars/' ~ userLiked.avatar ) }}" alt="Image de profil de l'utilisateur {{ userLiked.username }}"
+                class="img-badge" />
+            <span class="text-thumb">{{ userLiked.username }}</span></a></p>
+            {% else %}
+            <div class="alert alert-info small">Il n'y a pas de voyageurs favoris.</div> 
+        {% endfor %}
         </div>
     </div>
+    {% endif %}
 </div>

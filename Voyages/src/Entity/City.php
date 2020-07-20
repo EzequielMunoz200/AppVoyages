@@ -240,4 +240,16 @@ class City
         return '/city/' . $this->getGeonameId();
         //return 'http://' . $_SERVER['SERVER_NAME'] . '/city/' . $this->getGeonameId();
     }
+
+
+    public function isLikedByUser(User $user): bool
+    {
+        foreach ($this->cityLikes as $like) {
+            if ($like->getUser() === $user) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

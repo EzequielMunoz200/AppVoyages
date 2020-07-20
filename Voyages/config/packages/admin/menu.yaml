@@ -1,13 +1,15 @@
 easy_admin:
   design:
+    brand_color: '#55967E'
     menu:
-      - label: 'Gestion'
-        icon: 'home'
+      #- label: 'Gestion'
+      #  icon: 'home'
        
-        children:
+      #  children:
           - {label: 'Administration'}
           - {entity: 'City', icon: 'globe', label: 'Villes'}
           - {entity: 'Tag', icon: 'home', label: 'Tags'}
           - {entity: 'User', icon: 'calendar', label: 'Utilisateurs'}
+          - {entity: 'Review', icon: 'comment', label: 'Avis'}
           - {label: 'Web site'}
           - {label: 'Accueil', icon: 'home', url: 'http://localhost:8000', rel: 'accueil'}
