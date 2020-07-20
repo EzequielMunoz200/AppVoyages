@@ -25,8 +25,6 @@
                 <td>{{ city_list.createdAt ? city_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ city_list.updatedAt ? city_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('city_list_show', {'id': city_list.id}) }}">show</a>
-                    <a href="{{ path('city_list_edit', {'id': city_list.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +35,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('city_list_new') }}">Create new</a>
 {% endblock %}

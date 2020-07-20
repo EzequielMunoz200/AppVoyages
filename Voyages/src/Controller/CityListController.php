@@ -27,7 +27,7 @@ class CityListController extends AbstractController
     }
 
     /**
-     * @Route("/xx", name="city_list_index", methods={"GET"})
+     * @Route("/", name="city_list_index", methods={"GET"})
      */
     public function index(CityListRepository $cityListRepository): Response
     {
@@ -37,46 +37,46 @@ class CityListController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="city_list_new", methods={"GET","POST"})
+     * @Route("/results", name="city_list_results", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function showResults(Request $request, CityRepository $cityRepository, SessionInterface $session): Response
     {
+
+        $arrayMatching = $session->get('arrayMatching');
+        $urlResults = $session->get('urlResults');
+        $quantityPerRange = $session->get('quantityPerRange');
+
         $cityList = new CityList();
         $form = $this->createForm(CityListType::class, $cityList);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            //add current user
+            $cityList->addUser($this->getUser());
+            //add url 
+            $cityList->setUrl($urlResults);
             $entityManager->persist($cityList);
             $entityManager->flush();
+            $this->addFlash(
+                'success',
+                'La liste a été sauvegarde!'
+            );
 
-            return $this->redirectToRoute('city_list_index');
+            return $this->redirectToRoute('city_list_results');
         }
 
-        return $this->render('city_list/new.html.twig', [
+        return $this->render('city_list/show.html.twig', [
+            'arrayMatching' => $arrayMatching,
+            'urlResults' => $_SERVER['SERVER_NAME'].$urlResults,
+            'quantityPerRange' => $quantityPerRange,
             'city_list' => $cityList,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/results", name="city_list_results", methods={"GET"})
-     */
-    public function showResults(Request $request, CityRepository $cityRepository, SessionInterface $session): Response
-    {
-        $arrayMatching = $session->get('arrayMatching');
-        $urlResults = $session->get('urlResults');
-        $quantityPerRange = $session->get('quantityPerRange');
-
-        return $this->render('city_list/show.html.twig', [
-            'arrayMatching' => $arrayMatching,
-            'urlResults' => $urlResults,
-            'quantityPerRange' => $quantityPerRange,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="city_list_sho", methods={"GET"})
+     * @Route("/{id}", name="city_list_show", methods={"GET"})
      */
     public function show(CityList $cityList): Response
     {

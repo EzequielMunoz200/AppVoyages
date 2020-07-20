@@ -6,112 +6,55 @@
 {% endblock %}
 
 {% block stylesheets %}
-
 	<link rel="stylesheet" href="{{ asset('css/random-city.css') }}" crossorigin=""/>
-
+	<link rel="stylesheet" href="{{ asset('css/city_list_show.css') }}" crossorigin=""/>
 {% endblock %}
-
 {% block body %}
 	<div class="wrapper-results-city-list">
-		<div class="row">
-			<aside class="details col-2 border">
-				<h3>Détails</h3>
+        <h1>Resultats de la recherche avancée</h1>
+        <p class="intro">Découvrez les destinations</p>
+		<div class="row col-12 col-md-12 col-sm-12">
+			<aside class="details col-md-12 col-sm-12 col-lg-12 col-xl-2 border">
+				<h3>Pourcentage de correspondance avec votre recherche</h3>
 				<ul>
-					{% set i = 100 %}
-					{% set j = i - 1 %}
-					{% for k in 1..100 %}
-						{% if quantityPerRange[j]  is defined  %}
-							<li>
-								<p>
-									{{ j }} % ~
-									{{ i }} %  ~ ( {{ quantityPerRange[j] }} )</p>
+                    {% for key in quantityPerRange|keys|sort|reverse %}
+							<li class="list-percent  btn btn-info mb-3" data-percent="{{key}}">
+                                {% if quantityPerRange[key] == 1 %}
+                                Afficher le resultat avec {{ key }}%
+                                {% else %}
+                                Afficher les {{ quantityPerRange[key] }} resultats avec {{ key }}%
+                                {% endif %}
 							</li>
-						{% endif %}
-						{% for key, match in arrayMatching %}
-							{% if arrayMatching[key]['value'] > j and arrayMatching[key]['value'] <= i %}
-								<p>
-									<a href="{{ path('city_show', {geonameId : match['city'].geonameId}) }}">{{ match['city'].name }}, <span class="details-country-link">{{ match['city'].country }}</span></a>
-								</p>
-							{% endif %}
-						{% endfor %}
-
-						{% set i = i - 5 %}
-						{% set j = i - 5 %}
 					{% endfor %}
 				</ul>
-
+				<div class="url-link btn btn-secondary btn-sm" onclick="copyToClipboard()">
+					<i class="far fa-clipboard"></i>&nbsp;<small>Copier le lien de la recherche</small>
+					<input id="urlLinkInput" type="text" value="{{urlResults}}">
+				</div>
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				{{ include('city_list/_form.html.twig') }}
+				{% endif %}
 			</aside>
-			<div class="col-10">
-				<h1>Resultats de la recherche avancée</h1>
-				<p class="intro">Pour les curieux, découvrez ici des destinations auxquelles vous n'auriez pas pensé.</p>
-
-				<div class="city-list-result">
-
-					{% for item in arrayMatching %}
-						<a href="{{ path('city_show', { geonameId : item.city.geonameId }) }}">
-							<picture class="city-card" data-name="{{ item.city.name }}" data-geonameid="{{ item.city.geonameId }}">
-								<source srcset="" media="(min-width: 400px)">
-								<img class="city-img shadow-sm" src="{{asset('images/accueil/picture_' ~ random(1,17) ~ '.jpg')}}" alt="Image de {{ item.city.name }}" onerror="this.src='{{ asset('images/loader.gif') }}'"/>
-								<p class="city-name">{{ item.city.name }}</p>
-							</picture>
-						</a>
+			<div class="col-md-12 col-lg-12 col-sm-12 col-xl-9 box-results-right">
+				<div
+					class="city-list-result">
+					{% for key in quantityPerRange|keys %}
+						{% for item in arrayMatching %}
+							{% if item['value'] == key  %}
+								<a class="picture-result" href="{{ path('city_show', { geonameId : item.city.geonameId }) }}" data-range="{{key}}" data-show="true">
+									<picture class="city-card" data-name="{{ item.city.name }}" data-geonameid="{{ item.city.geonameId }}">
+										<source srcset="" media="(min-width: 400px)">
+										<img class="city-img shadow-sm" src="{{asset('images/accueil/picture_' ~ random(1,17) ~ '.jpg')}}" alt="Image de {{ item.city.name }}" onerror="this.src='{{ asset('images/loader.gif') }}'"/>
+										<p class="city-name">{{ item.city.name }}, {{ item.city.country }}</p>
+									</picture>
+								</a>
+							{% endif %}
+						{% endfor %}
 					{% endfor %}
-
 				</div>
 			</div>
 		</div>
-		<style>
-			.wrapper-results-city-list {
-				display: flex;
-				position: absolute;
-				top: 4%;
-				padding: 5%;
-			}
-
-			.wrapper-results-city-list h1 {
-				font-size: xx-large;
-				text-align: center;
-			}
-			.intro {
-				text-align: center;
-			}
-
-
-			.wrapper-results-city-list h3 {
-				font-size: medium;
-				text-align: center;
-			}
-
-			.wrapper-results-city-list p {
-				font-size: small;
-			}
-
-			.details {
-				color: white;
-				background-color: #55967E;
-				padding: 15px;
-            }
-            
-            .details-country-link{
-                font-weight: normal;
-            }
-
-			.details a {
-                color: white;
-                font-weight: bold;
-
-            }
-
-            .details ul {
-                list-style: none;
-            }
-            .details li{
-                font-style: italic;
-			}
-		</style>
-
-		{% dump(arrayMatching) %}
-		{% dump(urlResults) %}
-		{% dump(quantityPerRange) %}
 	</div>
+	
+<script src="{{asset('js/city_list_show.js')}}"></script>
 {% endblock %}

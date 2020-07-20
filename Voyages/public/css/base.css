@@ -6,6 +6,13 @@ html {
   max-height: 100%;
 }
 
+.flash-success {
+  top: 59px !important;
+  position: relative;
+  width: max-content;
+  z-index:3;
+}
+
 
 body {
   /* Margin bottom by footer height */
@@ -22,7 +29,8 @@ body {
   z-index: 50;
 }
 
-.nav-link, .dropdown-item{
+.nav-link,
+.dropdown-item {
   font-size: small;
 }
 

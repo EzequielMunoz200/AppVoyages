@@ -86,6 +86,11 @@ class UserController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash(
+                'success',
+                'Le profil a été mis à jour!'
+            );
+
             return $this->redirectToRoute('user_show', ['id' => $user->getId()]);
         }
 

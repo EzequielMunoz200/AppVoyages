@@ -27,9 +27,6 @@ class AdvancedSearchController extends AbstractController
 
         $data = new AdvancedSearchData();
         $form = $this->createForm(AdvancedSearchType::class, $data);
-
-        /*  $form = $this->createForm(AdvancedSearchType::class);
-        $form->handleRequest($request); */
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -71,7 +68,7 @@ class AdvancedSearchController extends AbstractController
                 $objectCity = $em->getRepository(City::class)->find($key);
                 $arrayMatching[] = [
                     'city' => $objectCity,
-                    'value' => $matchValue,
+                    'value' => round($matchValue),
                 ];
             }
             $arrayMatchingFlat = [];

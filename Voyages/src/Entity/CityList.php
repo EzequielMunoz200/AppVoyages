@@ -6,6 +6,7 @@ use App\Repository\CityListRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CityListRepository::class)
@@ -21,6 +22,13 @@ class CityList
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(allowNull=false, message="Obligatoire")
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 30,
+     *      minMessage = "{{ limit }} caractères minimum",
+     *      maxMessage = "{{ limit }} caractères maximum",
+     *      allowEmptyString = false)
      */
     private $name;
 
@@ -47,6 +55,7 @@ class CityList
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->createdAt =  new \DateTime;
     }
 
     public function __toString()
@@ -88,7 +97,7 @@ class CityList
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 

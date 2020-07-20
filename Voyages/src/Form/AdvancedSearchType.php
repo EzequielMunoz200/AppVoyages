@@ -19,6 +19,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Constraints\GreaterThan;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class AdvancedSearchType extends AbstractType
@@ -53,6 +55,11 @@ class AdvancedSearchType extends AbstractType
                 'choice_value' => 'id',
                 'multiple' => true,
                 'required' => true,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez ajouter des critères',
+                    ]),
+                ],
             ]);
     }
 
