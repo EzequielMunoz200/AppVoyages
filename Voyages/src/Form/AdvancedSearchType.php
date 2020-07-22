@@ -45,10 +45,11 @@ class AdvancedSearchType extends AbstractType
                 ],
                 'choice_label' => 'country',
                 'choice_value' => 'id',
+                'help' => 'Le choix par défaut fait la recherche dans tous les pays',
             ])
 
             ->add('tags', ChoiceType::class, [
-                'label' => 'Ajoutez des critères pour trouver la destination idéale',
+                'label' => 'Choissisez parmi les critères existentes pour trouver la destination idéale',
                 'mapped' => false,
                 'choices' => $this->em->getRepository(Tag::class)->findAll(),
                 'choice_label' => 'name',

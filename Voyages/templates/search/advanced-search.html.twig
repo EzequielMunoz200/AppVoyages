@@ -15,7 +15,7 @@
         <div class="d-flex flex-column col-12 p-0">
             {{ form_start(form) }}
             {{ form_widget(form) }}
-            <button class="btn btn-dark btn-sm pull-right">{{ button_label|default('Rechercher') }}</button>
+            <button class="btn btn-sm pull-right btn-submit-advanced-search">{{ button_label|default('Rechercher') }}</button>
             {{ form_end(form) }}
         </div>
 
@@ -34,8 +34,36 @@
                 vertical-align: text-bottom;
             }
 
+            label.required:after {
+                content: " * ";
+                color: red;
+            }
+
+            .btn-submit-advanced-search{
+                background-color: #55967E;
+                color: white;
+            }
+
+            .btn-submit-advanced-search:hover{
+                background-color: #74bea3;
+                color: whitey;
+            }
+
+            .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable{
+                background-color: #55967E;
+            }
+
+            a{
+                color: #55967E;
+            }
+
+            a:hover{
+                color:#55967E;
+            }
 
         </style>
+
+        
     </div>
 
 </div>
@@ -52,7 +80,7 @@
     }
 
     $('#countries').prepend('<option selected=""></option>').select2({
-        placeholder: 'Tous le pays'
+        placeholder: 'Je cherche dans tous le pays'
     });
 
     $('#tags').select2({
