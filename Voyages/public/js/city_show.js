@@ -48,35 +48,87 @@ modal.onclick = function () {
 }
 
 //report review
-  let reviewButtons = document.querySelectorAll('.report-review-button');
-  reviewButtons.forEach(
+let reviewButtons = document.querySelectorAll('.report-review-button');
+reviewButtons.forEach(
     function (reviewButton) {
-      reviewButton.addEventListener('click', handleReportReview);
+        reviewButton.addEventListener('click', handleReportReview);
     }
-  )
-  function handleReportReview(evt) {
+)
+function handleReportReview(evt) {
     evt.preventDefault();
     const url = this.href;
     let span = evt.target.closest('.span-review');
     fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
     }).then(
-      (response) => {
-        if (response.status == 202) {
-          console.log(response.status)
+        (response) => {
+            if (response.status == 202) {
+                console.log(response.status)
+            }
+            else {
+                console.log(response.status)
+            }
+        })
+        .then(
+            (data) => {
+                span.textContent = 'L\'avis est signalé. Merci !';
+            }
+        );
+}
+
+
+
+// Script review like
+
+let reviewLikes = document.querySelectorAll('.review-like');
+/*  let reviewId = '';
+ let spanRate = ''; */
+reviewLikes.forEach(
+    function (thumbs) {
+        /* let heart = reviewVoteSpan.querySelector('i'); */
+        thumbs.addEventListener('click', handleLike);
+        /* spanRate = document.querySelector('.span-rate'); */
+        /* spanRate.textContent = parseInt(document.querySelector('.span-rate').dataset.likescount); */
+    }
+);
+function handleLike(evt) {
+    //console.log("click on like");
+    reviewId = evt.currentTarget.dataset.reviewid;
+    console.log(evt.currentTarget);
+    let thumbElt = evt.currentTarget;
+    evt.preventDefault();
+    let url = '/api/v1/review/' + reviewId + '/like'
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
         }
-        else {
-          console.log(response.status)
-        }
-      })
-      .then(
-        (data) => {
-          span.textContent = 'L\'avis est signalé. Merci !';
-        }
-      );
-  }
+    })
+        .then(
+            (response) => {
+                if (response.ok) {
+                    console.log(response.status + ' - opération effectuée');
+                    return response.json();
+                }
+                else {
+                    console.log(response.status + 'L\'opération a échoué');
+                }
+            })
+        .then(
+            (data) => {
+                if (data.code == 200) {
+                    thumbElt.innerHTML = '';
+                    thumbElt.innerHTML = data.likes +' '+ '<i class="far fa-thumbs-up"></i>';
+                } else if (data.code == 201) {
+                    thumbElt.innerHTML = '';
+                    thumbElt.innerHTML = data.likes +' '+ '<i class="fas fa-thumbs-up"></i>';
+                }
+            }
+        );
+}
 

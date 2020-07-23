@@ -282,4 +282,14 @@ class Review
         return $this;
     }
 
+    public function isLikedByUser(User $user): bool
+    {
+        foreach ($this->reviewLikes as $like) {
+            if ($like->getUser() === $user) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -29,7 +29,7 @@ class ReviewController extends AbstractController //api/v1/review/{id}
 
             return $this->json(403);
         }
-        
+
         $review = $this->getDoctrine()->getRepository(Review::class)->find($id);
         $review->setIsReported(true);
 
@@ -86,6 +86,6 @@ class ReviewController extends AbstractController //api/v1/review/{id}
             'code' => 201,
             'message' => 'Message liked',
             'likes' => $reviewLikeRepository->count(['review' => $review]),
-        ], 200);
+        ], 201);
     }
 }

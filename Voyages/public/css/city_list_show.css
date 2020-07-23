@@ -116,6 +116,7 @@
     font-size: small;
 }
 
+
 @media (max-width: 768px) {
     .details {
         min-height: auto;

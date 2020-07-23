@@ -1,165 +1,179 @@
 <div id="form-review-container" class="col-xl-6 col-lg-6 col-md-8 col-sm-8">
-    <h4 class="form-review-title">Partagez votre avis sur {{ objectCity.name }} </h4>
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    {{ form_start(formReview, {'attr': {'id': 'form_review', 'autocomplete': 'off'}}) }}
-    {{ form_widget(formReview) }}
-    <button class="btn btn-sm btn-dark form-submit">{{ button_label|default('Envoyer mon avis') }}</button>
-    {{ form_end(formReview) }}
+	<h4 class="form-review-title">Partagez votre avis sur
+		{{ objectCity.name }}
+	</h4>
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		{{ form_start(formReview, {'attr': {'id': 'form_review', 'autocomplete': 'off'}}) }}
+		{{ form_widget(formReview) }}
+		<button class="btn btn-sm btn-dark form-submit">{{ button_label|default('Envoyer mon avis') }}</button>
+		{{ form_end(formReview) }}
 
-    {% else %}
-    <div class="alert alert-info">Veuillez vous
-        <a href="{{ path('app_login') }}" class="alert-link">connecter </a> pour rédiger un avis.
-    </div>
-    {% endif %}
+	{% else %}
+		<div class="alert alert-info">Veuillez vous
+			<a href="{{ path('app_login') }}" class="alert-link">connecter
+			</a>
+			pour rédiger un avis.
+		</div>
+	{% endif %}
 
 </div>
 <h3 class="subtitle-section">Avis des utilisateurs</h3>
 
-<div class="review-div col-xl-6 col-lg-6 col-md-8 col-sm-8">
-    <!-- Beginning Caroussel -->
-    <div id="carouselExampleIndicators-review" class="carousel slide">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
+<div
+	class="review-div col-xl-6 col-lg-6 col-md-8 col-sm-8">
+	<!-- Beginning Caroussel -->
+	<div id="carouselExampleIndicators-review" class="carousel slide">
+		<div class="carousel-inner">
+			<div class="carousel-item active">
 
-                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                {% set max = 5 %}
-                {% if reviews|length > max %}
-                {% set seeMoreContent = true %}
-                {% endif %}
-                {% elseif is_granted('IS_AUTHENTICATED_FULLY') %}
-                {% set max = reviews|length %}
-                {% endif %}
-                {% for review in reviews|reverse|slice(0, max) %}
-                <div class="accordion review-accordion" id="accordion-{{ review.id }}">
-                    <div class="card card-review">
-                        <div class="card-header" id="headingOne">
-                            <p class="report-button  m-0 text-right">
-                                <a class="report-button py-0 m-0" data-toggle="collapse" href="#signal-{{ review.id }}"
-                                    role="button" aria-expanded="false" aria-controls="collapseExample">
-                                    signaler <i class="fas fa-exclamation-triangle"></i>
-                                </a>
-                            </p>
-                            <div class="collapse text-center text-danger report-message mx-0"
-                                id="signal-{{ review.id }}">
-                                <span class="span-review"><a
-                                        href="{{ path('api_v1_review_report', {'id': review.id } ) }}"
-                                        class="report-review-button" data-reviewId="{{ review.id }}"> <i
-                                            class="em em-no_entry" aria-role="presentation"
-                                            aria-label="NO ENTRY"></i>Avis inapproprié, je signale!</a></span>
-                            </div>
-                            <div class="header-review">
-                                {% if review is defined %}
-                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+					{% set max = 5 %}
+					{% if reviews|length > max %}
+						{% set seeMoreContent = true %}
+					{% endif %}
+				{% elseif is_granted('IS_AUTHENTICATED_FULLY') %}
+					{% set max = reviews|length %}
+				{% endif %}
+				{% for review in reviews|reverse|slice(0, max) %}
+					<div class="accordion review-accordion" id="accordion-{{ review.id }}">
+						<div class="card card-review">
+							<div class="card-header" id="headingOne">
+								<p class="report-button  m-0 text-right">
+									<a class="report-button py-0 m-0" data-toggle="collapse" href="#signal-{{ review.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+										signaler
+										<i class="fas fa-exclamation-triangle"></i>
+									</a>
+								</p>
+								<div class="collapse text-center text-danger report-message mx-0" id="signal-{{ review.id }}">
+									<span class="span-review">
+										<a href="{{ path('api_v1_review_report', {'id': review.id } ) }}" class="report-review-button" data-reviewid="{{ review.id }}">
+											<i class="em em-no_entry" aria-role="presentation" aria-label="NO ENTRY"></i>Avis inapproprié, je signale!</a>
+									</span>
+								</div>
+								<div class="header-review">
+									{% if review is defined %}
+										{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
-                                <div class="profile-info">
-                                    <a href="{{ path('user_show', { 'id': review.author.id}) }}">
-                                        <img class="user-profile-picture"
-                                            src="{{ asset('images/avatars/' ~ review.author.avatar) }}"
-                                            alt="Photo de profil"></a>
-                                    <a class="user-name" href="{{ path('user_show', { 'id': review.author.id}) }}">{{ review.author.username }}</a>
-                                </div>
+											<div class="profile-info">
+												<a href="{{ path('user_show', { 'id': review.author.id}) }}">
+													<img class="user-profile-picture" src="{{ asset('images/avatars/' ~ review.author.avatar) }}" alt="Photo de profil"></a>
+												<a class="user-name" href="{{ path('user_show', { 'id': review.author.id}) }}">{{ review.author.username }}</a>
+											</div>
 
-                                {% else %}
-                                <div class="profile-info">
-                                    <img class="user-profile-picture"
-                                        src="{{ asset('images/avatars/' ~ review.author.avatar) }}"
-                                        alt="Photo de profil">
-                                    <p class="m-0 user-name">{{ review.author.username }}</p>
-                                </div>
+										{% else %}
+											<div class="profile-info">
+												<img class="user-profile-picture" src="{{ asset('images/avatars/' ~ review.author.avatar) }}" alt="Photo de profil">
+												<p class="m-0 user-name">{{ review.author.username }}</p>
+											</div>
 
-                                {% endif %}
+										{% endif %}
 
-                                {% endif %}
+									{% endif %}
 
-                                {% set difference = date(review.createdAt|date("Y/m/d")).diff(date('now'|date('Y/m/d'))) %}
-                                {% set leftDays = difference.days %}
-                                {% dump(leftDays) %}
+									{% set difference = date(review.createdAt|date("Y/m/d")).diff(date('now'|date('Y/m/d'))) %}
+									{% set leftDays = difference.days %}
+								{# 	{% dump(leftDays) %} #}
 
-                                <div class="right-block-review">
-                                    <h4 class="item-card-header-review"><strong>Ville visitée</strong> le
-                                        {{review.travelDate|date("d/m/Y")}}
-                                    </h4>
-                                    <h4 class="item-card-header-review">
-                                        <strong class="mr-2">Note:</strong>
+									<div class="right-block-review">
+										<h4 class="item-card-header-review">
+											<strong>Ville visitée</strong>
+											le
+											{{review.travelDate|date("d/m/Y")}}
+										</h4>
+										<h4 class="item-card-header-review">
+											<strong class="mr-2">Note:</strong>
 
-                                        {% set rateCircleFull = '<i class="fa fa-circle" aria-hidden="true"></i>' %}
-                                        {% set rateCircleEmpty = '<i class="fa fa-circle-thin" aria-hidden="true"></i>' %}
-                                        {% for i in 1..5 %}
-                                        {% if i <= review.rate  %}
-                                        {{ rateCircleFull|raw }}
-                                        {% else %}
-                                        {{ rateCircleEmpty|raw }}
+											{% set rateCircleFull = '<i class="fa fa-circle" aria-hidden="true"></i>' %}
+											{% set rateCircleEmpty = '<i class="fa fa-circle-thin" aria-hidden="true"></i>' %}
+											{% for i in 1..5 %}
+												{% if i <= review.rate  %}
+													{{ rateCircleFull|raw }}
+												{% else %}
+													{{ rateCircleEmpty|raw }}
+												{% endif %}
+
+											{% endfor %}
+
+										</h4>
+										<h4 class="item-card-header-review">
+											<em>Publié il y a
+												{{ leftDays }}
+												jour
+												{% if leftDays > 1 %}s
+												{% endif %}
+											</em>
+										</h4>
+									</div>
+								</div>
+
+
+								<h2 class="mb-0">
+									<button class="btn btn-link btn-block text-center btn-see-more" type="button" data-toggle="collapse" data-target="#collapse-{{ review.id }}" aria-expanded="true" aria-controls="collapseOne">Voir plus
+									</button>
+								</h2>
+							</div>
+
+							<div id="collapse-{{ review.id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion-{{ review.id }}">
+								<div
+									class="card-body">
+
+									<!-- Default dropleft button -->
+									<p class="card-text text-justify">{{ review.text|raw }}</p>
+
+									<div class="city-pictures text-center">
+										{% for picture in review.pictures %}
+											<img src="{{ asset('images/uploads/' ~ picture.filename) }}" alt="Image de {{cityData.cityName}} postée par un utilisateur." class="user-image">
+										{% endfor %}
+
+                                    </div>
+                                    {%  dump(review) %}
+                                    {% dump(app.user.reviewLikes) %}
+                                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                        {% if review.author != app.user %}
+                                            {% set isLiked = false %}
+                                            {% dump(review.isLikedByUser(app.user)) %}
+                                            {% if app.user and review.isLikedByUser(app.user) %}
+                                                {% set isLiked = true %}
+									        {% endif %} 
+
+										    {# FULL => fas | EMPTY => far#}
+										    <a class="review-like" href="" data-reviewid="{{ review.id }}">
+											    {% if isLiked == true %}
+                                                {{review.reviewLikes|length}} <i class="fas fa-thumbs-up"></i>
+											    {% else %}
+                                                {{review.reviewLikes|length}} <i class="far fa-thumbs-up"></i>
+											    {% endif %}
+                                            </a>
                                         {% endif %}
-
-                                        {% endfor %}
-
-                                    </h4>
-                                    <h4 class="item-card-header-review"><em>Publié il y a {{ leftDays }}
-                                            jour{% if leftDays > 1 %}s{% endif %}</em>
-                                    </h4>
-                                </div>
-                            </div>
+									{% endif %}
 
 
-                            <h2 class="mb-0">
-                                <button class="btn btn-link btn-block text-center btn-see-more" type="button"
-                                    data-toggle="collapse" data-target="#collapse-{{ review.id }}" aria-expanded="true"
-                                    aria-controls="collapseOne">Voir plus
-                                </button>
-                            </h2>
-                        </div>
-
-                        <div id="collapse-{{ review.id }}" class="collapse" aria-labelledby="headingOne"
-                            data-parent="#accordion-{{ review.id }}">
-                            <div class="card-body">
-
-                                <!-- Default dropleft button -->
-                                <p class="card-text text-justify">{{ review.text|raw }}</p>
-
-                                {#  <div class="review-votes d-flex justify-content-end">
-                                    <span class="review-vote like">
-                                        {% if app.user and review.isLikedByUser(app.user) %}
-                                        <i class="em em-heart" aria-role="presentation"
-                                            data-reviewid="{{ review.id }}"></i>
-                                        {% else %}
-                                        <i class="fa fa-heart-o" aria-role="presentation"
-                                            data-reviewid="{{ review.id }}"></i>
-                                        {% endif %}
-                                    </span>
-                                    <span class="span-rate" data-likesCount="{{ review.likes|length }}"></span>
-                                </div> #}
-
-                                <div class="city-pictures text-center">
-                                    {% for picture in review.pictures %}
-                                    <img src="{{ asset('images/uploads/' ~ picture.filename) }}"
-                                        alt="Image de {{cityData.cityName}} postée par un utilisateur."
-                                        class="user-image">
-                                    {% endfor %}
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% else %}
-                <p class="text-center"><em>Il n'y a pas encore d'avis pour cette destination. Laissez-nous le
-                        vôtre!</em>
-                </p>
-                {% endfor %}
-                {% if seeMoreContent is defined %}
-                <div class="alert alert-info  mt-4">Veuillez vous
-                    <a href="{{ path('app_login') }}" class="alert-link">connecter </a> pour voir tous les avis.
-                </div>
-                {% else %}
-                {% if is_granted('IS_AUTHENTICATED_FULLY')  %}
-            </div>
-        </div>
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators-review" data- -to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators-review" data- -to="1"></li>
-            <li data-target="#carouselExampleIndicators-review" data- -to="2"></li>
-        </ol>
-    </div>
-</div>
-{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+				{% else %}
+					<p class="text-center">
+						<em>Il n'y a pas encore d'avis pour cette destination. Laissez-nous le
+							                        vôtre!</em>
+					</p>
+				{% endfor %}
+				{% if seeMoreContent is defined %}
+					<div class="alert alert-info  mt-4">Veuillez vous
+						<a href="{{ path('app_login') }}" class="alert-link">connecter
+						</a>
+						pour voir tous les avis.
+					</div>
+				{% else %}
+					{% if is_granted('IS_AUTHENTICATED_FULLY')  %}
+					</div>
+				</div>
+				<ol class="carousel-indicators">
+					<li data-target="#carouselExampleIndicators-review" data- -to="0" class="active"></li>
+					<li data-target="#carouselExampleIndicators-review" data- -to="1"></li>
+					<li data-target="#carouselExampleIndicators-review" data- -to="2"></li>
+				</ol>
+			</div>
+		</div>
+	{% endif %}
 {% endif %}

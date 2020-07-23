@@ -298,6 +298,17 @@ h1 {
     color: white;
 }
 
+
+.review-like {
+    color: #55967E;
+    text-decoration: none;
+}
+
+.review-like:hover{
+    color: #55967E;
+    text-decoration: none;
+}
+
 #review_rate {
     display: flex;
     justify-content: space-evenly;
