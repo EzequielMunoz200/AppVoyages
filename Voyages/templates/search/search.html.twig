@@ -2,6 +2,7 @@
 
 {% block title %}{{parent()}} - Recherche Simple {% endblock %}
 {% block stylesheets %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <link href="{{ asset('css/search.css') }}" type="text/css" rel="stylesheet" />
 {% endblock %}
 {% block body %}
@@ -12,15 +13,10 @@
     </div>
 
     <div class="container-search">
-        <form action="" class="form-search">
-            <label class="label-form-search" for="field-search">Nom de la ville </label>
-            <input id="field-search" type="search" name="field_search" autocomplete="off" >
-
-            <button id="button-search" type="submit" class="btn btn-sm " style="display:none;">Aller</button>
-        </form>
-        <div class="wrapper-resultats">
-            <div id="search-results"></div>
-        </div>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-sm pull-right btn-submit-advanced-search">{{ button_label|default('Rechercher') }}</button>
+        {{ form_end(form) }}
 
     </div>
 </div>
@@ -36,7 +32,25 @@
     </div>
 </template>
 
-<script src="{{asset('js/search.js')}}"></script>
+{# <script src="{{asset('js/search.js')}}"></script> #}
 
+{% block javascript2 %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script>
 
+    if (jQuery) {
+        console.log("jQuery est chargé");
+    }
+    else {
+        console.log("jQuery n'est pas chargé");
+    }
+
+    $('#cities').prepend('<option selected=""></option>').select2({
+        placeholder: 'Selectionnez le nom de la ville'
+    });
+
+</script>
+<script src="{{asset('js/search.js')}}"></script> 
+{% endblock %}
 {% endblock %}

@@ -1,5 +1,5 @@
 <div id="form-review-container" class="col-xl-6 col-lg-6 col-md-8 col-sm-8">
-    <h4 class="form-review-title">Avez-vous déjà visité {{ objectCity.name }} ? </h4>
+    <h4 class="form-review-title">Partagez votre avis sur {{ objectCity.name }} </h4>
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     {{ form_start(formReview, {'attr': {'id': 'form_review', 'autocomplete': 'off'}}) }}
     {{ form_widget(formReview) }}
@@ -42,7 +42,7 @@
                             <div class="collapse text-center text-danger report-message mx-0"
                                 id="signal-{{ review.id }}">
                                 <span class="span-review"><a
-                                        href="{# {{ path('api_v1_review_report', {'id': review.id } ) }} #}"
+                                        href="{{ path('api_v1_review_report', {'id': review.id } ) }}"
                                         class="report-review-button" data-reviewId="{{ review.id }}"> <i
                                             class="em em-no_entry" aria-role="presentation"
                                             aria-label="NO ENTRY"></i>Avis inapproprié, je signale!</a></span>
@@ -68,19 +68,6 @@
                                 </div>
 
                                 {% endif %}
-
-                                {# displays the highest level badge reached #}
-                                {#  {% set badgeLevel = [] %}
-                                {% for key, badge in review.author.badges %}
-                                {% set badgeLevel = badgeLevel|merge([badge.level]) %}
-                                {% endfor %}
-                                {% for badge in review.author.badges %}
-                                {% if badge.level == max(badgeLevel) %}
-                                <h4 class="card-badge">
-                                    <img src="{{ asset('images/badges/' ~ badge.filename ~ '.svg' ) }}"
-                                        alt="Badge {{ badge.name }}" class="user-badge" style="width: 20px;" /></h4>
-                                {% endif %}
-                                {% endfor %} #}
 
                                 {% endif %}
 

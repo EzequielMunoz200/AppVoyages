@@ -26,7 +26,10 @@
 
             .select2-container--default .select2-selection--multiple .select2-selection__choice{
                 overflow: hidden;
-                border-radius: 15px;
+                border-radius: 5px; 
+                border: none;
+                background-color: #55967E;
+                color: white;
             }
 
             .select2-selection__choice__display{
@@ -46,11 +49,22 @@
 
             .btn-submit-advanced-search:hover{
                 background-color: #74bea3;
-                color: whitey;
+                color: white;
             }
 
             .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable{
                 background-color: #55967E;
+            }
+
+            .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
+                border-right: none;
+                color: white;
+            }
+
+            .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover{
+                border-right: none;
+                color: white;
+                background-color: indianred;
             }
 
             a{

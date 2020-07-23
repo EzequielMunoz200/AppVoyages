@@ -9,5 +9,6 @@ easy_admin:
                     - { property: 'isActive', label: 'Status' }
                     - { property: 'isReported', label: 'Signalé' }
                     - { property: 'author', label: 'Auteur' }
+                    - { property: 'text', label: 'Avis', type: 'raw'}
                     - { property: 'createdAt', label: 'Publiée' }
                     

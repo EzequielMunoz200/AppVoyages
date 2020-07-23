@@ -47,4 +47,36 @@ modal.onclick = function () {
     modal.style.display = "none";
 }
 
+//report review
+  let reviewButtons = document.querySelectorAll('.report-review-button');
+  reviewButtons.forEach(
+    function (reviewButton) {
+      reviewButton.addEventListener('click', handleReportReview);
+    }
+  )
+  function handleReportReview(evt) {
+    evt.preventDefault();
+    const url = this.href;
+    let span = evt.target.closest('.span-review');
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    }).then(
+      (response) => {
+        if (response.status == 202) {
+          console.log(response.status)
+        }
+        else {
+          console.log(response.status)
+        }
+      })
+      .then(
+        (data) => {
+          span.textContent = 'L\'avis est signalé. Merci !';
+        }
+      );
+  }
 

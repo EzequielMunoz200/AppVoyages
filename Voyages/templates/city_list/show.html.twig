@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	{{ parent() }}
-	Destinations aléatoires
+	{{ parent() }} - 
+	Résultats de la recherche avancée
 {% endblock %}
 
 {% block stylesheets %}
@@ -11,24 +11,24 @@
 {% endblock %}
 {% block body %}
 	<div class="wrapper-results-city-list">
-        <h1>Resultats de la recherche avancée</h1>
-        <p class="intro">Découvrez les destinations</p>
+        <h1>Résultats de la recherche avancée</h1>
+        <p class="intro">Voici les destinations trouvées</p>
 		<div class="row col-12 col-md-12 col-sm-12">
 			<aside class="details col-md-12 col-sm-12 col-lg-12 col-xl-2 border">
-				<h3>Pourcentage de correspondance avec votre recherche</h3>
+				<h3>Pourcentage de correspondance avec vos préférences</h3>
 				<ul>
                     {% for key in quantityPerRange|keys|sort|reverse %}
-							<li class="list-percent  btn btn-info mb-3" data-percent="{{key}}">
+							<li class="list-percent  btn btn-light mb-3" data-percent="{{key}}">
                                 {% if quantityPerRange[key] == 1 %}
-                                Afficher le resultat avec {{ key }}%
+                                Une ville avec un match de {{ key }}%
                                 {% else %}
-                                Afficher les {{ quantityPerRange[key] }} resultats avec {{ key }}%
+                                {{ quantityPerRange[key] }} villes avec un match de {{ key }}%
                                 {% endif %}
 							</li>
 					{% endfor %}
 				</ul>
 				<div class="url-link btn btn-secondary btn-sm" onclick="copyToClipboard()">
-					<i class="far fa-clipboard"></i>&nbsp;<small>Copier le lien de la recherche</small>
+					<p><i class="far fa-clipboard"></i>&nbsp;<small>Copier le lien de la recherche pour le partager</small></p>
 					<input id="urlLinkInput" type="text" value="{{urlResults}}">
 				</div>
 				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
