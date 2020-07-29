@@ -2,12 +2,12 @@
 
 {% block title %}City{% endblock %}
 {% block stylesheets %}
-<link href="{{ asset('css/page.css') }}" type="text/css" rel="stylesheet" />
+<link href="{{ asset('css/city_show.css') }}" type="text/css" rel="stylesheet" />
 {% endblock %}
-
+{% dump(cityImagePortrait) %}
 {% block body %}
-<section id="landing-section"
-    style="background-image:url('{{imagesData['urlImage'].full}}'); height:110%; background-size: 100% 110%; background-attachment: fixed;">
+<section id="landing-section" class="landing-section-image" 
+style="--bg-image-landscape: url('{{imagesData['urlImage'].full}}'); --bg-image-portrait: url('{{cityImagePortrait['urlImage'].regular}}');">
 </section>
 
 <section id="data-section">

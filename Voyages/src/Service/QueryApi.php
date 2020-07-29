@@ -108,7 +108,7 @@ class QueryApi
 
 
 
-    public function cityDataImage($cityNameUnsplash)
+    public function cityDataImagePortrait($cityNameUnsplash)
     {
         if (isset($cityNameUnsplash)) {
             //dump($cityNameUnsplash);
@@ -116,7 +116,7 @@ class QueryApi
             //'https://api.unsplash.com/search/photos/?query=' . $cityNameUnsplash . '&client_id=' . $_ENV['API_KEY_UNSPLASH'];
             //landscape
             //$urlImageQuery = 'https://api.unsplash.com/search/photos/?orientation=landscape&query=' . $cityNameUnsplash . '&client_id=' . $_ENV['API_KEY_UNSPLASH'];
-            $urlImageQuery = 'https://api.unsplash.com/search/photos/?query=' . $cityNameUnsplash . '&client_id=' . $_ENV['API_KEY_UNSPLASH'];
+            $urlImageQuery = 'https://api.unsplash.com/search/photos/?orientation=portrait&query=' . $cityNameUnsplash . '&client_id=' . $_ENV['API_KEY_UNSPLASH'];
             $jsonStringUrlImage = file_get_contents($urlImageQuery);
             $objectResponseUrlImage = json_decode($jsonStringUrlImage);
             $urlImage = $objectResponseUrlImage->results[0]->urls;
@@ -128,34 +128,6 @@ class QueryApi
         ];
     }
 
-
-
-    public function cityDataImages($cityNameUnsplash)
-    {
-        if (isset($cityNameUnsplash)) {
-            /*  $urlImageQuery = 'https://api.unsplash.com/search/photos/?query=' . $cityNameUnsplash . '&client_id=' . $_ENV['API_KEY_UNSPLASH'];
-            $jsonStringUrlImage = file_get_contents($urlImageQuery);
-            $objectResponseUrlImage = json_decode($jsonStringUrlImage);
-            $urlImage = $objectResponseUrlImage->results[0]->urls;
- */
-            $urlRandomImageQuery = 'https://api.unsplash.com/photos/random?query=' . $cityNameUnsplash . '&count=16&client_id=' . $_ENV['API_KEY_UNSPLASH'];
-            $jsonStringUrlRandomImage = file_get_contents($urlRandomImageQuery);
-            $objectResponseUrlRandomImage = json_decode($jsonStringUrlRandomImage);
-            $randomImagesArray = [];
-
-            foreach ($objectResponseUrlRandomImage as $urlRandomImage) {
-                $randomImagesArray[] = $urlRandomImage->urls;
-            }
-        } else {
-            $randomImagesArray = [];
-        }
-        return [
-            'urlRandomImages' => $randomImagesArray
-        ];
-    }
-
-
-
     public function citiesDataImages($cityNameUnsplash)
     {
         if (isset($cityNameUnsplash)) {
@@ -164,7 +136,7 @@ class QueryApi
             $objectResponseUrlImage = json_decode($jsonStringUrlImage);
             $urlImage = $objectResponseUrlImage->results[0]->urls;
 
-            $urlRandomImageQuery = 'https://api.unsplash.com/photos/random?query=' . $cityNameUnsplash . '&count=18&client_id=' . $_ENV['API_KEY_UNSPLASH'];
+            $urlRandomImageQuery = 'https://api.unsplash.com/photos/random?query=' . $cityNameUnsplash . '&count=16&client_id=' . $_ENV['API_KEY_UNSPLASH'];
             $jsonStringUrlRandomImage = file_get_contents($urlRandomImageQuery);
             $objectResponseUrlRandomImage = json_decode($jsonStringUrlRandomImage);
             $randomImagesArray = [];

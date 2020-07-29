@@ -110,6 +110,7 @@ class CityController extends AbstractController
         return $this->render('city/show.html.twig', [
             'cityData' => $queryApi->citiesData($geonameId),
             'imagesData' => $queryApi->citiesDataImages($queryApi->citiesData($geonameId)['cityNameUnsplash']),
+            'cityImagePortrait' => $queryApi->cityDataImagePortrait($queryApi->citiesData($geonameId)['cityNameUnsplash']),
             'details' => $queryApi->cityDataDetails($geonameId),
             'reviews' => $city->getReviews(), //array à initialiser dans le template
             'formReview' => $formReview->createView(),

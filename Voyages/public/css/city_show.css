@@ -59,6 +59,7 @@ h1 {
     justify-content: center;
     align-items: center;
     padding: 5% 0;
+    width: 8rem;
 }
 
 #container-cards .card-text {
@@ -144,6 +145,7 @@ h1 {
     height: 5em;
     width: 5em;
     margin: 0.3em 0.1em;
+    margin-right: 1%;
     border-radius: 50%;
 
     -webkit-box-shadow: 0px 0px 6px -5px rgba(0, 0, 0, 0.75);
@@ -252,7 +254,7 @@ h1 {
 }
 
 /* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px) {
+@media only screen and(max-width: 700px) {
     .modal-content {
         width: 100%;
     }
@@ -414,14 +416,54 @@ h1 {
     margin-bottom: 2%;
 }
 
+.landing-section-image {
+    background-image: var(--bg-image-portrait);
+    height: 110%;
+    background-size: 100% 110%;
+    background-attachment: fixed;
+}
+
 
 /*-------------------------------------------------MEDIA QUERIES--------------------------------------------*/
 
 @media only screen and (min-width: 768px) {
     .user-profile-picture {
-        width: 7em;
-        height: 7em;
+        width: 6em;
+        height: 6em;
         border-radius: 50%;
         margin-right: 4%;
     }
+
+    .img-carousel {
+        height: 10em;
+        width: 10em;
+    }
+
+    #container-cards .card {
+        width: 10rem;
+    }
 }
+
+@media only screen and (min-width: 992px) {
+    .user-profile-picture {
+        width: 4em;
+        height: 4em;
+        border-radius: 50%;
+        margin-right: 4%;
+    }
+
+    .img-carousel {
+        height: 10em;
+        width: 10em;
+    }
+
+
+    .landing-section-image {
+        background-image: var(--bg-image-landscape);
+        height: 110%;
+        background-size: 100% 110%;
+        background-attachment: fixed;
+    }
+
+}
+

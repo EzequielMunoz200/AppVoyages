@@ -28,7 +28,7 @@
 					{% endfor %}
 				</ul>
 				<div class="url-link btn btn-secondary btn-sm" onclick="copyToClipboard()">
-					<p><i class="far fa-clipboard"></i>&nbsp;<small>Copier le lien de la recherche pour le partager</small></p>
+					<p><i class="far fa-clipboard"></i>&nbsp;<small>Partager par lien</small></p>
 					<input id="urlLinkInput" type="text" value="{{urlResults}}">
 				</div>
 				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
