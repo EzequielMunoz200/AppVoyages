@@ -15,7 +15,7 @@
         <div class="d-flex flex-column col-12 p-0">
             {{ form_start(form) }}
             {{ form_widget(form) }}
-            <button class="btn btn-dark btn-sm pull-right">{{ button_label|default('Rechercher') }}</button>
+            <button class="btn btn-sm pull-right btn-submit-advanced-search">{{ button_label|default('Rechercher') }}</button>
             {{ form_end(form) }}
         </div>
 
@@ -26,7 +26,10 @@
 
             .select2-container--default .select2-selection--multiple .select2-selection__choice{
                 overflow: hidden;
-                border-radius: 15px;
+                border-radius: 5px; 
+                border: none;
+                background-color: #55967E;
+                color: white;
             }
 
             .select2-selection__choice__display{
@@ -34,8 +37,47 @@
                 vertical-align: text-bottom;
             }
 
+            label.required:after {
+                content: " * ";
+                color: red;
+            }
+
+            .btn-submit-advanced-search{
+                background-color: #55967E;
+                color: white;
+            }
+
+            .btn-submit-advanced-search:hover{
+                background-color: #74bea3;
+                color: white;
+            }
+
+            .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable{
+                background-color: #55967E;
+            }
+
+            .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
+                border-right: none;
+                color: white;
+            }
+
+            .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover{
+                border-right: none;
+                color: white;
+                background-color: indianred;
+            }
+
+            a{
+                color: #55967E;
+            }
+
+            a:hover{
+                color:#55967E;
+            }
 
         </style>
+
+        
     </div>
 
 </div>
@@ -52,11 +94,11 @@
     }
 
     $('#countries').prepend('<option selected=""></option>').select2({
-        placeholder: 'Tous le pays'
+        placeholder: 'Tous les pays'
     });
 
     $('#tags').select2({
-        placeholder: 'Selectionnez des critères'
+        placeholder: 'Sélectionnez des critères'
     });
 
 </script>

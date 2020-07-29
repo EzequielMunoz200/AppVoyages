@@ -13,7 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,7 +22,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class AdvancedSearchType extends AbstractType
+class SearchType extends AbstractType
 {
 
     private $em;
@@ -36,38 +35,28 @@ class AdvancedSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->setMethod('GET')
-            ->add('countries', ChoiceType::class, [
-                'label' => 'Un pays en particulier?',
+            ->add('cities', ChoiceType::class, [
+                'label' => 'Cherchez par nom de ville',
                 'mapped' => false,
-                'required' => false,
-                'choices' => [
-                    'Recherche par pays' => $this->em->getRepository(City::class)->findAllCountryName()
-                ],
-                'choice_label' => 'country',
-                'choice_value' => 'id',
-                'help' => 'Sans sélection, la recherche prendra en compte tous les pays.',
-            ])
-
-            ->add('tags', ChoiceType::class, [
-                'label' => 'Choisissez parmi les critères existants pour trouver la destination idéale',
-                'mapped' => false,
-                'choices' => $this->em->getRepository(Tag::class)->findAll(),
-                'choice_label' => 'name',
-                'choice_value' => 'id',
-                'multiple' => true,
                 'required' => true,
+                'choices' => [
+                    'Recherche par nom de ville' => $this->em->getRepository(City::class)->findAll(),
+                ],
+                'choice_label' => 'name',
+                'choice_value' => 'geonameId',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Vous devez ajouter des critères',
                     ]),
                 ],
             ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => AdvancedSearchData::class,
+            'data_class' => City::class,
             'method' => 'GET',
             'csrf_protection' => false,
             'attr' => ['novalidate' => 'novalidate'],

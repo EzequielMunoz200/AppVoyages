@@ -3,18 +3,19 @@
     flex-direction: column;
     position: absolute;
     top: 4%;
-    padding: 5%;
+    padding: 5% 0%;
 }
 
 .wrapper-results-city-list h1 {
-    font-size: xx-large;
+    font-size: x-large;
     text-align: center;
 }
 
-.intro {
+.wrapper-results-city-list .intro {
     text-align: center;
     color: #55967E;
     font-style: italic;
+    font-size: large;
 }
 
 
@@ -69,7 +70,7 @@
 
 .details li {
     font-style: italic;
-    font-size: x-small;
+    font-size: small;
     width: -webkit-fill-available;
 }
 
@@ -91,37 +92,42 @@
     margin: auto;
 }
 
-.url-link{
+.url-link {
     width: -webkit-fill-available;
 }
 
-#urlLinkInput{
-    font-size: x-small ;
+#urlLinkInput {
+    font-size: x-small;
 }
 
-#city_list_name{
+#city_list_name {
     height: 1.5em;
 }
 
-.form_save_list{
-  margin-top: 4%;
+.form_save_list {
+    margin-top: 4%;
 }
 
-.save-search{
-    font-size: small;
-  }
-
-.required{
+.save-search {
     font-size: small;
 }
+
+.required {
+    font-size: small;
+}
+
 
 @media (max-width: 768px) {
     .details {
         min-height: auto;
-        height: auto;
+        height: auto;margin: auto;
         margin-bottom: 4%;
         position: unset;
+        width: 300px;
+    }
 
+    .city-list-result {
+        max-width: 50% !important;
     }
 
     .box-results-right {
@@ -130,5 +136,11 @@
 
     .wrapper-results-city-list {
         margin-top: 5%;
+    }
+}
+
+@media (min-width: 769px) {
+    .city-list-result {
+        margin-left: 2%;
     }
 }

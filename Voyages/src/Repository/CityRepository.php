@@ -19,6 +19,11 @@ class CityRepository extends ServiceEntityRepository
         parent::__construct($registry, City::class);
     }
 
+    public function findAll()
+    {
+        return $this->findBy(array(), array('name' => 'ASC'));
+    }
+
     public function findByGeonameId($geonameId){
         $builder = $this->createQueryBuilder('city');
         $builder->where('city.geonameId = :geonameId');

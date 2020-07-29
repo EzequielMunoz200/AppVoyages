@@ -1,7 +1,7 @@
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 {% set isLiked = false %}
 {% for cityLiked in app.user.cityLikes %}
-{% dump(cityLiked) %}
+{# {% dump(cityLiked) %} #}
 {% if cityLiked.city.id ==  objectCity.id %}
 {% set isLiked = true %}
 {% endif %}
@@ -19,7 +19,7 @@
 
 
 
-{% dump(app.user) %}
+{# {% dump(app.user) %} #}
 <h1>{{ cityData['fullname'] }}</h1>
 
 {% if cityData['description'] is not null %}
@@ -31,7 +31,7 @@
 {{ include('/city/show_partials/tags.html.twig') }}
 
 <div id="city-scores">
-    <h3 class="subtitle-section">Scores de la ville</h3>
+    <h3 class="subtitle-section">Critéres d'appréciation</h3>
     <div id="container-cards">
         {% set iconScore = { 
             0 : 'fas fa-building',
@@ -62,7 +62,7 @@
         </div>
         {% endfor %}
         {% else %}
-        <div class="alert alert-warning text-center p-2">On a pas encore des données pour cette ville</div>
+        <div class="alert alert-warning text-center p-2">Nous n'avons pas encore de données pour cette ville</div>
         {% endif %}
     </div>
 </div>

@@ -34,6 +34,10 @@ body {
   font-size: small;
 }
 
+.dropdown-item:active {
+  background-color: #55967E;
+}
+
 .container-fluid {
   height: 100%;
   padding: 0;

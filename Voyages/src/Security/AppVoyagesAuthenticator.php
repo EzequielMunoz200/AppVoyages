@@ -93,11 +93,14 @@ class AppVoyagesAuthenticator extends AbstractFormLoginAuthenticator implements 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+            dd($targetPath);
             return new RedirectResponse($targetPath);
         }
-
+        //url before login
+        //($request->request->get('_target_path'));
+        
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        return new RedirectResponse($this->urlGenerator->generate('accueil'));
+        return new RedirectResponse($request->request->get('_target_path'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
