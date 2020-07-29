@@ -42,7 +42,7 @@ class ReviewType extends AbstractType
                 'config' => [
                     'language' => 'fr',
                 ],
-                'label' => 'Donner votre avis sur la destination',
+                'label' => 'Donnez votre avis sur la destination',
                 'required' => false,
                 'row_attr' => ['rows' => 4],
             ])

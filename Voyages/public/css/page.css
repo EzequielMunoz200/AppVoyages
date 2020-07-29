@@ -7,7 +7,7 @@
     padding-bottom: 5%;
 }
 
-.city-like{
+.city-like {
     position: absolute;
     right: 20px;
     bottom: -49px;
@@ -15,7 +15,7 @@
     color: indianred;
 }
 
-.city-like:hover{
+.city-like:hover {
     position: absolute;
     right: 20px;
     bottom: -49px;
@@ -98,6 +98,7 @@ h1 {
     height: 35px;
     padding: 10px;
 }
+
 /* Ends Tags Section */
 
 
@@ -286,7 +287,7 @@ h1 {
     color: white;
 }
 
-#review .form-group .custom-file-label{
+#review .form-group .custom-file-label {
     color: black;
 }
 
@@ -304,7 +305,7 @@ h1 {
     text-decoration: none;
 }
 
-.review-like:hover{
+.review-like:hover {
     color: #55967E;
     text-decoration: none;
 }
@@ -408,6 +409,11 @@ h1 {
 .review-div {
     margin: auto;
 }
+
+.city-pictures {
+    margin-bottom: 2%;
+}
+
 
 /*-------------------------------------------------MEDIA QUERIES--------------------------------------------*/
 

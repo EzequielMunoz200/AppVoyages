@@ -38,6 +38,7 @@
 					<div class="accordion review-accordion" id="accordion-{{ review.id }}">
 						<div class="card card-review">
 							<div class="card-header" id="headingOne">
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 								<p class="report-button  m-0 text-right">
 									<a class="report-button py-0 m-0" data-toggle="collapse" href="#signal-{{ review.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
 										signaler
@@ -48,8 +49,9 @@
 									<span class="span-review">
 										<a href="{{ path('api_v1_review_report', {'id': review.id } ) }}" class="report-review-button" data-reviewid="{{ review.id }}">
 											<i class="em em-no_entry" aria-role="presentation" aria-label="NO ENTRY"></i>Avis inapproprié, je signale!</a>
-									</span>
-								</div>
+                                    </span>
+                                </div>
+                                {% endif %}
 								<div class="header-review">
 									{% if review is defined %}
 										{% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -126,8 +128,6 @@
 										{% endfor %}
 
                                     </div>
-                                    {%  dump(review) %}
-                                    {% dump(app.user.reviewLikes) %}
                                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                         {% if review.author != app.user %}
                                             {% set isLiked = false %}
@@ -160,7 +160,7 @@
 				{% endfor %}
 				{% if seeMoreContent is defined %}
 					<div class="alert alert-info  mt-4">Veuillez vous
-						<a href="{{ path('app_login') }}" class="alert-link">connecter
+						<a href="{{ path('city_show', { geonameId : app.request.get('_route_params')['geonameId'] }) }}" class="alert-link">connecter
 						</a>
 						pour voir tous les avis.
 					</div>

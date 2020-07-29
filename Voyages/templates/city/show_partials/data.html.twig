@@ -31,7 +31,7 @@
 {{ include('/city/show_partials/tags.html.twig') }}
 
 <div id="city-scores">
-    <h3 class="subtitle-section">Des critéres d'appréciation</h3>
+    <h3 class="subtitle-section">Critéres d'appréciation</h3>
     <div id="container-cards">
         {% set iconScore = { 
             0 : 'fas fa-building',
@@ -62,7 +62,7 @@
         </div>
         {% endfor %}
         {% else %}
-        <div class="alert alert-warning text-center p-2">On a pas encore des données pour cette ville</div>
+        <div class="alert alert-warning text-center p-2">Nous n'avons pas encore de données pour cette ville</div>
         {% endif %}
     </div>
 </div>
