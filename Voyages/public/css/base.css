@@ -10,7 +10,7 @@ html {
   top: 59px !important;
   position: relative;
   width: max-content;
-  z-index:3;
+  z-index: 3;
 }
 
 
@@ -71,8 +71,59 @@ body {
 }
 
 
+.wrapper-login {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-submit {
+  background-color: #55967E;
+  color: white;
+}
+
+.btn-submit:hover{
+  color: lightgray;
+}
+
+.wrapper-login .form-control {
+  border-color: #55967E;
+  box-shadow: none;
+}
+
+.wrapper-login .form-control:focus {
+  border-color: #55967E;
+  box-shadow: 0 0 0 0.2rem rgba(5, 70, 5, 0.212)
+}
 
 
+.wrapper-accueil{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 4px;
+}
+
+.card-accueil{
+  background-color: #55967E;
+  color: white;
+  padding: 1%;
+}
+
+.card-accueil li {
+  list-style: none;
+}
+
+.link-accueil:hover {
+  color: lightgray;
+}
+
+.link-accueil:visited {
+  color: white;
+}
 /* Custom page CSS
   -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
