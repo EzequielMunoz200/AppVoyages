@@ -40,13 +40,16 @@ class Tag
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=City::class, inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity=City::class, mappedBy="tags")
      */
     private $cities;
+
 
     public function __construct()
     {
         $this->cities = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        
     }
 
     public function __toString()
@@ -66,7 +69,7 @@ class Tag
 
     public function setName(string $name): self
     {
-        $this->name = $name;
+        $this->name = ucfirst($name);
 
         return $this;
     }
@@ -88,7 +91,7 @@ class Tag
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -140,6 +143,10 @@ class Tag
      */
     public function getColorTag()
     {
+
+        if ($this->getColor()[0] == '#') {
+            return '<div style="background-color:#' . substr($this->getColor(), 1) . ';">&#8239;</div>';
+        }
         return '<div style="background-color:#' . $this->getColor() . ';">&#8239;</div>';
     }
 }

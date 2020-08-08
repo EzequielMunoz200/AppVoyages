@@ -1,13 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() ~ ' - ' }} {{pageTitle}}{% endblock %}
+{% block title %}
+	{{ parent() ~ ' - ' }}
+	{{pageTitle}}
+{% endblock %}
 {% block stylesheets %}
-{# <link href="{{ asset('css/page.css') }}" type="text/css" rel="stylesheet" /> #}
+	{# <link href="{{ asset('css/page.css') }}" type="text/css" rel="stylesheet" /> #}
 {% endblock %}
 
 {% block body %}
-<div class="wrapper-accueil">
-    <h1>Page d accueil</h1>
-</div>
+	<section class="wrapper-accueil">
+		<h1 class="text-center mb-4">App Voyages  <img src="{{ asset('images/logo/travel-globe-152-170988.png')}}" style="width: 100px;"></h1>
+		<div>
+			<ul class="card shadow text-center card-accueil">
+                <h2 class="text-center"><a href="{{path('advanced_search')}}" class="stretched-link link-accueil">Recherche Avancée</a></h2>
+                <li>Utilisez la recherche avancée pour trouver votre destination idéale en fonction de différents critères</li>       
+            </ul>
+           
+            <ul class="card shadow text-center card-accueil">
+                <h2 class="text-center"><a href="{{path('search')}}" class="stretched-link link-accueil">Recherche Simple</a></h2>
+                <li>Si vous avez une ville en tête, accédez à sa fiche détaillé en effectuant une recherche simple</li>
+            </ul>
+            
+            <ul class="card shadow text-center card-accueil">
+                <h2 class="text-center"><a href="{{path('city_random')}}" class="stretched-link link-accueil">Recherche Aléatoire</a></h2>
+                <li>Découvrez, en un seul clic de maniére aléatoire, des destinationspartout dans le monde</li>
+            </ul>
+		</div>
+
+	</section>
 
 {% endblock %}

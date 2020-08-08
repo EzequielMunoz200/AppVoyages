@@ -56,7 +56,7 @@ class City
     private $Reviews;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Tag::class, mappedBy="cities")
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="cities")
      */
     private $tags;
 

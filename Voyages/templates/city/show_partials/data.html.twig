@@ -53,7 +53,7 @@
         {% if cityData['scores'] is not null %}
         {% for key, score in categoryScores %}
         <div class="card shadow" data-category="{{ score }}"
-            data-originalcategory="{{ cityData['scores'][key].name|default('n/a') }}" style="width: 10rem;">
+            data-originalcategory="{{ cityData['scores'][key].name|default('n/a') }}"{#  style="width: 10rem;" #}>
             <i class="{{ iconScore[key]|default('fas fa-exclamation') ~ ' fa-4x' }}"
                 style="color: {{ cityData['scores'][key].color|default('n/a') }};"></i>
             <p class="card-text">{{ score|default('n/a') }}</p>

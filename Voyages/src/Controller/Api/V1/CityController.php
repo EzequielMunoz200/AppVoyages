@@ -70,10 +70,10 @@ class CityController extends AbstractController /* implements TokenAuthenticated
     public function cityImage(CityRepository $cityRepository, ObjectNormalizer $objetNormalizer, Request $request, QueryApi $queryApi, $cityName)
     {
 
-        $cityImage = $queryApi->cityDataImage($cityName);
+        $cityImagePortrait = $queryApi->cityDataImagePortrait($cityName);
 
 
-        if (empty($cityImage)) {
+        if (empty($cityImagePortrait)) {
 
             return new Response('Pas de resultats', Response::HTTP_NO_CONTENT);
         }
@@ -81,7 +81,7 @@ class CityController extends AbstractController /* implements TokenAuthenticated
         /*  $serializer = new Serializer([new DateTimeNormalizer(), $objetNormalizer]);
         $json = $serializer->normalize($cityImage, null, ['groups' => 'api_v1_city']); */
 
-        return $this->json($cityImage);
+        return $this->json($cityImagePortrait);
     }
 
      /**
