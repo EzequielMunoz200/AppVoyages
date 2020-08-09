@@ -38,20 +38,20 @@
 					<div class="accordion review-accordion" id="accordion-{{ review.id }}">
 						<div class="card card-review">
 							<div class="card-header" id="headingOne">
-                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-								<p class="report-button  m-0 text-right">
-									<a class="report-button py-0 m-0" data-toggle="collapse" href="#signal-{{ review.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
-										signaler
-										<i class="fas fa-exclamation-triangle"></i>
-									</a>
-								</p>
-								<div class="collapse text-center text-danger report-message mx-0" id="signal-{{ review.id }}">
-									<span class="span-review">
-										<a href="{{ path('api_v1_review_report', {'id': review.id } ) }}" class="report-review-button" data-reviewid="{{ review.id }}">
-											<i class="em em-no_entry" aria-role="presentation" aria-label="NO ENTRY"></i>Avis inapproprié, je signale!</a>
-                                    </span>
-                                </div>
-                                {% endif %}
+								{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+									<p class="report-button  m-0 text-right">
+										<a class="report-button py-0 m-0" data-toggle="collapse" href="#signal-{{ review.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+											signaler
+											<i class="fas fa-exclamation-triangle"></i>
+										</a>
+									</p>
+									<div class="collapse text-center text-danger report-message mx-0" id="signal-{{ review.id }}">
+										<span class="span-review">
+											<a href="{{ path('api_v1_review_report', {'id': review.id } ) }}" class="report-review-button" data-reviewid="{{ review.id }}">
+												<i class="em em-no_entry" aria-role="presentation" aria-label="NO ENTRY"></i>Avis inapproprié, je signale!</a>
+										</span>
+									</div>
+								{% endif %}
 								<div class="header-review">
 									{% if review is defined %}
 										{% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -74,7 +74,7 @@
 
 									{% set difference = date(review.createdAt|date("Y/m/d")).diff(date('now'|date('Y/m/d'))) %}
 									{% set leftDays = difference.days %}
-								{# 	{% dump(leftDays) %} #}
+									{# 	{% dump(leftDays) %} #}
 
 									<div class="right-block-review">
 										<h4 class="item-card-header-review">
@@ -127,24 +127,26 @@
 											<img src="{{ asset('images/uploads/' ~ picture.filename) }}" alt="Image de {{cityData.cityName}} postée par un utilisateur." class="user-image">
 										{% endfor %}
 
-                                    </div>
-                                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                        {% if review.author != app.user %}
-                                            {% set isLiked = false %}
-                                            {% dump(review.isLikedByUser(app.user)) %}
-                                            {% if app.user and review.isLikedByUser(app.user) %}
-                                                {% set isLiked = true %}
-									        {% endif %} 
+									</div>
+									{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+										{% if review.author != app.user %}
+											{% set isLiked = false %}
+											{% dump(review.isLikedByUser(app.user)) %}
+											{% if app.user and review.isLikedByUser(app.user) %}
+												{% set isLiked = true %}
+											{% endif %}
 
-										    {# FULL => fas | EMPTY => far#}
-										    <a class="review-like" href="" data-reviewid="{{ review.id }}">
-											    {% if isLiked == true %}
-                                                {{review.reviewLikes|length}} <i class="fas fa-thumbs-up"></i>
-											    {% else %}
-                                                {{review.reviewLikes|length}} <i class="far fa-thumbs-up"></i>
-											    {% endif %}
-                                            </a>
-                                        {% endif %}
+											{# FULL => fas | EMPTY => far#}
+											<a class="review-like" href="" data-reviewid="{{ review.id }}">
+												{% if isLiked == true %}
+													{{review.reviewLikes|length}}
+													<i class="fas fa-thumbs-up"></i>
+												{% else %}
+													{{review.reviewLikes|length}}
+													<i class="far fa-thumbs-up"></i>
+												{% endif %}
+											</a>
+										{% endif %}
 									{% endif %}
 
 
@@ -155,7 +157,7 @@
 				{% else %}
 					<p class="text-center">
 						<em>Il n'y a pas encore d'avis pour cette destination. Laissez-nous le
-							                        vôtre!</em>
+																																										                        vôtre!</em>
 					</p>
 				{% endfor %}
 				{% if seeMoreContent is defined %}
@@ -164,16 +166,10 @@
 						</a>
 						pour voir tous les avis.
 					</div>
-				{% else %}
-					{% if is_granted('IS_AUTHENTICATED_FULLY')  %}
-					</div>
+			{% else %}
 				</div>
-				<ol class="carousel-indicators">
-					<li data-target="#carouselExampleIndicators-review" data- -to="0" class="active"></li>
-					<li data-target="#carouselExampleIndicators-review" data- -to="1"></li>
-					<li data-target="#carouselExampleIndicators-review" data- -to="2"></li>
-				</ol>
 			</div>
 		</div>
-	{% endif %}
+	</div>
 {% endif %}
+</div>

@@ -155,6 +155,7 @@ h1 {
 
 .carousel-indicators {
     bottom: -39px !important;
+    z-index: 1;
 }
 
 /* END GALLERY */

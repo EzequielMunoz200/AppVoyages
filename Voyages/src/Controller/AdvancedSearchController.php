@@ -82,12 +82,26 @@ class AdvancedSearchController extends AbstractController
             //https://www.php.net/manual/en/function.array-count-values.php
             $quantityPerRange = (array_count_values($arrayMatchingFlat));
 
+            if(empty($quantityPerRange)){
+                $this->addFlash(
+                    'danger',
+                    'Il n\'y a pas de resultats'
+                );
+    
+    
+                return $this->redirectToRoute('advanced_search');
+            }
+    
+
             // redirects to a route and maintains the original query string parameters
             //https://symfony.com/doc/current/controller.html
             //return $this->redirectToRoute('city_list_show_resultats', ['resultats' => $request->query->all()]);
             $session->set('arrayMatching', $arrayMatching);
             $session->set('urlResults',  $_SERVER['REQUEST_URI']);
             $session->set('quantityPerRange', $quantityPerRange);
+            //dd($arrayMatching);
+            
+         
             return $this->redirectToRoute('city_list_results');
         }
 
