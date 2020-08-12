@@ -17,3 +17,6 @@ easy_admin:
             form: 
                 fields:
                     - { property: 'tags', label: 'Tags de la ville' }
+
+            edit:
+                title: 'Mettre à jour (# %%entity_id%% )'

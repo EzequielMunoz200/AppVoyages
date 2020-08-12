@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}City{% endblock %}
+{% block title %} {{ parent() }} - {{ objectCity.name }} {% endblock %}
 {% block stylesheets %}
 <link href="{{ asset('css/city_show.css') }}" type="text/css" rel="stylesheet" />
 {% endblock %}
@@ -25,7 +25,7 @@ style="--bg-image-landscape: url('{{imagesData['urlImage'].full}}'); --bg-image-
 <section id="comments">
     {{ include('/city/show_partials/review.html.twig') }}
 </section>
-
+{% dump(objectCity) %}
 {# 
 {% dump(cityData) %}
 {% dump(imagesData['urlRandomImages']) %}
