@@ -15,11 +15,19 @@
     <h3 class="title-badges">Villes favorites &nbsp</h3>
     <div class="hide-scroll">
         <div class="box-badges">
+            {% if user != app.user %}
+            {% for cityLiked in user.cityLikes %}
+            <p><img src="{{asset('images/accueil/picture_' ~ random(1,17) ~ '.jpg') }}" alt=""
+                    class="img-badge" />
+                <span class="text-thumb">{{ cityLiked.city.name }}, {{ cityLiked.city.country }}</span></p>
+            {% endfor %}
+            {% else %}
             {% for cityLiked in app.user.cityLikes %}
             <p><img src="{{asset('images/accueil/picture_' ~ random(1,17) ~ '.jpg') }}" alt=""
                     class="img-badge" />
                 <span class="text-thumb">{{ cityLiked.city.name }}, {{ cityLiked.city.country }}</span></p>
             {% endfor %}
+            {% endif %}
         </div>
     </div>
 </div>
