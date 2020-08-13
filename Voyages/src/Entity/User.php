@@ -633,5 +633,19 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new \DateTime();
+        if($this->getPoints() > 500){
+            $this->setRoles(["ROLE_MODERATEUR"]);
+        }else{
+            $this->setRoles([]);
+        }
+        
+    }
+
 
 }
