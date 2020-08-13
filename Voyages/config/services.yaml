@@ -33,4 +33,16 @@ services:
     #    arguments:
     #        $tokens: '%tokens%'
 
-    
+    App\EventListener\UserManagerScore:
+        tags:
+            -
+                # these are the options required to define the entity listener
+                name: 'doctrine.orm.entity_listener'
+                event: 'postUpdate'
+                entity: 'App\Entity\User'
+        arguments:
+            $em: '@doctrine.orm.entity_manager'
+
+
+    #App\EventListener\UserManagerScore:
+     #   
