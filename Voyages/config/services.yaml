@@ -33,7 +33,7 @@ services:
     #    arguments:
     #        $tokens: '%tokens%'
 
-    App\EventListener\UserManagerScore:
+    App\EventListener\SetAwardBadge:
         tags:
             -
                 # these are the options required to define the entity listener

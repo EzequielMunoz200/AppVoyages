@@ -7,7 +7,7 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 
-class UserManagerScore
+class SetAwardBadge
 {
 
     protected $em;
