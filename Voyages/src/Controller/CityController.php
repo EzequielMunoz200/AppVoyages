@@ -95,6 +95,9 @@ class CityController extends AbstractController
                 $review->addPicture($picture);
                 $entityManager->persist($picture);
             }
+
+            //gain 10 points for each review published
+            $entityManager->persist($this->getUser()->setPoints(10));
             $entityManager->persist($review);
             $entityManager->flush();
 

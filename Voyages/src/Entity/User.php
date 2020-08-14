@@ -387,7 +387,7 @@ class User implements UserInterface
 
     public function setPoints(?int $points): self
     {
-        $this->points = $points;
+        $this->points += $points;
 
         return $this;
     }
