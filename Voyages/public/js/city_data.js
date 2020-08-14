@@ -1,4 +1,32 @@
-if( document.querySelector('.city-like') !== null ){
+
+// Translatation of the summary
+let apiKey = '';
+let summary = document.querySelector('.city-description').dataset.summary;
+//summary = summary.replace(/(<([^>]+)>)/ig, "");
+
+console.log(summary)
+
+let firstTranslation = {};
+fetch('/api/v1/translate/', {
+    method: 'POST',
+    body: JSON.stringify(summary),
+    headers: {
+        'Content-type': 'application/json',
+    }
+}).then(function (response) {
+    if (response.ok) {
+        return response.json();
+    }
+    return Promise.reject(response);
+}).then(function (data) {
+    //console.log(data);
+    document.querySelector('.city-description').innerHTML = '<br>' + data.Translation;
+
+}).catch(function (error) {
+    console.warn('Something went wrong.', error);
+});
+
+if (document.querySelector('.city-like') !== null) {
     let likeElt = document.querySelector('.city-like');
     let cityId = likeElt.dataset.cityid;
     likeElt.addEventListener('click', changeHeart);
@@ -39,3 +67,4 @@ if( document.querySelector('.city-like') !== null ){
     }
 
 }
+
