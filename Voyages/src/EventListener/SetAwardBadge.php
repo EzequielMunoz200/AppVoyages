@@ -27,19 +27,14 @@ class SetAwardBadge
                 $user->getPoints() <= 500 &&
                 //Posts published
                 count($user->getReviews()) > 2 &&
-                count($user->getReviews()) <= 4 &&
                 //Posts liked by others travelers
                 count($user->getReviewLikes()) > 5 &&
-                count($user->getReviewLikes()) <= 10 &&
                 //Someone adds you as a favorite 
                 count($user->getUsers()) > 5 &&
-                count($user->getUsers()) <= 10 &&
                 //you've added someone to your favorites
                 count($user->getFavoriteUser()) > 5 &&
-                count($user->getFavoriteUser()) <= 10 &&
                 //dating from (in days)
-                (int)($user->getCreatedAt()->diff(new \DateTime('now')))->format('%R%a') > 30 &&
-                (int)($user->getCreatedAt()->diff(new \DateTime('now')))->format('%R%a') <= 180):
+                (int)($user->getCreatedAt()->diff(new \DateTime('now')))->format('%R%a') > 30):
 
                 $badge = $this->em
                     ->getRepository(Badge::class)
@@ -53,19 +48,14 @@ class SetAwardBadge
                 $user->getPoints() <= 1000 &&
                 //Posts published
                 count($user->getReviews()) > 4 &&
-                count($user->getReviews()) <= 8 &&
                 //Posts liked by others travelers
                 count($user->getReviewLikes()) > 10 &&
-                count($user->getReviewLikes()) <= 15 &&
                 //Someone adds you as a favorite 
                 count($user->getUsers()) > 10 &&
-                count($user->getUsers()) <= 15 &&
                 //you've added someone to your favorites
                 count($user->getFavoriteUser()) > 10 &&
-                count($user->getFavoriteUser()) <= 15 &&
                 //dating from (in days)
-                (int)($user->getCreatedAt()->diff(new \DateTime('now')))->format('%R%a') > 180 &&
-                (int)($user->getCreatedAt()->diff(new \DateTime('now')))->format('%R%a') <= 730):
+                (int)($user->getCreatedAt()->diff(new \DateTime('now')))->format('%R%a') > 180):
 
                 $badge = $this->em
                     ->getRepository(Badge::class)
