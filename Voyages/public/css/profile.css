@@ -214,6 +214,7 @@ a.user-like {
     position: absolute;
     top: 316px;
     width: -webkit-fill-available;
+    width: -moz-available;
     height: 152px;
     min-height: 152px;
     padding: 9px 0px;

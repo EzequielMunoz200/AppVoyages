@@ -124,6 +124,24 @@ body {
 .link-accueil:visited {
   color: white;
 }
+
+.wrapper-legal {
+  height:  auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.wrapper-legal h2 {
+  margin-top: 2em;
+}
+
+.wrapper-legal p {
+  text-align: justify;
+  padding-bottom: 2em;
+}
 /* Custom page CSS
   -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
