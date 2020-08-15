@@ -37,7 +37,7 @@
 				{% for review in reviews|reverse|slice(0, max) %}
 					<div class="accordion review-accordion" id="accordion-{{ review.id }}">
 						<div class="card card-review">
-							<div class="card-header" id="headingOne">
+							<div class="card-header" id="heading-{{ review.id }}">
 								{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 									<p class="report-button  m-0 text-right">
 										<a class="report-button py-0 m-0" data-toggle="collapse" href="#signal-{{ review.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -100,8 +100,7 @@
 										<h4 class="item-card-header-review">
 											<em>Publié il y a
 												{{ leftDays }}
-												jour
-												{% if leftDays > 1 %}s
+												jour{% if leftDays > 1 %}s
 												{% endif %}
 											</em>
 										</h4>
@@ -115,7 +114,7 @@
 								</h2>
 							</div>
 
-							<div id="collapse-{{ review.id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion-{{ review.id }}">
+							<div id="collapse-{{ review.id }}" class="collapse" aria-labelledby="heading-{{ review.id }}" data-parent="#accordion-{{ review.id }}">
 								<div
 									class="card-body">
 

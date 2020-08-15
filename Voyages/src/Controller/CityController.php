@@ -95,12 +95,15 @@ class CityController extends AbstractController
                 $review->addPicture($picture);
                 $entityManager->persist($picture);
             }
+
+            //gain 10 points for each review published
+            $entityManager->persist($this->getUser()->setPoints(10));
             $entityManager->persist($review);
             $entityManager->flush();
 
             $this->addFlash(
                 'success',
-                'L\'avis a été publiée!'
+                'L\'avis a été publié!'
             );
 
             return $this->redirectToRoute('city_show', ['geonameId' =>  $geonameId]);

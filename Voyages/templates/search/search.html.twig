@@ -9,7 +9,7 @@
 <div class="wrapper-search">
     <div class="titles">
         <h1 class="title-search">Recherche Simple</h1>
-        <p class="subtitle-search">Recherchez par nom de ville ou <a href="#"> faites une recherche avancée</a></p>
+        <p class="subtitle-search">Recherchez par nom de ville ou <a href="{{path('advanced_search')}}"> faites une recherche avancée</a></p>
     </div>
 
     <div class="container-search">
@@ -32,25 +32,11 @@
     </div>
 </template>
 
-{# <script src="{{asset('js/search.js')}}"></script> #}
+
 
 {% block javascript2 %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script>
-
-    if (jQuery) {
-        console.log("jQuery est chargé");
-    }
-    else {
-        console.log("jQuery n'est pas chargé");
-    }
-
-    $('#cities').prepend('<option selected=""></option>').select2({
-        placeholder: 'Selectionnez le nom de la ville'
-    });
-
-</script>
-<script src="{{asset('js/search.js')}}"></script> 
+<script src="{{asset('js/search.js')}}"></script>
 {% endblock %}
 {% endblock %}

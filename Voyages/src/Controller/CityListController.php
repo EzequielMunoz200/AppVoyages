@@ -63,7 +63,7 @@ class CityListController extends AbstractController
             $entityManager->flush();
             $this->addFlash(
                 'success',
-                'La liste a été sauvegarde!'
+                'La liste a été sauvegardée!'
             );
 
             return $this->redirectToRoute('city_list_results');

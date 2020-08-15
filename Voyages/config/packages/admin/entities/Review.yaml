@@ -10,5 +10,5 @@ easy_admin:
                     - { property: 'isReported', label: 'Signalé' }
                     - { property: 'author', label: 'Auteur' }
                     - { property: 'text', label: 'Avis', type: 'raw'}
-                    - { property: 'createdAt', label: 'Publiée' }
+                    - { property: 'createdAt', label: 'Publié' }
                     

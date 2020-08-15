@@ -387,7 +387,7 @@ class User implements UserInterface
 
     public function setPoints(?int $points): self
     {
-        $this->points = $points;
+        $this->points += $points;
 
         return $this;
     }
@@ -639,10 +639,8 @@ class User implements UserInterface
     public function onPreUpdate()
     {
         $this->updatedAt = new \DateTime();
-        if($this->getPoints() > 500){
-            $this->setRoles(["ROLE_MODERATEUR"]);
-        }else{
-            $this->setRoles([]);
+        if($this->getPoints() > 500 && !in_array("ROLE_ADMIN", $this->getRoles())){
+            $this->setRoles(["ROLE_MODERATOR"]);
         }
         
     }

@@ -85,7 +85,7 @@ class AdvancedSearchController extends AbstractController
             if(empty($quantityPerRange)){
                 $this->addFlash(
                     'danger',
-                    'Il n\'y a pas de resultats'
+                    'Il n\'y a pas de résultats'
                 );
     
     

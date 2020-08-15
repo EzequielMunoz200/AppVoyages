@@ -104,7 +104,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0px 4px;
+  padding: 0px 24px;
 }
 
 .card-accueil{
@@ -123,6 +123,10 @@ body {
 
 .link-accueil:visited {
   color: white;
+}
+
+.link-accueil {
+  color: whitesmoke;
 }
 
 .wrapper-legal {
