@@ -20,11 +20,15 @@
     {{ form_row(registrationForm.email) }}
     {{ form_row(registrationForm.password.first) }}
     {{ form_row(registrationForm.password.second) }}
-    {{ form_row(registrationForm.agreeTerms) }}
-
+    
+    {% block registrationForm %}
+    <div class="d-flex align-items-center">
+        {{ form_row(registrationForm.agreeTerms) }}
+        <span class="cgu"><a  href="{{path('legal_mentions')}}">&nbsp;Conditions Générales d'Utilisation</a></span>
+        
+    </div>
+    {% endblock %}
     <button type="submit" class="btn btn-dark form-submit btn-sm pull-right">S'inscrire</button>
-
-
     {{ form_end(registrationForm) }}
 </div>
 
