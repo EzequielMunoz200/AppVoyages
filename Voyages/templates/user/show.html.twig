@@ -34,7 +34,7 @@
         <div class="text-presentation">{{ user.description|raw }}</div>
         {% else %}
         <div class="text-presentation">
-            <div class="alert alert-info">La presentation n\'a pas été redigé.</div>
+            <div class="alert alert-info">La presentation n'a pas été redigée.</div>
         </div>
         {% endif %}
        
@@ -48,7 +48,7 @@
                     <p><img src="{{asset('images/flags/' ~ languages.flag ) }}" alt="Icône drapeau" class="img-badge" />
                         <span class="text-thumb">{{ languages }}</span></a></p>
                     {% else %}
-                    <div class="alert alert-info small">Il n'y a pas des langues ajoutées.</div>
+                    <div class="alert alert-info small">Il n'y a pas de langues ajoutées.</div>
                     {% endfor %}
                 </div>
             </div>

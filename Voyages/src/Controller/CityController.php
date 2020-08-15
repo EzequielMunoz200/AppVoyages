@@ -103,7 +103,7 @@ class CityController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'L\'avis a été publiée!'
+                'L\'avis a été publié!'
             );
 
             return $this->redirectToRoute('city_show', ['geonameId' =>  $geonameId]);

@@ -5,7 +5,7 @@
         <div class="carousel-item active">
             <div class="city-pictures text-center img-gallery">
                 {% for image in imagesData['urlRandomImages']|slice(0, 8) %}
-                <img id="{{ 'image' ~ random(1,50000) }}" src="{{ image.small }}" alt="Image de Paris"
+                <img id="{{ 'image' ~ random(1,50000) }}" src="{{ image.regular }}" alt="Image de Paris"
                     class="img-carousel" />
                 {% endfor %}
             </div>
@@ -14,7 +14,7 @@
             <div class="city-pictures text-center">
                 <div class="city-pictures text-center img-gallery">
                     {% for image in imagesData['urlRandomImages']|slice(8, 16) %}
-                    <img id="{{ 'image' ~ random(1,50000) }}" src="{{ image.thumb }}" alt="Image de Paris"
+                    <img id="{{ 'image' ~ random(1,50000) }}" src="{{ image.regular }}" alt="Image de Paris"
                         class="img-carousel" />
                     {% endfor %}
                 </div>

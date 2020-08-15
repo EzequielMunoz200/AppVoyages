@@ -1,8 +1,9 @@
 //User Like Script
 console.log('Run user_like.js');
-let likeElt = document.querySelector('.user-like');
-let connectedUserId = likeElt.dataset.connecteduser;
-let targetedUserId = likeElt.dataset.targeteduser;
+if (document.querySelector('.user-like') !== null) {
+    let likeElt = document.querySelector('.user-like');
+    let connectedUserId = likeElt.dataset.connecteduser;
+    let targetedUserId = likeElt.dataset.targeteduser;
     likeElt.addEventListener('click', changeHeart);
     function changeHeart(evt) {
         evt.preventDefault();
@@ -23,7 +24,7 @@ let targetedUserId = likeElt.dataset.targeteduser;
                         )
 
                         :
-                        (response.status == 204) ? response.status + ' - pas de resultats'
+                        (response.status == 204) ? response.status + ' - pas de résultats'
                             :
                             console.log('L\'opération a échoué')
                 })
@@ -39,3 +40,5 @@ let targetedUserId = likeElt.dataset.targeteduser;
                 }
             );
     }
+
+}

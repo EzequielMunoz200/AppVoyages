@@ -32,7 +32,7 @@ class CityController extends AbstractController /* implements TokenAuthenticated
 
         $cities = $this->getDoctrine()->getRepository(City::class)->findByPartialName($search);
         if (empty($cities)) {
-            return new Response('Pas de resultats', Response::HTTP_NO_CONTENT);
+            return new Response('Pas de résultats', Response::HTTP_NO_CONTENT);
         }
 
         $serializer = new Serializer([new DateTimeNormalizer(), $objetNormalizer]);
@@ -55,7 +55,7 @@ class CityController extends AbstractController /* implements TokenAuthenticated
 
         if (empty($cityDetails)) {
 
-            return new Response('Pas de resultats', Response::HTTP_NO_CONTENT);
+            return new Response('Pas de résultats', Response::HTTP_NO_CONTENT);
         }
 
         /*  $serializer = new Serializer([new DateTimeNormalizer(), $objetNormalizer]);
@@ -75,7 +75,7 @@ class CityController extends AbstractController /* implements TokenAuthenticated
 
         if (empty($cityImagePortrait)) {
 
-            return new Response('Pas de resultats', Response::HTTP_NO_CONTENT);
+            return new Response('Pas de résultats', Response::HTTP_NO_CONTENT);
         }
 
         /*  $serializer = new Serializer([new DateTimeNormalizer(), $objetNormalizer]);

@@ -17,7 +17,7 @@ cities.forEach(
                             response.json()
                         )
                         :
-                        (response.status === 204) ? response.status + ' - pas de resultats'
+                        (response.status === 204) ? response.status + ' - pas de résultats'
                             :
                             console.log('L\'opération a échoué')
                 })
