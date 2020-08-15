@@ -22,7 +22,7 @@
         <a href="{{ path('city_show', { geonameId : city.geonameId }) }}">
             <picture class="city-card" data-name="{{ city.name }}" data-geonameid="{{ city.geonameId }}">
                 <source srcset="" media="(min-width: 400px)">
-                <img class="city-img shadow-sm" src="" alt="Image de {{ city.name }}" onerror="this.src='{{ asset('images/loader.gif') }}'" />
+                <img class="city-img shadow-sm" src="" alt="Image de {{ city.name }}" onerror="this.src='{{ asset('images/accueil/picture_2.jpg') }}'" />
                 <p class="city-name">{{ city.name }}</p>
             </picture>
         </a>

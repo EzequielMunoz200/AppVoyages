@@ -17,7 +17,7 @@
     font-style: italic;
     font-size: large;
 }
-
+c
 
 .wrapper-results-city-list h3 {
     font-size: smaller;
@@ -142,5 +142,6 @@
 @media (min-width: 769px) {
     .city-list-result {
         margin-left: 2%;
+        width: 1190px;
     }
 }
