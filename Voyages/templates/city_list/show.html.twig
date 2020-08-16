@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	{{ parent() }} - 
-	Résultats de la recherche avancée
+	{{ parent() }}
+	- 
+									Résultats de la recherche avancée
 {% endblock %}
 
 {% block stylesheets %}
@@ -10,51 +11,70 @@
 	<link rel="stylesheet" href="{{ asset('css/city_list_show.css') }}" crossorigin=""/>
 {% endblock %}
 {% block body %}
-	<div class="wrapper-results-city-list">
-        <h1>Résultats de la recherche avancée</h1>
-        <p class="intro">Voici les destinations trouvées</p>
-		<div class="row col-12 col-md-12 col-sm-12">
-			<aside class="details col-md-12 col-sm-12 col-lg-12 col-xl-2 border">
-				<h3>Pourcentage de correspondance avec vos préférences</h3>
-				<ul>
-                    {% for key in quantityPerRange|keys|sort|reverse %}
-							<li class="list-percent  btn btn-light mb-3" data-percent="{{key}}">
-                                {% if quantityPerRange[key] == 1 %}
-                                Une ville avec un match de {{ key }}%
-                                {% else %}
-                                {{ quantityPerRange[key] }} villes avec un match de {{ key }}%
-                                {% endif %}
-							</li>
-					{% endfor %}
-				</ul>
-				<div class="url-link btn btn-secondary btn-sm" onclick="copyToClipboard()">
-					<p><i class="far fa-clipboard"></i>&nbsp;<small>Partager par lien</small></p>
-					<input id="urlLinkInput" type="text" value="{{urlResults}}">
-				</div>
-				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+	<header class="header-info navbar navbar-expand-lg navbar-dark">
+		<div class="btn-group">
+			<button type="button" class="btn btn-sm btn-dark text-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Trier les résultats
+			</button>
+			<ul id="drop-menu" class="dropdown-menu">
+				{% for key in quantityPerRange|keys|sort|reverse %}
+					<li class="list-percent dropdown-item btn btn-light mb-3" data-percent="{{key}}">
+						{% if quantityPerRange[key] == 1 %}
+							Une ville avec un match de
+							{{ key }}%
+						{% else %}
+							{{ quantityPerRange[key] }}
+							villes avec un match de
+							{{ key }}%
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+
+		<div class="btn btn-dark btn-sm btn-share-link" onclick="copyToClipboard()">
+			<p class="text-share-link">
+				<i class="far fa-clipboard"></i>&nbsp;<small>Partager par lien</small>
+			</p>
+			<input id="urlLinkInput" readonly="true" type="text" value="{{urlResults}}">
+		</div>
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<button id="btn-collapse-save-form" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerSave" aria-controls="navbarTogglerSave" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="icon-navbar">
+					<i class="far fa-save"></i>
+				</span>
+			</button>
+		{% endif %}
+
+		<div
+			class="collapse navbar-collapse" id="navbarTogglerSave">
+			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 				{{ include('city_list/_form.html.twig') }}
-				{% endif %}
-			</aside>
-			<div class="col-md-12 col-lg-12 col-sm-12 col-xl-9 box-results-right">
-				<div
-					class="city-list-result">
-					{% for key in quantityPerRange|keys %}
-						{% for item in arrayMatching %}
-							{% if item['value'] == key  %}
-								<a class="picture-result" href="{{ path('city_show', { geonameId : item.city.geonameId }) }}" data-range="{{key}}" data-show="true">
-									<picture class="city-card" data-name="{{ item.city.name }}" data-geonameid="{{ item.city.geonameId }}">
-										<source srcset="" media="(min-width: 400px)">
-										<img class="city-img shadow-sm" src="{{asset('images/accueil/picture_' ~ random(1,17) ~ '.jpg')}}" alt="Image de {{ item.city.name }}" onerror="this.src='{{ asset('images/loader.gif') }}'"/>
-										<p class="city-name">{{ item.city.name }}, {{ item.city.country }}</p>
-									</picture>
-								</a>
-							{% endif %}
-						{% endfor %}
+			{% endif %}
+		</div>
+	</header>
+
+	<div class="box-results-city-list">
+		<div class="wrapper-results-city-list">
+			<h1>{{ quantityPerRange|sum|default('0') }} Résultats</h1>
+			<div class="city-list-result">
+				{% for key in quantityPerRange|keys %}
+					{% for item in arrayMatching %}
+						{% if item['value'] == key  %}
+							<a class="picture-result" href="{{ path('city_show', { geonameId : item.city.geonameId }) }}" data-range="{{key}}" data-show="true">
+								<picture class="city-card" data-name="{{ item.city.name }}" data-geonameid="{{ item.city.geonameId }}">
+									<source srcset="" media="(min-width: 400px)">
+									<img class="city-img shadow" src="{{asset('images/accueil/picture_' ~ random(1,17) ~ '.jpg')}}" alt="Image de {{ item.city.name }}" onerror="this.src='{{ asset('images/loader.gif') }}'"/>
+									<p class="city-name">{{ item.city.name }},
+										{{ item.city.country }}</p>
+								</picture>
+							</a>
+						{% endif %}
 					{% endfor %}
-				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
-	
-<script src="{{asset('js/city_list_show.js')}}"></script>
+
+	<script src="{{asset('js/city_list_show.js')}}"></script>
 {% endblock %}
