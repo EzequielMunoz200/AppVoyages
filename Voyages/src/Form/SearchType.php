@@ -46,7 +46,7 @@ class SearchType extends AbstractType
                 'choice_value' => 'geonameId',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Vous devez ajouter des critères',
+                        'message' => 'Veuillez selectionner une ville',
                     ]),
                 ],
             ]);
