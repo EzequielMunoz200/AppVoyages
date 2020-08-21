@@ -2,10 +2,10 @@
 
 namespace App\Service;
 
-use Symfony\Component\BrowserKit\Response;
+//use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Serializer\Encoder\JsonEncode;
-use Symfony\Component\Validator\Constraints\Json;
+//use Symfony\Component\Serializer\Encoder\JsonEncode;
+//use Symfony\Component\Validator\Constraints\Json;
 
 class Translate
 {
@@ -15,8 +15,8 @@ class Translate
         $replace = ' ';
         $newText = str_replace($order, $replace, $text);
 
-        $arrayText = ['text' => $text, 'model_id' => 'en_fr'];
-        $jsonText = json_encode($arrayText);
+        //$arrayText = ['text' => $text, 'model_id' => 'en_fr'];
+        //$jsonText = json_encode($arrayText);
 
         //https://cloud.ibm.com/docs/language-translator?topic=language-translator-customizing#check-model-example-request
         $url = $_ENV['URL_TRANSLATE'] . '/v3/translate?version=2018-05-01';
