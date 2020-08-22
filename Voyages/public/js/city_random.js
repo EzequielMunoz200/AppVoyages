@@ -7,13 +7,12 @@ cities.forEach(
         //cityName = cityName.replace(/\s/g,'');
         cityName = cityName.replace(/\s/g, '-');
         let cityId = city.dataset.geonameid;
-        // Récupération des images de ville
+        // Get cities images
         fetch('/api/v1/image/' + cityName)
             .then(
                 (response) => {
                     return response.status == 200 ?
                         (
-                            //console.log(response.status + ' - opération effectué'),
                             response.json()
                         )
                         :
@@ -26,9 +25,8 @@ cities.forEach(
                     console.log(data);
                     let imageElement = city.querySelector('img');
                     let imageElt = city.querySelector('source');
-                    imageElt.setAttribute('srcset', data.urlImage.regular);
-                    imageElement.setAttribute('src', data.urlImage.full);
-                    //console.log(data.thumb);
+                    imageElt.setAttribute('srcset', data.urlImage.small);
+                    imageElement.setAttribute('src', data.urlImage.regular);
                 }
             );
     }

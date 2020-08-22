@@ -65,9 +65,8 @@
 								<picture class="city-card" data-name="{{ item.city.name }}" data-geonameid="{{ item.city.geonameId }}">
 									<source srcset="" media="(min-width: 400px)">
 									<img class="city-img shadow" src="{{asset('images/accueil/picture_' ~ random(1,17) ~ '.jpg')}}" alt="Image de {{ item.city.name }}" onerror="this.src='{{ asset('images/loader.gif') }}'"/>
-									<p class="city-name">{{ item.city.name }},
-										{{ item.city.country }}</p>
 								</picture>
+								<span class="city-name">{{ item.city.name }},{{ item.city.country }}</span>
 							</a>
 						{% endif %}
 					{% endfor %}
