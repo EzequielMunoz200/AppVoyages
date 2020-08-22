@@ -58,7 +58,7 @@
 		<div class="wrapper-results-city-list">
 			<h1>{{ quantityPerRange|sum|default('0') }} Résultats</h1>
 			<div class="city-list-result">
-				{% for key in quantityPerRange|keys %}
+				{% for key in quantityPerRange|keys|reverse %}
 					{% for item in arrayMatching %}
 						{% if item['value'] == key  %}
 							<a class="picture-result" href="{{ path('city_show', { geonameId : item.city.geonameId }) }}" data-range="{{key}}" data-show="true">
