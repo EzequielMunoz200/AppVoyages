@@ -5,12 +5,7 @@ namespace App\Controller\Api\V1;
 use App\Service\Translate;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 /**
  * @Route("/api/v1", name="api_v1_")
@@ -20,7 +15,7 @@ class TranslateController extends AbstractController
     /**
      * @Route("/translate/", name="city_translate", methods={"POST"})
      */
-    public function translateText(ObjectNormalizer $objetNormalizer, Request $request)
+    public function translateText(Request $request)
     {
         $content = $request->getContent();
         $arrayData = json_decode($content, true);

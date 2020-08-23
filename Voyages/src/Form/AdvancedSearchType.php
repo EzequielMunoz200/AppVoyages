@@ -49,7 +49,7 @@ class AdvancedSearchType extends AbstractType
             ])
 
             ->add('tags', ChoiceType::class, [
-                'label' => 'Choisissez parmi les critères existants pour trouver la destination idéale',
+                'label' => 'Choisissez une ou plusieurs étiquettes ci-dessous',
                 'mapped' => false,
                 'choices' => $this->em->getRepository(Tag::class)->findAll(),
                 'choice_label' => 'name',

@@ -4,22 +4,20 @@ if (document.querySelector('.city-description') !== null ) {
     let summary = document.querySelector('.city-description').dataset.summary;
     //summary = summary.replace(/(<([^>]+)>)/ig, "");
 
-    console.log(summary)
-
-    let firstTranslation = {};
     fetch('/api/v1/translate/', {
         method: 'POST',
         body: JSON.stringify(summary),
         headers: {
             'Content-type': 'application/json',
         }
-    }).then(function (response) {
+    }).then( 
+        (response) => {
         if (response.ok) {
             return response.json();
         }
         return Promise.reject(response);
-    }).then(function (data) {
-        //console.log(data);
+    }).then(
+        (data)  => {
         document.querySelector('.city-description').innerHTML = '<br>' + data.Translation;
 
     }).catch(function (error) {

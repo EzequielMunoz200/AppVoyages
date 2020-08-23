@@ -14,8 +14,8 @@ if (document.querySelector('.report-profile') !== null) {
             }
         }).then(
             (response) => {
-                if (response.status == 202) {
-                    console.log(response.status + ' - opération effectuée')
+                if (response.ok) {
+                    console.log(response.status)
                 }
                 else {
                     console.log(response.status)

@@ -1,4 +1,6 @@
-{{ form_start(form) }}
+{{ form_start(form, { 'attr': {'id': 'form-save-list' } }) }}
     {{ form_widget(form) }}
-    <button class="btn btn-sm btn-secondary save-search">{{ button_label|default('Sauvegarder cette recherche') }}</button>
+    <div class="form-group save-search-group">
+        <button class="btn btn-sm btn-dark save-search">{{ button_label|default('Sauvegarder cette recherche') }}</button>
+    </div>
 {{ form_end(form) }}

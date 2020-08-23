@@ -49,7 +49,6 @@ class Tag
     {
         $this->cities = new ArrayCollection();
         $this->createdAt = new \DateTime();
-        
     }
 
     public function __toString()
@@ -143,10 +142,6 @@ class Tag
      */
     public function getColorTag()
     {
-
-        if ($this->getColor()[0] == '#') {
-            return '<div style="background-color:#' . substr($this->getColor(), 1) . ';">&#8239;</div>';
-        }
-        return '<div style="background-color:#' . $this->getColor() . ';">&#8239;</div>';
+        return '<div style="background-color:#' . str_replace('#', '', $this->getColor()) . ';">&#8239;</div>';
     }
 }

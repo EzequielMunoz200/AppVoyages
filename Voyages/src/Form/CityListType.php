@@ -14,7 +14,8 @@ class CityListType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Donnez un nom à cette liste :'
+                'label' => ' Ajouter cette liste à vos favoris :',
+                'attr' =>['placeholder' => 'Saisir un nom']
             ]);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\CityList;
+use App\Entity\User;
 use App\Form\AdvancedSearchType;
 use App\Form\CityListType;
 use App\Repository\CityListRepository;
@@ -81,12 +82,21 @@ class CityListController extends AbstractController
     /**
      * @Route("/{id}", name="city_list_show", methods={"GET"})
      */
-    public function show(CityList $cityList): Response
+    public function show($id): Response
     {
-        return $this->render('city_list/show.html.twig', [
+
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+
+        if ($user != $this->getUser()) {
+            throw $this->createNotFoundException('Cette page n\'existe pas');
+        }
+
+        return $this->render('city_list/index.html.twig', []);
+    
+        /* return $this->render('city_list/show.html.twig', [
             'city_list' => $cityList,
             //'resultat' => 
-        ]);
+        ]); */
     }
 
     /**

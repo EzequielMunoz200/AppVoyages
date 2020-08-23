@@ -21,7 +21,7 @@
         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-2" required autofocus>
         <label for="inputPassword">Mot de passe</label>
         <input type="password" name="password" id="inputPassword" class="form-control" required>
-        <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}"/>
+        <input type="hidden" name="_target_path"/>
     
         <input type="hidden" name="_csrf_token"
                value="{{ csrf_token('authenticate') }}"

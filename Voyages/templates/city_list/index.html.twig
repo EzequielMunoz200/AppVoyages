@@ -1,38 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}CityList index{% endblock %}
+{% block title %} {{ parent()}} - Mes villes {% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/city_list_show.css') }}"/>
+{% endblock %}
 
 {% block body %}
-    <h1>CityList index</h1>
 
-    <table class="table">
+{% dump(app.request.schemeAndHttpHost) %}
+<div class="wrapper-city-list-show">
+    <h1>Mes villes</h1>
+
+    <table class="table ">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Url</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
+                <th>Nom</th>
+                <th>Lien</th>
+                <th>Crée le:</th>
+                {# <th>Mise</th> #}
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for city_list in city_lists %}
+        {% for list in app.user.cityLists %}
             <tr>
-                <td>{{ city_list.id }}</td>
-                <td>{{ city_list.name }}</td>
-                <td>{{ city_list.url }}</td>
-                <td>{{ city_list.createdAt ? city_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ city_list.updatedAt ? city_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                </td>
+                <td>{{ list.id }}</td>
+                <td>{{ list.name }}</td>
+                <td><a href="{{ app.request.schemeAndHttpHost ~ list.url }}">Aller voir ma liste</a></td>
+                <td>{{ list.createdAt ? list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ include('city_list/_delete_form.html.twig') }}</td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">Vous n'avez pas de listes sauvegardées</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+</div>
+
+
 
 {% endblock %}

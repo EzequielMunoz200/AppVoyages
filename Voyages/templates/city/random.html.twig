@@ -1,18 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} Destinations aléatoires{% endblock %}
+{% block title %}{{ parent() }} - Destinations aléatoires{% endblock %}
 
 {% block stylesheets %}
 
-<link rel="stylesheet" href="{{ asset('css/random-city.css') }}" crossorigin="" />
+<link rel="stylesheet" href="{{ asset('css/random-city.css') }}"/>
 
 {% endblock %}
 
 {% block body %}
 
 <div class="wrapper-cities-list">
-    {% dump(randomCities) %}
-
     <h1>Destinations aléatoires</h1>
     <p class="intro">Pour les curieux, découvrez ici des destinations auxquelles vous n'auriez pas pensé.</p>
 
@@ -21,15 +19,14 @@
         {% for city in randomCities %}
         <a href="{{ path('city_show', { geonameId : city.geonameId }) }}">
             <picture class="city-card" data-name="{{ city.name }}" data-geonameid="{{ city.geonameId }}">
-                <source srcset="" media="(min-width: 400px)">
+                <source srcset="" media="(min-width: 450px)">
                 <img class="city-img shadow-sm" src="" alt="Image de {{ city.name }}" onerror="this.src='{{ asset('images/accueil/picture_2.jpg') }}'" />
-                <p class="city-name">{{ city.name }}</p>
             </picture>
+            <span class="city-name">{{ city.name }}</span>
         </a>
         {% endfor %}
 
     </div>
-
 </div>
 
 {% endblock %}

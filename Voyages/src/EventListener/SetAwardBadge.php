@@ -5,7 +5,7 @@ namespace App\EventListener;
 use App\Entity\Badge;
 use App\Entity\User;
 use Doctrine\ORM\EntityManager;
-use Doctrine\Persistence\Event\LifecycleEventArgs;
+/* use Doctrine\Persistence\Event\LifecycleEventArgs; */
 
 class SetAwardBadge
 {
@@ -17,10 +17,11 @@ class SetAwardBadge
     }
     // the entity listener methods receive two arguments:
     // the entity instance and the lifecycle event
-    public function postUpdate(User $user, LifecycleEventArgs $event)
+    public function postUpdate(User $user/* , LifecycleEventArgs $event */)
     {
         switch (true) {
             case (
+                //Get Badge "Voyageur Aguerri"
                 //points
                 $user->getPoints() > 100 &&
                 $user->getPoints() <= 500 &&
@@ -42,6 +43,7 @@ class SetAwardBadge
 
                 break;
             case (
+                //Get Badge "Grand Voyageur"
                 //points
                 $user->getPoints() > 500 &&
                 $user->getPoints() <= 1000 &&
@@ -62,6 +64,7 @@ class SetAwardBadge
                 $user->addBadge($badge);
                 break;
             case (
+                //Get Badge "Globe-Trotter"
                 //points
                 $user->getPoints() > 1000 &&
                 //Posts published

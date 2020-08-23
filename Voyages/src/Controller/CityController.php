@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\City;
 use App\Entity\Picture;
 use App\Entity\Review;
-use App\Form\CityType;
 use App\Form\ReviewType;
 use App\Service\QueryApi;
 use App\Service\ImageUploader;
@@ -30,28 +29,6 @@ class CityController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="city_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $city = new City();
-        $form = $this->createForm(CityType::class, $city);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($city);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('city_index');
-        }
-
-        return $this->render('city/new.html.twig', [
-            'city' => $city,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{geonameId}", name="city_show", requirements={"geonameId"="\d+"}, methods={"GET", "POST"})
@@ -120,41 +97,6 @@ class CityController extends AbstractController
             'objectCity' => $city,
         ]);
     }
-
-    /**
-     * @Route("/{id}/edit", name="city_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, City $city): Response
-    {
-        $form = $this->createForm(CityType::class, $city);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('city_index');
-        }
-
-        return $this->render('city/edit.html.twig', [
-            'city' => $city,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="city_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, City $city): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $city->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($city);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('city_index');
-    }
-
 
     /**
      * @Route("/random", name="city_random", methods={"GET"})
