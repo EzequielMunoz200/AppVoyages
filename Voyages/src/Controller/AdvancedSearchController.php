@@ -8,7 +8,6 @@ use App\Entity\Tag;
 use App\Form\AdvancedSearchType;
 use App\Form\SearchType;
 use App\Repository\CityRepository;
-use App\Service\SearchMatchTag;
 use RecursiveArrayIterator;
 use RecursiveIteratorIterator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -95,11 +94,9 @@ class AdvancedSearchController extends AbstractController
 
             // redirects to a route and maintains the original query string parameters
             //https://symfony.com/doc/current/controller.html
-            //return $this->redirectToRoute('city_list_show_resultats', ['resultats' => $request->query->all()]);
             $session->set('arrayMatching', $arrayMatching);
             $session->set('urlResults',  $_SERVER['REQUEST_URI']);
             $session->set('quantityPerRange', $quantityPerRange);
-            //dd($arrayMatching);
             
          
             return $this->redirectToRoute('city_list_results');

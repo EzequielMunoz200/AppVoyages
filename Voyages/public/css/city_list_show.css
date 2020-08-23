@@ -7,6 +7,10 @@
     z-index: 25;
 }
 
+.wrapper-city-list-show{
+    padding: 5em;
+}
+
 #drop-menu {
     background-color: #55967E;
 }
