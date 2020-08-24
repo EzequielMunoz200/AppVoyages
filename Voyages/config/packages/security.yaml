@@ -44,13 +44,6 @@ security:
         - { path: ^/city/(list|random), roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/city/(\d+), roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        - { path: ^/user/(\d+)/(edit), roles: ROLE_USER }
-        - { path: ^/user/(\d+), roles: ROLE_USER }
-
-        - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/city/(list|random), roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/city/(\d+), roles: IS_AUTHENTICATED_ANONYMOUSLY }
-
         - { path: ^/user/, roles: ROLE_ADMIN }
         - { path: ^/user/(\d+)/(edit), roles: ROLE_USER }
         - { path: ^/user/(\d+), roles: ROLE_USER }

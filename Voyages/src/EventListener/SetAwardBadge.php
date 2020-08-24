@@ -14,8 +14,7 @@ class SetAwardBadge
     {
         $this->em = $em;
     }
-    // the entity listener methods receive two arguments:
-    // the entity instance and the lifecycle event
+    
     public function postUpdate(User $user)
     {
 
