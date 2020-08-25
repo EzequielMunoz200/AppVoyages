@@ -93,14 +93,22 @@
         console.log("jQuery n'est pas chargé");
     }
 
-    $('#countries').prepend('<option selected=""></option>').select2({
+    $('#countries').prepend('<option value="Tous les pays">Tous les pays</option>').select2({
         placeholder: 'Tous les pays'
     });
+
+   
+  
+      
 
     $('#tags').select2({
         placeholder: 'Sélectionnez des critères'
     });
 
+
+    function myReset() {
+        window.location.reload()
+    };
 </script>
 {% endblock %}
 

@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -61,6 +62,13 @@ class AdvancedSearchType extends AbstractType
                         'message' => 'Vous devez ajouter des critères',
                     ]),
                 ],
+            ])
+            ->add('erase', ResetType::class, [
+                'attr' => [ 
+                    'onclick' => 'myReset()',
+                    'class' => 'btn-sm btn-secondary float-sm-right'
+                ],
+                'label' => 'Nettoyer',
             ]);
     }
 
