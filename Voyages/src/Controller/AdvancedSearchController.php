@@ -29,7 +29,7 @@ class AdvancedSearchController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($form->get('countries')->getData() && $form->get('countries')->getData()->getCountry() !== "Tous+les+pays") {
+            if ($form->get('countries')->getData()) {
                 $queryCountry = $form->get('countries')->getData()->getCountry();
                 //create a query builder
                 $allCities = $em->getRepository(City::class)->findByCountryName($queryCountry);
@@ -37,10 +37,6 @@ class AdvancedSearchController extends AbstractController
                     return $this->redirectToRoute('advanced_search');
                 }
             } 
-            elseif  ($form->get('countries')->getData() && $form->get('countries')->getData()->getCountry() === "Tous les pays")
-            {
-                $allCities = $cityRepository->findAll();
-            }
             else {
                 //all cities of the db
                 $allCities = $cityRepository->findAll();

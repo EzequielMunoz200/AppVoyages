@@ -9,9 +9,10 @@ html {
 
 .flash-success {
   top: 59px !important;
-  position: relative;
+  position: absolute;
   width: max-content;
-  z-index: 3;
+  z-index: 35;
+  float: right;
 }
 
 

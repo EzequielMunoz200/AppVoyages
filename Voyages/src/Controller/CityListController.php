@@ -48,6 +48,10 @@ class CityListController extends AbstractController
         $urlResults = $session->get('urlResults');
         $quantityPerRange = $session->get('quantityPerRange');
 
+        if(!$quantityPerRange){
+            return $this->redirectToRoute('accueil');
+        }
+
         $cityList = new CityList();
         $form = $this->createForm(CityListType::class, $cityList);
         $form->handleRequest($request);

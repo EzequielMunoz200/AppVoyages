@@ -44,14 +44,15 @@ security:
         - { path: ^/city/(list|random), roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/city/(\d+), roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        - { path: ^/user/, roles: ROLE_ADMIN }
+       
         - { path: ^/user/(\d+)/(edit), roles: ROLE_USER }
         - { path: ^/user/(\d+), roles: ROLE_USER }
+        - { path: ^/user, roles: ROLE_ADMIN }
 
         - { path: ^/admin/, roles: ROLE_ADMIN }
         - { path: ^/(city|review|picture|user)/new, roles: ROLE_ADMIN }
         - { path: ^/(city|review|picture)/(\d+)/(edit|delete), roles: ROLE_ADMIN }
-        - { path: ^/(review|city|badge|tag), roles: ROLE_ADMIN }
+        - { path: ^/(review|city|badge|tag|language), roles: ROLE_ADMIN }
 
        
         
