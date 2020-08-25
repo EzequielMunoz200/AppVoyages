@@ -156,8 +156,8 @@
     .save-search-group {
         margin-left: 20px;
         display: flex;
-        align-items: center;
-        margin-bottom: 0px;
+        align-self: flex-end;
+        margin-bottom: 21px;
     }
 
     .city-list-result {
@@ -209,6 +209,13 @@
     .picture-result{
         margin-right: 32px;
     }
+
+    .save-search-group {
+        margin-left: 20px;
+        display: flex;
+        align-self: flex-end;
+        margin-bottom: 21px;
+    }
 }
 
 
@@ -242,6 +249,13 @@
 
     .picture-result{
         margin-right: 32px;
+    }
+
+    .save-search-group {
+        margin-left: 20px;
+        display: flex;
+        align-self: flex-end;
+        margin-bottom: 21px;
     }
 }
 
