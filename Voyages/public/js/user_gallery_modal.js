@@ -10,7 +10,7 @@
         image.addEventListener("click", handleClick);
     });
     function handleClick(evt) {
-        modal.style.display = "block";
+        modal.style.display = "flex";
         modalImg.src = this.src;
         //captionText.innerHTML = this.alt;
         evt.currentTarget

@@ -66,9 +66,9 @@ class AdvancedSearchType extends AbstractType
             ->add('erase', ResetType::class, [
                 'attr' => [ 
                     'onclick' => 'myReset()',
-                    'class' => 'btn-link float-sm-right'
+                    'class' => 'btn-link float-right'
                 ],
-                'label' => 'Reset',
+                'label' => 'Réinitialiser',
             ]);
     }
 

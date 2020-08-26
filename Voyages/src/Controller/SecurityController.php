@@ -4,19 +4,24 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Component\HttpFoundation\Request;
 
 class SecurityController extends AbstractController
 {
+    use TargetPathTrait;
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
     {
-        /* if ($this->getUser()) {
+        if ($this->getUser()) {
+           dd( $this->getTargetPath($request->getSession(), 'providerKey'));
              return $this->redirectToRoute('target_path');
-         } */
+         }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

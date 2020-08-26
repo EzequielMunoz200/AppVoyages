@@ -233,6 +233,11 @@ a.user-like {
     min-height: 500px;
 }
 
+.modal-content{
+    margin: auto;
+    width: unset;
+}
+
 .img-carousel {
     width: 3.5em;
     height: 3.5em;

@@ -17,13 +17,13 @@
         <div class="box-badges">
             {% if user != app.user %}
             {% for cityLiked in user.cityLikes %}
-            <p><a href="{{ path('city_show', { geonameId: cityLiked.city.geonameId }) }}"><img src="{{asset('images/accueil/picture_' ~ random(1,17) ~ '.jpg') }}" alt=""
+            <p><a class="link-item-profile-box" href="{{ path('city_show', { geonameId: cityLiked.city.geonameId }) }}"><img src="{{asset('images/accueil/picture_' ~ random(1,17) ~ '.jpg') }}" alt=""
                     class="img-badge" />
                 <span class="text-thumb">{{ cityLiked.city.name }}, {{ cityLiked.city.country }}</span></a></p>
             {% endfor %}
             {% else %}
             {% for cityLiked in app.user.cityLikes %}
-            <p><a href="{{ path('city_show', { geonameId: cityLiked.city.geonameId }) }}"><img src="{{asset('images/accueil/picture_' ~ random(1,17) ~ '.jpg') }}" alt=""
+            <p><a class="link-item-profile-box" href="{{ path('city_show', { geonameId: cityLiked.city.geonameId }) }}"><img src="{{asset('images/accueil/picture_' ~ random(1,17) ~ '.jpg') }}" alt=""
                     class="img-badge" />
                 <span class="text-thumb">{{ cityLiked.city.name }}, {{ cityLiked.city.country }}</span></a></p>
             {% endfor %}
