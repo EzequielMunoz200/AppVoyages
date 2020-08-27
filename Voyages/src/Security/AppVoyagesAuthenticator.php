@@ -19,6 +19,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class AppVoyagesAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
@@ -30,13 +31,15 @@ class AppVoyagesAuthenticator extends AbstractFormLoginAuthenticator implements 
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
+    protected $requestStack;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, RequestStack $requestStack)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->requestStack = $requestStack;
     }
 
     public function supports(Request $request)
@@ -71,15 +74,18 @@ class AppVoyagesAuthenticator extends AbstractFormLoginAuthenticator implements 
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('L\'email n\'a pas été trouvé.');
         }
 
         return $user;
     }
 
-    public function checkCredentials($credentials, UserInterface $user)
+    public function checkCredentials($credentials, UserInterface $user): bool 
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        if (!$this->passwordEncoder->isPasswordValid($user, $credentials['password'])){
+            throw new CustomUserMessageAuthenticationException('Les identifiants ne sont pas valides');
+        }
+        return true;
     }
 
     /**
@@ -93,6 +99,10 @@ class AppVoyagesAuthenticator extends AbstractFormLoginAuthenticator implements 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+            $registerPage = $this->urlGenerator->generate('app_register');
+           if($targetPath === $registerPage){
+            return new RedirectResponse($this->urlGenerator->generate('accueil'));
+           }
             return new RedirectResponse($targetPath);
         }
         //url before login

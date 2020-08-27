@@ -17,7 +17,6 @@ class SetAwardBadge
     
     public function postUpdate(User $user)
     {
-
         switch (true) {
             case (
                 //Get Badge "Voyageur Aguerri"

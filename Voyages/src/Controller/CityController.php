@@ -29,13 +29,11 @@ class CityController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/{geonameId}", name="city_show", requirements={"geonameId"="\d+"}, methods={"GET", "POST"})
      */
     public function show(ImageUploader $imageUploader, City $city, QueryApi $queryApi, $geonameId, Request $request): Response
     {
-
         $city = $this->getDoctrine()->getRepository(City::class)->findbyGeonameID($geonameId);
 
         if (!$city) {
