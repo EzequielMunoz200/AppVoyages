@@ -1,0 +1,18 @@
+easy_admin:
+  entities:
+        Badge:
+            label: Badge
+            class: App\Entity\Badge
+            list:
+                fields:
+                    - {property: 'level', label: 'Niveau'}
+                    - { property: 'name', label: 'Étiquette' }
+                    - { property: 'filenameBadge', label: 'Image', type: 'image', base_path: '/images/badges/' }
+                    #- { property: 'colorTag', label: 'Couleur', color: '#0E8BAB', type: 'raw' }
+
+                actions:
+                    - { name: 'show', icon: 'eye', label: false, css_class: 'btn btn-info mb-2' }
+                    - { name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning mb-2' }
+                    - { name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger mb-2' }
+                    
+              
