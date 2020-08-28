@@ -67,12 +67,7 @@ class UserController extends AbstractController
     public function edit(ImageUploader $imageUploader, Request $request, User $user): Response
     {
         //teste le droit (edit) sur l'objet($user)
-        //retourne un 403 si l'utilisateur ne rentre pas dans les conditions du voter
         $this->denyAccessUnlessGranted('edit', $user);
-        /*  if (!$this->isGranted('edit', $user, 'User tried to access a page without having ROLE_ADMIN')) {
-            $this->addFlash('danger', 'Vous n\'avez pas le droits de editer cette question');
-            return $this->redirectToRoute('question_show', ['id' => $user->getId()]);
-        } */
 
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -80,10 +75,8 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('avatar')->getData()) {
                 $fileName = $imageUploader->moveFile($form->get('avatar')->getData(), 'images/avatars');
-                /* dd($fileName); */
                 $user->setAvatar($fileName);
             }
-
 
             $this->getDoctrine()->getManager()->flush();
 
@@ -111,7 +104,9 @@ class UserController extends AbstractController
             $entityManager->remove($user);
             $entityManager->flush();
         }
+        $this->get('security.token_storage')->setToken(null);
+        $this->get('session')->invalidate();
 
-        return $this->redirectToRoute('user_index');
+        return $this->redirectToRoute('accueil');
     }
 }

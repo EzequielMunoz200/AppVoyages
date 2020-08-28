@@ -20,6 +20,10 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppVoyagesAuthenticator $authenticator, BadgeRepository $badgeRepository): Response
     {
+        if ($this->getUser()) {
+            return ($this->redirectToRoute('accueil'));
+        }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -34,25 +38,31 @@ class RegistrationController extends AbstractController
                 )
             );
 
-             //add default badge
-             $badge = $badgeRepository->find(1);
-             $user->addBadge($badge);
-             $user->setPoints(5);
-             //add default avatar
-             $user->setAvatar('default-avatar.png');
-             //add default username $firstname(14 CHAR )+'#'.random_int
-             $firstname = $form->get('firstname')->getData();
-             $name = $form->get('name')->getData();
-             $newUsername = substr($firstname, 0, 14) . '#' . random_int(1, 100000);
-             $user->setUsername($newUsername);
-             $user->setIsActive(true);
+            //add default badge
+            $badge = $badgeRepository->find(1);
+            $user->addBadge($badge);
+            $user->setPoints(5);
+            //add default avatar
+            $user->setAvatar('default-avatar.png');
+            //add default username $firstname(14 CHAR )+'#'.random_int
+            $firstname = $form->get('firstname')->getData();
+            $name = $form->get('name')->getData();
+            $newUsername = substr($firstname, 0, 14) . '#' . random_int(1, 100000);
+            $user->setUsername($newUsername);
+            $user->setIsActive(true);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
+
+            $this->addFlash(
+                'info',
+                'Inscription réussie. Connectez-vous pour commencer à utiliser App Voyages!',
+            );
             // do anything else you need here, like send an email
 
-           /*  return $guardHandler->authenticateUserAndHandleSuccess(
+            /* return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,
                 $authenticator,

@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	{{ parent() ~ ' - ' }} Accueil
+	{{ parent() ~ ' - ' }}
+	Accueil
 {% endblock %}
 {% block stylesheets %}
 	{# <link href="{{ asset('css/page.css') }}" type="text/css" rel="stylesheet" /> #}
@@ -9,22 +10,31 @@
 
 {% block body %}
 	<section class="wrapper-accueil">
-		<h1 class="text-center mb-4">App Voyages  <img src="{{ asset('images/logo/travel-globe.svg')}}" style="width: 100px;" alt="Logo: un avion vole au-dessus du globe"></h1>
+		<h1 class="text-center m-0">App Voyages
+			<img src="{{ asset('images/logo/travel-globe.svg')}}" style="width: 100px;" alt="Logo: un avion vole au-dessus du globe"></h1>
+			<p class="accueil-subtitle text-center">App Voyages vous aide à trouver votre prochaine destination de voyage avec ses solutions de recherche ainsi qu’ avec les avis et notes partagés par d'autres voyageurs
+			</p>
 		<div>
 			<ul class="card shadow text-center card-accueil">
-                <h2 class="text-center"><a href="{{path('advanced_search')}}" class="stretched-link link-accueil">Recherche Avancée</a></h2>
-                <li>Sélectionnez un ou plusieurs critères pour trouver votre destination idéale</li>       
-            </ul>
-           
-            <ul class="card shadow text-center card-accueil">
-                <h2 class="text-center"><a href="{{path('search')}}" class="stretched-link link-accueil">Recherche Simple</a></h2>
-                <li>Si vous avez une ville en tête, accédez à sa fiche détaillée en effectuant une recherche simple</li>
-            </ul>
-            
-            <ul class="card shadow text-center card-accueil">
-                <h2 class="text-center"><a href="{{path('city_random')}}" class="stretched-link link-accueil">Recherche Aléatoire</a></h2>
-                <li>Découvrez, en un seul clic et de maniére aléatoire, des destinations partout dans le monde</li>
-            </ul>
+				<h2 class="text-center">
+					<a href="{{path('advanced_search')}}" class="stretched-link link-accueil">Recherche Avancée</a>
+				</h2>
+				<li>Sélectionnez un ou plusieurs critères pour trouver votre destination idéale</li>
+			</ul>
+
+			<ul class="card shadow text-center card-accueil">
+				<h2 class="text-center">
+					<a href="{{path('search')}}" class="stretched-link link-accueil">Recherche Simple</a>
+				</h2>
+				<li>Si vous avez une ville en tête, accédez à sa fiche détaillée en effectuant une recherche simple</li>
+			</ul>
+
+			<ul class="card shadow text-center card-accueil">
+				<h2 class="text-center">
+					<a href="{{path('city_random')}}" class="stretched-link link-accueil">Recherche Aléatoire</a>
+				</h2>
+				<li>Découvrez, en un seul clic et de maniére aléatoire, des destinations partout dans le monde</li>
+			</ul>
 		</div>
 
 	</section>

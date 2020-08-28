@@ -11,12 +11,12 @@
 <div class="wrapper-city-list-show">
     <h1>Mes villes</h1>
 
-    <table class="table ">
+    <table class="table table-striped ">
         <thead>
             <tr>
-                <th>Id</th>
+               {#  <th>Id</th> #}
                 <th>Nom</th>
-                <th>Lien</th>
+              {#   <th>Lien</th> #}
                 <th>Crée le:</th>
                 {# <th>Mise</th> #}
                 <th>actions</th>
@@ -25,10 +25,10 @@
         <tbody>
         {% for list in app.user.cityLists %}
             <tr>
-                <td>{{ list.id }}</td>
-                <td>{{ list.name }}</td>
-                <td><a href="{{ app.request.schemeAndHttpHost ~ list.url }}">Aller voir ma liste</a></td>
-                <td>{{ list.createdAt ? list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                {# <td>{{ list.id }}</td> #}
+                {# <td>{{ list.name }}</td> #}
+                <td><a href="{{ app.request.schemeAndHttpHost ~ list.url }}">{{ list.name }}</a></td>
+                <td>{{ list.createdAt ? list.createdAt|date('d-m-Y') : '' }}</td>
                 <td>{{ include('city_list/_delete_form.html.twig') }}</td>
             </tr>
         {% else %}

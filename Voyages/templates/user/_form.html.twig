@@ -1,4 +1,44 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary btn-sm">{{ button_label|default('Save') }}</button>
+<div class="form-row">
+	<div class="col-md-12 col-xl-4 form-group border p-4 col-12">
+
+		<div class="form-row">
+			<div class="col-xl-6 col-lg-6 col-12">
+				{{ form_row(form.firstname) }}
+			</div>
+			<div class="col-xl-6 col-lg-6 col-12">
+				{{ form_row(form.name) }}
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="col-xl-6 col-lg-6 col-12">
+				{{ form_row(form.username) }}
+			</div>
+			<div class="col-xl-6 col-lg-6 col-12">
+				{{ form_row(form.email) }}
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="col">
+				{{ form_row(form.avatar) }}
+			</div>
+		</div>
+
+	</div>
+	<div class="col-md-12 col-xl-4 form-group border p-4 mx-xl-4 col-12">
+		{{ form_row(form.description) }}
+	</div>
+	<div class="col-md-12 col-xl-3 form-group border p-4 col-12">
+		{{ form_row(form.languages) }}
+	</div>
+</div>
+<div
+	class="form-row">
+	{#  {{ form_widget(form) }} #}
+	<button class="btn btn-primary btn-sm col-4">{{ button_label|default('Save') }}</button>
+</div>
+
+
+
 {{ form_end(form) }}

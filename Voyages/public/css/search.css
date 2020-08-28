@@ -14,7 +14,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-   /*  justify-content: center; */
+    /*  justify-content: center; */
     width: 70%;
     margin: auto;
     height: inherit;
@@ -51,7 +51,7 @@ body {
     outline-color: #55967E;
 }
 
-.form-group{
+.form-group {
     display: grid;
 }
 
@@ -105,20 +105,20 @@ body {
     color: white;
 }
 
-.select2-container--default .select2-selection--multiple .select2-selection__choice{
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
     overflow: hidden;
-    border-radius: 5px; 
+    border-radius: 5px;
     border: none;
     background-color: #55967E;
     color: white;
 }
 
-.select2-selection__choice__display{
+.select2-selection__choice__display {
     font-size: small;
     vertical-align: text-bottom;
 }
 
-label.required{
+label.required {
     font-size: small;
 }
 
@@ -127,33 +127,33 @@ label.required:after {
     color: red;
 }
 
-.btn-submit-advanced-search{
+.btn-submit-advanced-search {
     background-color: #55967E;
     color: white;
 }
 
-.btn-submit-advanced-search:hover{
+.btn-submit-advanced-search:hover {
     background-color: #74bea3;
     color: white;
 }
 
-.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
     border-right: none;
     color: white;
 }
 
-.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover{
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
     border-right: none;
     color: white;
     background-color: indianred;
 }
 
-a{
+a {
     color: #55967E;
 }
 
-a:hover{
-    color:#55967E;
+a:hover {
+    color: #55967E;
 }
 
 
@@ -174,5 +174,25 @@ a:hover{
         overflow-y: scroll;
         height: 197px;
         width: 20%;
+    }
+}
+
+@media (max-width: 850px) and (orientation:landscape) {
+    .wrapper-search {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 70%;
+        margin: auto;
+        height: inherit;
+    }
+
+    .title-search {
+        margin: 0;
+    }
+
+    .container-search{
+        position: unset;
     }
 }

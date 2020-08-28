@@ -646,4 +646,15 @@ class User implements UserInterface
     }
 
 
+    /**
+     * for EasyAdmin
+     *
+     * @return string
+     */
+    public function filenameAvatar()
+    {
+        return $this->getAvatar();
+    }
+
+
 }

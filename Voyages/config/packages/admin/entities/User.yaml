@@ -8,23 +8,17 @@ easy_admin:
                     - id
                     - { property: 'isActive', label: 'Status' }
                     - { property: 'isReported', label: 'Signalé', type: 'toggle'}
-                    - { property: 'firstname', label: 'Prénom' }
-                    - { property: 'name', label: 'Nom' }
                     - { property: 'username', label: 'Pseudo' }
-                    - { property: 'birthdate', label: 'Date de naissance'}
-                    - { property: 'email', label: 'Contact' }
-                    - avatar
-                    - points
-                    - description
-                    - { property: 'createdAt', label: 'Inscrit' }
                     - { property: 'updatedAt', label: 'Dernière MAJ' }
                     - { property: 'roles', label: 'Rôles' }
 
 
                     
                 actions:
-                    - { name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-secondary' }
-                    - { name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger' }
+                    - { name: 'show', icon: 'eye', label: false, css_class: 'btn btn-info mb-2' }
+                    - { name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning mb-2' }
+                    - { name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger mb-2' }
+                    
             edit:
                 fields: 
                     - username
@@ -32,3 +26,21 @@ easy_admin:
                     - points
                     - description
                     #- { property: 'birthdate', label: 'Date de naissance', type_options: {'widget': 'single_text'} }
+
+            show:
+                fields:
+                    - id
+                    - { property: 'isActive', label: 'Status' }
+                    - { property: 'isReported', label: 'Signalé', type: 'toggle'}
+                    - { property: 'firstname', label: 'Prénom' }
+                    - { property: 'name', label: 'Nom' }
+                    - { property: 'username', label: 'Pseudo' }
+                    - { property: 'birthdate', label: 'Date de naissance'}
+                    - { property: 'email', label: 'Contact' }
+                    - avatar
+                    - { property: 'filenameAvatar', label: 'Avatar', type: 'image', base_path: '/images/avatars/' }
+                    - points
+                    - description
+                    - { property: 'createdAt', label: 'Inscrit' }
+                    - { property: 'updatedAt', label: 'Dernière MAJ' }
+                    - { property: 'roles', label: 'Rôles' }

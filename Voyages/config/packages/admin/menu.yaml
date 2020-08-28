@@ -8,8 +8,9 @@ easy_admin:
       #  children:
           - {label: 'Administration'}
           - {entity: 'City', icon: 'globe', label: 'Villes'}
-          - {entity: 'Tag', icon: 'home', label: 'Tags'}
-          - {entity: 'User', icon: 'calendar', label: 'Utilisateurs'}
+          - {entity: 'Tag', icon: 'tag', label: 'Tags'}
+          - {entity: 'User', icon: 'users', label: 'Utilisateurs'}
           - {entity: 'Review', icon: 'comment', label: 'Avis'}
+          - {entity: 'Badge', icon: 'award', label: 'Badge'}
           - {label: 'Web site'}
-          - {label: 'Accueil', icon: 'home', url: 'http://localhost:8000', rel: 'accueil'}
+          - {label: 'Accueil', icon: 'home', route: 'accueil'}

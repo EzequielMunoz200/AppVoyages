@@ -20,4 +20,6 @@ function copyToClipboard() {
     copyUrl.select();
     copyUrl.setSelectionRange(0, 99999)
     document.execCommand("copy");
+    $('#copyLinkTo').toast('show')
   }
+  

@@ -36,7 +36,8 @@ class AdvancedSearchController extends AbstractController
                 if (!$allCities) {
                     return $this->redirectToRoute('advanced_search');
                 }
-            } else {
+            } 
+            else {
                 //all cities of the db
                 $allCities = $cityRepository->findAll();
             }

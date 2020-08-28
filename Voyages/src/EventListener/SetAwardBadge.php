@@ -5,7 +5,6 @@ namespace App\EventListener;
 use App\Entity\Badge;
 use App\Entity\User;
 use Doctrine\ORM\EntityManager;
-/* use Doctrine\Persistence\Event\LifecycleEventArgs; */
 
 class SetAwardBadge
 {
@@ -15,9 +14,8 @@ class SetAwardBadge
     {
         $this->em = $em;
     }
-    // the entity listener methods receive two arguments:
-    // the entity instance and the lifecycle event
-    public function postUpdate(User $user/* , LifecycleEventArgs $event */)
+    
+    public function postUpdate(User $user)
     {
         switch (true) {
             case (
@@ -35,11 +33,13 @@ class SetAwardBadge
                 count($user->getFavoriteUser()) > 5 &&
                 //dating from (in days)
                 (int)($user->getCreatedAt()->diff(new \DateTime('now')))->format('%R%a') > 30):
+                
 
                 $badge = $this->em
                     ->getRepository(Badge::class)
                     ->find(2);
                 $user->addBadge($badge);
+
 
                 break;
             case (
@@ -57,6 +57,10 @@ class SetAwardBadge
                 count($user->getFavoriteUser()) > 10 &&
                 //dating from (in days)
                 (int)($user->getCreatedAt()->diff(new \DateTime('now')))->format('%R%a') > 180):
+
+                //add rol
+                $user->setRoles(['ROLE_MODERATOR']);
+
 
                 $badge = $this->em
                     ->getRepository(Badge::class)

@@ -23,6 +23,7 @@ class UserType extends AbstractType
         $builder
             ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
+                'attr' => [ 'class' => 'form-group' ],
             ])
             ->add('name', TextType::class, [
                 'label' => 'Nom',
@@ -69,7 +70,10 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'attr' => ['novalidate' => 'novalidate'],
+            'attr' => [
+                'novalidate' => 'novalidate', 
+                'class' => 'd-flex flex-column justify-content-xl-center  justify-content-lg-center col-12 col-lg-12 col-xl-12',
+            ],
         ]);
     }
 }

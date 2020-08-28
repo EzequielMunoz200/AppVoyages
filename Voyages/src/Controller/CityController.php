@@ -12,6 +12,7 @@ use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -19,6 +20,15 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CityController extends AbstractController
 {
+
+    private $session;
+
+    public function __construct(SessionInterface $session)
+    {
+        $this->session = $session;
+    }
+
+    
     /**
      * @Route("/", name="city_index", methods={"GET"})
      */
@@ -29,13 +39,11 @@ class CityController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/{geonameId}", name="city_show", requirements={"geonameId"="\d+"}, methods={"GET", "POST"})
      */
     public function show(ImageUploader $imageUploader, City $city, QueryApi $queryApi, $geonameId, Request $request): Response
     {
-
         $city = $this->getDoctrine()->getRepository(City::class)->findbyGeonameID($geonameId);
 
         if (!$city) {
@@ -85,6 +93,9 @@ class CityController extends AbstractController
 
             return $this->redirectToRoute('city_show', ['geonameId' =>  $geonameId]);
         }
+
+        
+        $this->session->set('lastCityVisited', $this->generateUrl('city_show', ['geonameId' =>  $geonameId]));
 
 
         return $this->render('city/show.html.twig', [

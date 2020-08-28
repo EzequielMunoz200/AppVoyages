@@ -151,4 +151,15 @@ class Badge
 
         return $this;
     }
+
+
+    /**
+     * for EasyAdmin
+     *
+     * @return string
+     */
+    public function filenameBadge()
+    {
+        return $this->getFilename().'.svg';
+    }
 }

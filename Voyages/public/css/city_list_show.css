@@ -8,7 +8,7 @@
 }
 
 .wrapper-city-list-show{
-    padding: 5em;
+    padding: 5em 0px;
 }
 
 #drop-menu {
@@ -102,6 +102,12 @@
     height: -webkit-fill-available;
 }
 
+#copyLinkTo{
+    left: 54%;
+    top: 70%;
+    z-index: 50;
+}
+
 /*----------------------------------------MEDIA QUERIES----------------------------------------------------------------*/
 
 @media (min-width: 400px) and (max-width: 992px) {
@@ -131,6 +137,9 @@
         padding: 0px;
         box-shadow: none;
         flex-direction: row;
+        position: absolute;
+        left: 36%;
+        top: 13px;
     }
 
     .wrapper-results-city-list {
@@ -156,8 +165,8 @@
     .save-search-group {
         margin-left: 20px;
         display: flex;
-        align-items: center;
-        margin-bottom: 0px;
+        align-self: flex-end;
+        margin-bottom: 21px;
     }
 
     .city-list-result {
@@ -172,6 +181,16 @@
 
     .picture-result{
         margin-right: 32px;
+    }
+
+    #copyLinkTo{
+        left: 19%;
+        z-index: 50;
+    }
+
+    .save-search{
+        position: relative;
+        top: -11px;
     }
 }
 
@@ -195,6 +214,8 @@
         padding: 0px;
         box-shadow: none;
         flex-direction: row;
+        position: absolute;
+        left: 25%;
     }
 
     #city_list_name{
@@ -209,6 +230,19 @@
     .picture-result{
         margin-right: 32px;
     }
+
+    .save-search-group {
+        margin-left: 20px;
+        display: flex;
+        align-self: flex-end;
+        margin-bottom: 21px;
+    }
+
+    #copyLinkTo{
+        left: 10.5%;
+        z-index: 50;
+    }
+    
 }
 
 
@@ -229,6 +263,8 @@
         padding: 0px;
         box-shadow: none;
         flex-direction: row;
+        position: absolute;
+        left: 25%;
     }
 
     #city_list_name{
@@ -242,6 +278,18 @@
 
     .picture-result{
         margin-right: 32px;
+    }
+
+    .save-search-group {
+        margin-left: 20px;
+        display: flex;
+        align-self: flex-end;
+        margin-bottom: 21px;
+    }
+
+    #copyLinkTo{
+        left: 10.5%;
+        z-index: 50;
     }
 }
 

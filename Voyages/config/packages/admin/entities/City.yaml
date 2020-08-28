@@ -11,12 +11,16 @@ easy_admin:
                     - { property: 'geonameId', label: 'Geoname id' , type: 'integer'}
                     
                 actions:
-                    - { name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-secondary' }
+                    - { name: 'show', icon: 'eye', label: false, css_class: 'btn btn-info' }
+                    - { name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning' }
                     - { name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger' }
 
             form: 
                 fields:
+                    - { type: 'group', columns: 6}
                     - { property: 'tags', label: 'Tags de la ville' }
 
             edit:
                 title: 'Mettre à jour (# %%entity_id%% )'
+
+            

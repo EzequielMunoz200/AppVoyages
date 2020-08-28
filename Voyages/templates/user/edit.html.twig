@@ -1,19 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Paramètres{% endblock %}
+{% block title %}Paramètres
+{% endblock %}
 {% block stylesheets %}
-<link href="{{ asset('css/profile_edit.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('css/profile_edit.css') }}" type="text/css" rel="stylesheet"/>
 {% endblock %}
 
 {% block body %}
-<div class="wrapper-user-edit">
-    <h4>Mes paramètres</h4>
+	<div class="wrapper-user-edit d-flex flex-column justify-content-lg-center justify-content-xl-center">
+		<div class="box-user-edit">
+			<h1>Mes paramètres</h1>
+			{{ include('user/_delete_form.html.twig') }}
 
-    {{ include('user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-    
-    <a class="btn btn-secondary btn-sm mt-4" href="{{ path('user_show', {id : app.user.id}) }}">Retour au profil</a>
+			{{ include('user/_form.html.twig', {'button_label': 'Valider'}) }}
 
-    {{ include('user/_delete_form.html.twig') }}
-</div>
-<script src="{{asset('js/user_edit.js')}}"></script>
+			<a class="btn btn-secondary btn-sm my-4 ml-2 d-flex align-self-start col-4 " href="{{ path('user_show', {id : app.user.id}) }}">Retour au profil</a>
+		</div>
+
+
+	</div>
+	<script src="{{asset('js/user_edit.js')}}"></script>
 {% endblock %}
