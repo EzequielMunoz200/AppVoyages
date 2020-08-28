@@ -12,7 +12,7 @@ let latitude = document.getElementById('mapid').dataset.latitude;
 let longitude = document.getElementById('mapid').dataset.longitude;
 //console.log(latitude + ' ' + longitude);
 //https://leafletjs.com/examples/quick-start/
-let mymap = L.map('mapid', {scrollWheelZoom: false}).setView([latitude, longitude], 10);
+let mymap = L.map('mapid', {scrollWheelZoom: false, gestureHandling: true}).setView([latitude, longitude], 10);
 //console.log(mymap)
 // Token here : https://account.mapbox.com/
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid2VseXdlbG9vIiwiYSI6ImNrYmFmYXdyYjBubGwycW84ZWJxYWk1MXAifQ.0HxMbJuY3rmSYfS2hmhcVw', {

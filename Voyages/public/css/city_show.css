@@ -458,6 +458,10 @@ h1 {
         width: 10em;
     }
 
+    #img01 {
+        height: 79vh;
+        width: auto;
+    }
 
     .landing-section-image {
         background-image: var(--bg-image-landscape);
@@ -467,4 +471,3 @@ h1 {
     }
 
 }
-

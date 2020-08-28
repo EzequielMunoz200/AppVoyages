@@ -104,8 +104,9 @@ class UserController extends AbstractController
             $entityManager->remove($user);
             $entityManager->flush();
         }
+        $this->get('security.token_storage')->setToken(null);
+        $this->get('session')->invalidate();
 
-        return $this->redirectToRoute('user_index');
+        return $this->redirectToRoute('accueil');
     }
-
 }

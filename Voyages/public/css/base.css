@@ -4,7 +4,6 @@ html {
   position: relative;
   min-height: 100vh;
   max-height: 100%;
-
 }
 
 .flash-success {
@@ -22,8 +21,6 @@ body {
   margin-bottom: 60px;
   background-color: whitesmoke;
   font-family: 'Raleway', sans-serif;
-
-
 }
 
 .navbar {
@@ -45,6 +42,7 @@ body {
   height: 100%;
   padding: 0;
 }
+
 
 .footer {
   position: fixed;
@@ -86,7 +84,7 @@ body {
   color: white;
 }
 
-.btn-submit:hover{
+.btn-submit:hover {
   color: lightgray;
 }
 
@@ -101,16 +99,17 @@ body {
 }
 
 
-.wrapper-accueil{
+.wrapper-accueil {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0px 24px;
+  padding-top: 60px;
 }
 
-.card-accueil{
+.card-accueil {
   background-color: #55967E;
   color: white;
   padding: 1%;
@@ -133,7 +132,7 @@ body {
 }
 
 .wrapper-legal {
-  height:  auto;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -149,19 +148,24 @@ body {
   text-align: justify;
   padding-bottom: 2em;
 }
-/* Custom page CSS
-  -------------------------------------------------- */
-/* Not required for template or sticky footer method. */
 
-/* body > .container {
-    padding: 60px 15px 0;
+
+@media (min-width: 450px) {
+  .accueil-subtitle {
+    width: 50%;
   }
-  
-  .footer > .container {
-    padding-right: 15px;
-    padding-left: 15px;
+}
+
+@media (max-width:850px) and (orientation:landscape) {
+  .wrapper-accueil {
+    padding: 75px 24px;
+    height: unset;
   }
-  
-  code {
-    font-size: 80%;
-  } */
+}
+
+@media (max-height: 817px) and (orientation:portrait) {
+  .wrapper-accueil {
+    height: unset;
+    padding: 75px 24px;
+  }
+}

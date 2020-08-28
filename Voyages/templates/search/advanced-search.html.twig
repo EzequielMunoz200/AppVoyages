@@ -1,113 +1,138 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{parent()}} - Recherche avancée {% endblock %}
+{% block title %}
+	{{parent()}}
+	- Recherche avancée
+{% endblock %}
 {% block stylesheets %}
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+	<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet"/>
 {# <link href="{{ asset('css/search.css') }}" type="text/css" rel="stylesheet" /> #}
 {% endblock %}
 {% block body %}
 
-<div class="wrapper-advanced-search d-flex justify-content-center align-items-center">
-    <div class="inner-wrapper-advanced-search d-flex flex-column justify-content-center align-content-center p-2 col-8 mr-auto ml-auto col-xl-4">
-        <h1>Recherche avancée </h1>
-        <p>Sélectionnez un ou plusieurs critères pour trouver votre destination idéale, ou <a href="{{path('search')}}">faites une recherche simple</a></p>
+	<div class="wrapper-advanced-search d-flex justify-content-center align-items-center">
+		<div class="inner-wrapper-advanced-search d-flex flex-column justify-content-center align-content-center p-2 col-8 mr-auto ml-auto col-xl-4">
+			<h1>Recherche avancée
+			</h1>
+			<p>Sélectionnez un ou plusieurs critères pour trouver votre destination idéale, ou
+				<a href="{{path('search')}}">faites une recherche simple</a>
+			</p>
 
-        <div class="d-flex flex-column col-12 p-0">
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <button class="btn btn-sm btn-submit-advanced-search">{{ button_label|default('Rechercher') }}</button>
-            {{ form_end(form) }}
-        </div>
+			<div class="d-flex flex-column col-12 p-0">
+				{{ form_start(form) }}
+				{{ form_widget(form) }}
+				<button class="btn btn-sm btn-submit-advanced-search">{{ button_label|default('Rechercher') }}</button>
+				{{ form_end(form) }}
+			</div>
 
-        <style>
-            .wrapper-advanced-search {
-                height: inherit;
-            }
+			<style>
+				.wrapper-advanced-search {
+					height: inherit;
+				}
 
-            .select2-container--default .select2-selection--multiple .select2-selection__choice{
-                overflow: hidden;
-                border-radius: 5px; 
-                border: none;
-                background-color: #55967E;
-                color: white;
-            }
+				.select2-container--default .select2-selection--multiple .select2-selection__choice {
+					overflow: hidden;
+					border-radius: 5px;
+					border: none;
+					background-color: #55967E;
+					color: white;
+				}
 
-            .select2-selection__choice__display{
-                font-size: small;
-                vertical-align: text-bottom;
-            }
+				.select2-selection__choice__display {
+					font-size: small;
+					vertical-align: text-bottom;
+				}
 
-            label.required:after {
-                content: " * ";
-                color: red;
-            }
+				label.required:after {
+					content: " * ";
+					color: red;
+				}
 
-            .btn-submit-advanced-search{
-                background-color: #55967E;
-                color: white;
-            }
+				.btn-submit-advanced-search {
+					background-color: #55967E;
+					color: white;
+				}
 
-            .btn-submit-advanced-search:hover{
-                background-color: #74bea3;
-                color: white;
-            }
+				.btn-submit-advanced-search:hover {
+					background-color: #74bea3;
+					color: white;
+				}
 
-            .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable{
-                background-color: #55967E;
-            }
+				.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+					background-color: #55967E;
+				}
 
-            .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
-                border-right: none;
-                color: white;
-            }
+				.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+					border-right: none;
+					color: white;
+				}
 
-            .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover{
-                border-right: none;
-                color: white;
-                background-color: indianred;
-            }
+				.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+					border-right: none;
+					color: white;
+					background-color: indianred;
+				}
 
-            a{
-                color: #55967E;
-            }
+				a {
+					color: #55967E;
+				}
 
-            a:hover{
-                color:#55967E;
-            }
+				a:hover {
+					color: #55967E;
+				}
 
-        </style>
+				@media(max-width: 850px) and (orientation:landscape) {
+					.wrapper-advanced-search {
+						height: 60vw;
+					}
 
-        
-    </div>
+					.inner-wrapper {
+						padding-top: 55%;
+						padding-bottom: 10%;
+					}
 
-</div>
-{% block javascript2 %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script>
+				}
 
-    if (jQuery) {
-        console.log("jQuery est chargé");
-    }
-    else {
-        console.log("jQuery n'est pas chargé");
-    }
+				@media(max-width: 645px) and (orientation:landscape) {
+					.wrapper-advanced-search {
+						height: 86vw;
+					}
 
-    $('#countries').prepend('<option value=""></option>').select2({
-        placeholder: 'Tous les pays'
-    });
+					.inner-wrapper {
+						padding-top: 55%;
+						padding-bottom: 10%;
+					}
 
-   
-    $('#tags').select2({
-        placeholder: 'Sélectionnez des critères'
-    });
+				}
+			</style>
 
 
-    function myReset() {
-        window.location.replace("{{app.request.schemeAndHttpHost ~ app.request.pathInfo }}");
-    };
-</script>
-{% endblock %}
+		</div>
+
+	</div>
+	{% block javascript2 %}
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+		<script>
+
+			if (jQuery) {
+console.log("jQuery est chargé");
+} else {
+console.log("jQuery n'est pas chargé");
+}
+
+$('#countries').prepend('<option value=""></option>').select2({placeholder: 'Tous les pays'});
+
+
+$('#tags').select2({placeholder: 'Sélectionnez des critères'});
+
+
+function myReset() {
+window.location.replace("{{ app.request.schemeAndHttpHost ~ app.request.pathInfo }}");
+};
+		</script>
+	{% endblock %}
 
 
 {% endblock %}

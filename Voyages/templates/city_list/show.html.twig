@@ -38,6 +38,12 @@
 			</p>
 			<input id="urlLinkInput" readonly="true" type="text" value="{{urlResults}}">
 		</div>
+		<div class="toast position-absolute" id="copyLinkTo"role="alert" aria-live="assertive" aria-atomic="true">
+			<div class="toast-body alert-success">
+				<i class="far fa-check-circle"></i> Copié !
+			</div>
+		  </div>
+		
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 			<button id="btn-collapse-save-form" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerSave" aria-controls="navbarTogglerSave" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="icon-navbar">

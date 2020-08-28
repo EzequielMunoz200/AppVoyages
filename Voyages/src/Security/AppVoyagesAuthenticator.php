@@ -103,6 +103,9 @@ class AppVoyagesAuthenticator extends AbstractFormLoginAuthenticator implements 
            if($targetPath === $registerPage){
             return new RedirectResponse($this->urlGenerator->generate('accueil'));
            }
+           if(preg_match('/api\/v1\/image/i', $targetPath, $matches)){
+            return new RedirectResponse($this->urlGenerator->generate('accueil'));
+           }
             return new RedirectResponse($targetPath);
         }
         //url before login

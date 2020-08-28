@@ -23,12 +23,4 @@ class TranslateController extends AbstractController
         $response = $translation->translateToFrench($arrayData);
         return $response;
     }
-
-    /**
-     * @Route("/translate/", name="city_translate", methods={"GET"})
-     */
-    public function nonTranslate(Request $request)
-    {
-        return $this->redirectToRoute('accueil');
-    }
 }
