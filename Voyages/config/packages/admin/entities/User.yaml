@@ -15,9 +15,9 @@ easy_admin:
 
                     
                 actions:
-                    - { name: 'show', icon: 'eye', label: false, css_class: 'btn btn-info mb-2' }
-                    - { name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning mb-2' }
-                    - { name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger mb-2' }
+                    - { name: 'show', icon: 'eye', label: false, css_class: 'btn btn-info' }
+                    - { name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning' }
+                    - { name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger' }
                     
             edit:
                 fields: 

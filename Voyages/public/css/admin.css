@@ -1,0 +1,17 @@
+[data-propertyname="isReported"].checkbox-switch input:checked+span:before {
+    background:  #ee433e;
+}
+
+[data-propertyname="isReported"].checkbox-switch input:not(checked)+span:before {
+    background: gray;
+}
+
+
+[data-propertyname="isActive"].checkbox-switch input:checked+span:before {
+    background: #2aca80;
+}
+
+
+[data-propertyname="isActive"].checkbox-switch input:not(checked)+span:before {
+    background: gray;
+}

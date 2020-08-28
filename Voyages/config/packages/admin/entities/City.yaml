@@ -23,4 +23,13 @@ easy_admin:
             edit:
                 title: 'Mettre à jour (# %%entity_id%% )'
 
+            show:
+                fields:
+                    - id
+                    - { property: 'name', label: 'Ville' }
+                    - { property: 'country', label: 'Pays' }
+                    - { property: 'geonameId', label: 'Geoname id' , type: 'integer'}
+                    - { property: 'review', type: 'entity'}
+                    
+
             
