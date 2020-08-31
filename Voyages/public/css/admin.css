@@ -8,10 +8,11 @@
 
 
 [data-propertyname="isActive"].checkbox-switch input:checked+span:before {
-    background: #2aca80;
+    background:#2aca80;
 }
 
 
 [data-propertyname="isActive"].checkbox-switch input:not(checked)+span:before {
-    background: gray;
+   
+    background: gray; 
 }

@@ -3,6 +3,7 @@ easy_admin:
         City:
             label: Villes
             class: App\Entity\City
+            disabled_actions: ['new']
             list:
                 fields:
                     - id
@@ -29,7 +30,11 @@ easy_admin:
                     - { property: 'name', label: 'Ville' }
                     - { property: 'country', label: 'Pays' }
                     - { property: 'geonameId', label: 'Geoname id' , type: 'integer'}
-                    - { property: 'review', type: 'entity'}
+                    - { property: 'reviews', label: 'Avis', type: 'array', type_options: 'App\Entity\Review' }
+                    - { property: 'tags', type: 'association', type_options: 'App\Entity\Tag' }
+                    - { property: 'cityLikes', type: 'association', type_options: 'App\Entity\CityLike' }
+                    
+               
                     
 
             

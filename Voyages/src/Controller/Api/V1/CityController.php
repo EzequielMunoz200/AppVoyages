@@ -49,19 +49,16 @@ class CityController extends AbstractController /* implements TokenAuthenticated
      */
     public function cityDetails(ObjectNormalizer $objetNormalizer, Request $request, QueryApi $queryApi, $geonameId)
     {
-
         $cityDetails = $queryApi->cityDataDetails($geonameId);
-
 
         if (empty($cityDetails)) {
 
             return new Response('Pas de résultats', Response::HTTP_NO_CONTENT);
         }
-
-        /*  $serializer = new Serializer([new DateTimeNormalizer(), $objetNormalizer]);
-        $json = $serializer->normalize($cityImage, null, ['groups' => 'api_v1_city']); */
+ 
 
         return $this->json($cityDetails);
+        
     }
 
      /**

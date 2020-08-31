@@ -7,7 +7,9 @@
 {% dump(cityImagePortrait) %}
 {% block body %}
 <section id="landing-section" class="landing-section-image" 
+{# API Not working #}
 style="--bg-image-landscape: url('{{imagesData['urlImage'].full}}'); --bg-image-portrait: url('{{cityImagePortrait['urlImage'].regular}}');">
+{# style="--bg-image-landscape: url('{{imagesData.full}}'); --bg-image-portrait: url('{{cityImagePortrait.regular}}');"> #}
 </section>
 
 <section id="data-section">

@@ -3,11 +3,12 @@ easy_admin:
         User:
             label: Utilisateurs
             class: App\Entity\User
+            disabled_actions: ['new']
             list:
                 fields:
                     - id
-                    - { property: 'isActive', label: 'Status' }
-                    - { property: 'isReported', label: 'Signalé', type: 'toggle'}
+                    - { property: 'isActive', label: 'Inactif / Actif' }
+                    - { property: 'isReported', label: 'Non Signalé / Signalé', type: 'toggle'}
                     - { property: 'username', label: 'Pseudo' }
                     - { property: 'updatedAt', label: 'Dernière MAJ' }
                     - { property: 'roles', label: 'Rôles' }
@@ -23,7 +24,7 @@ easy_admin:
                 fields: 
                     - username
                     - avatar
-                    - points
+                    - { property: 'points', permission: 'ROLE_ADMIN'}
                     - description
                     #- { property: 'birthdate', label: 'Date de naissance', type_options: {'widget': 'single_text'} }
 
@@ -44,3 +45,4 @@ easy_admin:
                     - { property: 'createdAt', label: 'Inscrit' }
                     - { property: 'updatedAt', label: 'Dernière MAJ' }
                     - { property: 'roles', label: 'Rôles' }
+            

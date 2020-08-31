@@ -34,7 +34,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdownUser">
           <a class="dropdown-item" href="{{path('city_list_show', {id : app.user.id })}}">Mes listes de villes</a>
           <a class="dropdown-item" href="{{path('user_show', {id : app.user.id })}}">Mon profil</a>
-          {% if is_granted('ROLE_ADMIN') %}
+          {% if is_granted('ROLE_MODERATOR') %}
           <a class="dropdown-item" href="{{ url( 'easyadmin' )}}">Administration</a>
           {% endif %}
           <div class="dropdown-divider"></div>

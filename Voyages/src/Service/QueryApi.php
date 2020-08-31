@@ -59,7 +59,7 @@ class QueryApi
             'description' => (is_object($objectResponseScores)) ? $objectResponseScores->summary : null,
             'scores' => (is_object($objectResponseScores)) ? $objectResponseScores->categories : null,
             'cityName' => $cityName,
-            'cityNameUnsplash' => $cityNameUnsplash,
+            'cityNameUnsplash' => str_replace(' ', '%20', $cityNameUnsplash),
         ];
     }
 
@@ -104,13 +104,10 @@ class QueryApi
     }
 
 
-
-
-
-
     public function cityDataImagePortrait($cityNameUnsplash)
     {
         if (isset($cityNameUnsplash)) {
+            /* $cityNameUnsplash = str_replace(' ', '%20', $cityNameUnsplash); */
             //dump($cityNameUnsplash);
             //$cityNameUnsplash = str_replace('\%C3%A3', 'ã', $cityNameUnsplash);
             //'https://api.unsplash.com/search/photos/?query=' . $cityNameUnsplash . '&client_id=' . $_ENV['API_KEY_UNSPLASH'];
@@ -131,6 +128,7 @@ class QueryApi
     public function citiesDataImages($cityNameUnsplash)
     {
         if (isset($cityNameUnsplash)) {
+            $cityNameUnsplash = str_replace(' ', '%20', $cityNameUnsplash);
             $urlImageQuery = 'https://api.unsplash.com/search/photos/?query=' . $cityNameUnsplash . '&client_id=' . $_ENV['API_KEY_UNSPLASH'];
             $jsonStringUrlImage = file_get_contents($urlImageQuery);
             $objectResponseUrlImage = json_decode($jsonStringUrlImage);
