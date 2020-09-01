@@ -1,4 +1,4 @@
-//affichage du filename dans le label inputfile
+//show filename in the label of inputfile
 
 if (document.getElementById("review_imageFile") !== null) {
     const inputElt = document.getElementById("review_imageFile");
@@ -10,10 +10,8 @@ if (document.getElementById("review_imageFile") !== null) {
 
 let latitude = document.getElementById('mapid').dataset.latitude;
 let longitude = document.getElementById('mapid').dataset.longitude;
-//console.log(latitude + ' ' + longitude);
 //https://leafletjs.com/examples/quick-start/
 let mymap = L.map('mapid', {scrollWheelZoom: false, gestureHandling: true}).setView([latitude, longitude], 10);
-//console.log(mymap)
 // Token here : https://account.mapbox.com/
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid2VseXdlbG9vIiwiYSI6ImNrYmFmYXdyYjBubGwycW84ZWJxYWk1MXAifQ.0HxMbJuY3rmSYfS2hmhcVw', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -25,7 +23,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(mymap);
 let marker = L.marker([latitude, longitude]).addTo(mymap);
 
-//Script pour afficher le modal
+//Script show modal
 // Get the modal
 var modal = document.getElementById("myModal");
 var modalImg = document.getElementById("img01");

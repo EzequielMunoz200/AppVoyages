@@ -19,6 +19,16 @@ class PictureRepository extends ServiceEntityRepository
         parent::__construct($registry, Picture::class);
     }
 
+    public function findByReviewId($review_id){
+        $builder = $this->createQueryBuilder('picture');
+        $builder->where('picture.review = :review_id');
+        $builder->setParameter('review_id', $review_id);
+        $query = $builder->getQuery();
+       
+        return $query->execute();
+    }
+
+
     // /**
     //  * @return Picture[] Returns an array of Picture objects
     //  */

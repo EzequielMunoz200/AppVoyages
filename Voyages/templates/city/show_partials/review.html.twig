@@ -38,11 +38,11 @@
 					<div class="accordion review-accordion" id="accordion-{{ review.id }}">
 						<div class="card card-review">
 							<div class="card-header" id="heading-{{ review.id }}">
-								{% if is_granted('IS_AUTHENTICATED_FULLY') and  review.author.id != app.user.id %}
-									<p class="report-button  m-0 text-right">
+								{% if is_granted('IS_AUTHENTICATED_FULLY') and review.author.id != app.user.id %}
+									<p class="report-button m-0 text-right">
 										<a class="report-button py-0 m-0" data-toggle="collapse" href="#signal-{{ review.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
 											signaler
-											<i class="fas fa-exclamation-triangle"></i>
+											<i class=" text-danger fas fa-exclamation-triangle"></i>
 										</a>
 									</p>
 									<div class="collapse text-center text-danger report-message mx-0" id="signal-{{ review.id }}">
@@ -51,6 +51,14 @@
 												<i class="em em-no_entry" aria-role="presentation" aria-label="NO ENTRY"></i>Avis inapproprié, je signale!</a>
 										</span>
 									</div>
+								{% endif %}
+								{% if is_granted('IS_AUTHENTICATED_FULLY') and review.author.id == app.user.id %}
+									<p class="report-button m-0 text-right">
+										<a class="report-button py-0 m-0" href="{{ path('review_edit', { id: review.id }) }}">
+											Modifier
+											<i class="text-info fas fa-edit"></i>
+										</a>
+									</p>
 								{% endif %}
 								<div class="header-review">
 									{% if review is defined %}
@@ -100,7 +108,8 @@
 										<h4 class="item-card-header-review">
 											<em>Publié il y a
 												{{ leftDays }}
-												jour{% if leftDays > 1 %}s
+												jour
+												{% if leftDays > 1 %}s
 												{% endif %}
 											</em>
 										</h4>
@@ -124,11 +133,11 @@
 									<div class="city-pictures text-center">
 										{% for picture in review.pictures %}
 											{% if review.isActive %}
-											<img src="{{ asset('images/uploads/' ~ picture.filename) }}" alt="Image de {{cityData.cityName}} postée par un utilisateur." class="user-image">
+												<img src="{{ asset('images/uploads/' ~ picture.filename) }}" alt="Image de {{cityData.cityName}} postée par un utilisateur." class="user-image">
 											{% else %}
-											<i class="fas fa-exclamation-circle text-warning"></i>
+												<i class="fas fa-exclamation-circle text-warning"></i>
 											{% endif %}
-											{% endfor %}
+										{% endfor %}
 
 									</div>
 									{% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -172,5 +181,4 @@
 			</div>
 		</div>
 	</div>
-{% endif %}
-</div>
+{% endif %}</div>

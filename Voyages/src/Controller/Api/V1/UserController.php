@@ -4,7 +4,6 @@ namespace App\Controller\Api\V1;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,7 +20,7 @@ class UserController extends AbstractController
      */
     public function userLike($id, UserRepository $userRepository)
     {
-        //$id de l'utilisateur aimé
+        //$id => liked user
         $userTarget = $this->getDoctrine()->getRepository(User::class)->find($id);
 
         $userSource = $this->getUser();

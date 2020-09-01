@@ -102,7 +102,6 @@ class CityController extends AbstractController
             'cityData' => $queryApi->citiesData($geonameId),
             'imagesData' => $queryApi->citiesDataImages($city->getName()),
             'imagesData' => $queryApi->citiesDataImages($queryApi->citiesData($geonameId)['cityNameUnsplash']),
-           /*  'cityImagePortrait' => $queryApi->cityDataImagePortrait($city->getName()), */
             'cityImagePortrait' => $queryApi->cityDataImagePortrait($queryApi->citiesData($geonameId)['cityNameUnsplash']),
             'details' => $queryApi->cityDataDetails($geonameId),
             'reviews' => $city->getReviews(), //array à initialiser dans le template

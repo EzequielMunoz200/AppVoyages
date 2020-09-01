@@ -1,4 +1,18 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+    {{ form_row(form.rate) }}
+    {{ form_row(form.travelDate) }}
+    {{ form_row(form.text) }}
+    {% if review.pictures[0] is defined %}
+    <hr>
+    <p>La photo posté: <strong>{{ review.pictures[0].title }}</strong></p>
+    <img src="{{ asset('images/uploads/' ~ review.pictures[0].filename) }}" alt="Photo de: {{review.city.name}}" style="width: 200px;">
+    <hr> 
+    <p><h4>Changer la photo</p><small>Pour remplacer la photo postée insérez une nouvelle dans les champs ci-dessous, l'ancienne sera automatiquement effacée.</small></h4>
+    {% endif %}
+    {{ form_row(form.title) }}
+    {{ form_row(form.imageFile) }}
+    <hr>
+    
+    <button class="btn btn-dark">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
