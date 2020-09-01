@@ -4,16 +4,14 @@ namespace App\Controller;
 
 use App\Data\AdvancedSearchData;
 use App\Entity\City;
-use App\Entity\Tag;
 use App\Form\AdvancedSearchType;
-use App\Form\SearchType;
 use App\Repository\CityRepository;
-use RecursiveArrayIterator;
-use RecursiveIteratorIterator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use RecursiveArrayIterator;
+use RecursiveIteratorIterator;
 
 class AdvancedSearchController extends AbstractController
 {
@@ -43,7 +41,6 @@ class AdvancedSearchController extends AbstractController
             }
 
             $chosenTags = $form->get('tags')->getData();
-            //dd($chosenTags);
             $arrayResults = [];
             $matchCity = [];
             foreach ($allCities as $city) {
@@ -102,8 +99,6 @@ class AdvancedSearchController extends AbstractController
          
             return $this->redirectToRoute('city_list_results');
         }
-
-
 
 
         return $this->render('search/advanced-search.html.twig', [

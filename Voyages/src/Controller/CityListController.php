@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\CityList;
 use App\Entity\User;
-use App\Form\AdvancedSearchType;
 use App\Form\CityListType;
 use App\Repository\CityListRepository;
 use App\Repository\CityRepository;
@@ -42,8 +41,6 @@ class CityListController extends AbstractController
      */
     public function showResults(Request $request, CityRepository $cityRepository, SessionInterface $session): Response
     {
-
-       
         $arrayMatching = $session->get('arrayMatching');
         $urlResults = $session->get('urlResults');
         $quantityPerRange = $session->get('quantityPerRange');
@@ -55,8 +52,6 @@ class CityListController extends AbstractController
         $cityList = new CityList();
         $form = $this->createForm(CityListType::class, $cityList);
         $form->handleRequest($request);
-
-        dump($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -88,7 +83,6 @@ class CityListController extends AbstractController
      */
     public function show($id): Response
     {
-
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
         if ($user != $this->getUser()) {
@@ -96,11 +90,6 @@ class CityListController extends AbstractController
         }
 
         return $this->render('city_list/index.html.twig', []);
-    
-        /* return $this->render('city_list/show.html.twig', [
-            'city_list' => $cityList,
-            //'resultat' => 
-        ]); */
     }
 
     /**

@@ -49,7 +49,7 @@ security:
         - { path: ^/user/(\d+), roles: ROLE_USER }
         - { path: ^/user, roles: ROLE_ADMIN }
 
-        - { path: ^/admin/, roles: ROLE_ADMIN }
+        - { path: ^/admin/, roles: ROLE_MODERATOR }
         - { path: ^/(city|review|picture|user)/new, roles: ROLE_ADMIN }
         - { path: ^/(city|review|picture)/(\d+)/(edit|delete), roles: ROLE_ADMIN }
         - { path: ^/(review|city|badge|tag|language), roles: ROLE_ADMIN }

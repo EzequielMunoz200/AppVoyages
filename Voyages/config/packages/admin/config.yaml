@@ -1,2 +1,10 @@
 easy_admin:
   site_name: 'App Voyages'
+  design:
+      assets: 
+          favicon: 
+              path: '/images/logo/travel-globe.svg'
+              mime_type: 'image/svg'
+
+          css:
+              - '/css/admin.css'

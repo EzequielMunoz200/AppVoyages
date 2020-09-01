@@ -56,7 +56,7 @@ class Review
 
      /**
      * @ORM\Column(type="smallint", options={"default" : 5})
-     * @Assert\Choice({"1", "2", "3", "4", "5"})
+     * @Assert\Choice({1, 2, 3, 4, 5})
      * 
      */
     private $rate;
@@ -126,6 +126,9 @@ class Review
 
     public function getText(): ?string
     {
+        if(!$this->getIsActive() && $this->getCreatedAt()){
+            return '***Contenu Modéré***';
+        }
         return $this->text;
     }
 

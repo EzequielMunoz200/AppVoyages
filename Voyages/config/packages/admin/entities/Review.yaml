@@ -1,13 +1,14 @@
 easy_admin:
   entities:
         Review:
-            label: Villes
+            label: Avis
             class: App\Entity\Review
+            disabled_actions: ['new']
             list:
                 fields:
                     - id
-                    - { property: 'isActive', label: 'Status' }
-                    - { property: 'isReported', label: 'Signalé' }
+                    - { property: 'isActive', label: 'Désactivé / Publié' }
+                    - { property: 'isReported', label: 'Non Signalé / Signalé' }
                     - { property: 'author', label: 'Auteur' }
                     - { property: 'text', label: 'Avis', type: 'raw'}
                     - { property: 'createdAt', label: 'Publié' }

@@ -5,7 +5,6 @@ namespace App\Controller\Api\V1;
 use App\Entity\Review;
 use App\Entity\ReviewLike;
 use App\Repository\ReviewLikeRepository;
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/api/v1", name="api_v1_")
  */
-class ReviewController extends AbstractController //api/v1/review/{id}
+class ReviewController extends AbstractController
 {
     /**
      * @Route("/review/{id}", name="review_report", requirements={"id"="\d+"}, methods={"POST"})
