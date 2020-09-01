@@ -4,12 +4,12 @@
 {% block stylesheets %}
 <link href="{{ asset('css/city_show.css') }}" type="text/css" rel="stylesheet" />
 {% endblock %}
-{% dump(cityImagePortrait) %}
+
 {% block body %}
 <section id="landing-section" class="landing-section-image" 
-{# API Not working #}
+
 style="--bg-image-landscape: url('{{imagesData['urlImage'].full}}'); --bg-image-portrait: url('{{cityImagePortrait['urlImage'].regular}}');">
-{# style="--bg-image-landscape: url('{{imagesData.full}}'); --bg-image-portrait: url('{{cityImagePortrait.regular}}');"> #}
+
 </section>
 
 <section id="data-section">
@@ -27,12 +27,6 @@ style="--bg-image-landscape: url('{{imagesData['urlImage'].full}}'); --bg-image-
 <section id="comments">
     {{ include('/city/show_partials/review.html.twig') }}
 </section>
-{% dump(objectCity) %}
-{# 
-{% dump(cityData) %}
-{% dump(imagesData['urlRandomImages']) %}
-{% dump(details) %}
-{% dump(objectCity) %} #}
 
 <!-- show maps script -->
 <script src="{{asset('js/city_show.js')}}"></script>
